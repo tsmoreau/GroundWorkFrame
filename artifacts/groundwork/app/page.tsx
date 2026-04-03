@@ -52,7 +52,10 @@ export default function HomePage() {
       {/* Nav */}
       <nav className="px-8 py-5 flex items-center justify-between max-w-6xl mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ backgroundColor: "#C8A548" }}>
+          <div
+            className="w-7 h-7 rounded-md flex items-center justify-center"
+            style={{ backgroundColor: "#C8A548" }}
+          >
             <PawPrint className="w-4 h-4 text-white" />
           </div>
           <span className="font-semibold text-[#1C1208] tracking-tight">Denhaus</span>
@@ -73,57 +76,76 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden"
-        style={{ backgroundColor: "#2E1A0E" }}
-      >
-        <div className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: "url(https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=1600&q=60)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div className="relative max-w-6xl mx-auto px-8 py-28">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#C8A548" }}>
-            Los Angeles · Outdoor Pet Environments
-          </p>
-          <h1 className="text-5xl font-bold text-white leading-tight max-w-2xl">
-            A space your pet deserves.<br />
-            A structure you'll be proud of.
-          </h1>
-          <p className="mt-6 text-lg max-w-xl leading-relaxed" style={{ color: "#C8B8A0" }}>
-            Denhaus builds custom catios, dog houses, and outdoor enclosures for pets
-            and the people who love them. Every project is designed for your yard and built to last.
-          </p>
-          <div className="mt-10 flex items-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-[#2E1A0E] transition-colors hover:opacity-90"
-              style={{ backgroundColor: "#C8A548" }}
+      {/* Hero — split layout */}
+      <section className="max-w-6xl mx-auto px-8 pb-16 pt-8">
+        <div className="grid grid-cols-2 gap-12 items-center min-h-[480px]">
+          {/* Text side */}
+          <div>
+            <p
+              className="text-xs font-semibold tracking-widest uppercase mb-5"
+              style={{ color: "#C8A548" }}
             >
-              Get a Free Quote
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/gallery"
-              className="text-sm font-medium text-white hover:text-[#C8A548] transition-colors"
-            >
-              View our work →
-            </Link>
+              Los Angeles · Outdoor Pet Environments
+            </p>
+            <h1 className="text-5xl font-bold leading-[1.1] mb-6" style={{ color: "#1C1208" }}>
+              A space your pet deserves.<br />
+              A structure you'll be proud of.
+            </h1>
+            <p className="text-lg leading-relaxed mb-10" style={{ color: "#6B5B4A" }}>
+              Denhaus builds custom catios, dog houses, and outdoor enclosures
+              for pets and the people who love them. Every project is designed
+              for your yard and built to last.
+            </p>
+            <div className="flex items-center gap-5">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#2E1A0E" }}
+              >
+                Get a Free Quote
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/gallery"
+                className="text-sm font-medium transition-colors"
+                style={{ color: "#6B5B4A" }}
+              >
+                View our work →
+              </Link>
+            </div>
+          </div>
+          {/* Photo side */}
+          <div className="relative h-[480px] rounded-2xl overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=900&q=80"
+              alt="Cat sunbathing in outdoor enclosure"
+              className="w-full h-full object-cover"
+            />
+            {/* Subtle warm vignette at bottom */}
+            <div
+              className="absolute bottom-0 left-0 right-0 h-24"
+              style={{
+                background: "linear-gradient(to top, rgba(46,26,14,0.18), transparent)",
+              }}
+            />
           </div>
         </div>
       </section>
 
       {/* Gallery Teaser */}
-      <section className="max-w-6xl mx-auto px-8 py-20">
+      <section className="max-w-6xl mx-auto px-8 py-16 border-t" style={{ borderColor: "#E5D8C4" }}>
         <div className="flex items-end justify-between mb-8">
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-[#A09070] mb-2">Portfolio</p>
-            <h2 className="text-3xl font-bold text-[#1C1208]">Recent builds</h2>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#A09070" }}>
+              Portfolio
+            </p>
+            <h2 className="text-3xl font-bold" style={{ color: "#1C1208" }}>Recent builds</h2>
           </div>
-          <Link href="/gallery" className="text-sm font-medium text-[#2E1A0E] hover:underline flex items-center gap-1">
+          <Link
+            href="/gallery"
+            className="text-sm font-medium flex items-center gap-1 hover:underline"
+            style={{ color: "#2E1A0E" }}
+          >
             See all <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
@@ -144,18 +166,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features */}
-      <section style={{ backgroundColor: "#2E1A0E" }}>
+      {/* Features — light warm section */}
+      <section style={{ backgroundColor: "#EDE5D4" }}>
         <div className="max-w-6xl mx-auto px-8 py-20">
+          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#A09070" }}>
+            Why Denhaus
+          </p>
+          <h2 className="text-3xl font-bold mb-12" style={{ color: "#1C1208" }}>
+            Built to a higher standard
+          </h2>
           <div className="grid grid-cols-3 gap-10">
             {FEATURES.map(({ icon: Icon, title, body }) => (
               <div key={title}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "#C8A54822" }}>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  style={{ backgroundColor: "#C8A54828" }}
+                >
                   <Icon className="w-5 h-5" style={{ color: "#C8A548" }} />
                 </div>
-                <h3 className="font-semibold text-white text-lg mb-2">{title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#A89878" }}>{body}</p>
+                <h3 className="font-semibold text-lg mb-2" style={{ color: "#1C1208" }}>
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "#6B5B4A" }}>
+                  {body}
+                </p>
               </div>
             ))}
           </div>
@@ -163,16 +197,17 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="max-w-6xl mx-auto px-8 py-20 text-center">
-        <h2 className="text-3xl font-bold text-[#1C1208] mb-4">
+      <section className="max-w-6xl mx-auto px-8 py-24 text-center">
+        <h2 className="text-3xl font-bold mb-4" style={{ color: "#1C1208" }}>
           Ready to build something beautiful?
         </h2>
-        <p className="text-[#6B5B4A] mb-8 max-w-lg mx-auto">
-          We do free site visits in the greater LA area. Send us a message and we'll get back to you within one business day.
+        <p className="mb-8 max-w-lg mx-auto" style={{ color: "#6B5B4A" }}>
+          We do free site visits in the greater LA area. Send us a message and we'll
+          get back to you within one business day.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-white"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-white transition-opacity hover:opacity-90"
           style={{ backgroundColor: "#2E1A0E" }}
         >
           Get in Touch
@@ -180,10 +215,10 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#E8D8C4] px-8 py-8">
+      <footer className="border-t px-8 py-8" style={{ borderColor: "#E5D8C4" }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <p className="text-xs text-[#A09070]">© 2025 Denhaus LLC · Los Angeles, CA</p>
-          <div className="flex gap-5 text-xs text-[#A09070]">
+          <p className="text-xs" style={{ color: "#A09070" }}>© 2025 Denhaus LLC · Los Angeles, CA</p>
+          <div className="flex gap-5 text-xs" style={{ color: "#A09070" }}>
             <Link href="/gallery" className="hover:text-[#1C1208]">Gallery</Link>
             <Link href="/contact" className="hover:text-[#1C1208]">Contact</Link>
             <Link href="/admin/dashboard" className="hover:text-[#1C1208]">Admin</Link>

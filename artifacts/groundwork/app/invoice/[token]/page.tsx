@@ -69,13 +69,13 @@ function InvoiceContent({ token }: { token: string }) {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F5F0E8" }}>
       {/* Header */}
-      <div style={{ backgroundColor: "#2E1A0E" }} className="py-6 px-8">
+      <div className="py-5 px-8 border-b" style={{ backgroundColor: "#FDFAF5", borderColor: "#E5D8C4" }}>
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ backgroundColor: "#C8A548" }}>
               <PawPrint className="w-4 h-4 text-white" />
             </div>
-            <span className="font-semibold text-white">Denhaus</span>
+            <span className="font-semibold" style={{ color: "#1C1208" }}>Denhaus</span>
           </Link>
           <span
             className="text-xs font-semibold px-3 py-1.5 rounded-full capitalize"

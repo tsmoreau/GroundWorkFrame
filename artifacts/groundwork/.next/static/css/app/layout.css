@@ -231,6 +231,12 @@
   .top-1\/2 {
     top: calc(1 / 2 * 100%);
   }
+  .right-0 {
+    right: calc(var(--spacing) * 0);
+  }
+  .bottom-0 {
+    bottom: calc(var(--spacing) * 0);
+  }
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
@@ -378,6 +384,12 @@
   .h-14 {
     height: calc(var(--spacing) * 14);
   }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
+  }
+  .h-\[480px\] {
+    height: 480px;
+  }
   .h-full {
     height: 100%;
   }
@@ -386,6 +398,9 @@
   }
   .min-h-\[120px\] {
     min-height: 120px;
+  }
+  .min-h-\[480px\] {
+    min-height: 480px;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -549,6 +564,9 @@
   .gap-10 {
     gap: calc(var(--spacing) * 10);
   }
+  .gap-12 {
+    gap: calc(var(--spacing) * 12);
+  }
   .space-y-0\.5 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -682,6 +700,10 @@
   .border-t-0 {
     border-top-style: var(--tw-border-style);
     border-top-width: 0px;
+  }
+  .border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
   }
   .border-b {
     border-bottom-style: var(--tw-border-style);
@@ -842,6 +864,9 @@
   .py-20 {
     padding-block: calc(var(--spacing) * 20);
   }
+  .py-24 {
+    padding-block: calc(var(--spacing) * 24);
+  }
   .py-28 {
     padding-block: calc(var(--spacing) * 28);
   }
@@ -853,6 +878,9 @@
   }
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
+  }
+  .pt-8 {
+    padding-top: calc(var(--spacing) * 8);
   }
   .pr-3 {
     padding-right: calc(var(--spacing) * 3);
@@ -871,6 +899,9 @@
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
+  }
+  .pb-16 {
+    padding-bottom: calc(var(--spacing) * 16);
   }
   .pl-4 {
     padding-left: calc(var(--spacing) * 4);
@@ -929,6 +960,10 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
+  .leading-\[1\.1\] {
+    --tw-leading: 1.1;
+    line-height: 1.1;
+  }
   .leading-relaxed {
     --tw-leading: var(--leading-relaxed);
     line-height: var(--leading-relaxed);
@@ -982,6 +1017,9 @@
   }
   .text-\[\#7C6E58\] {
     color: #7C6E58;
+  }
+  .text-\[\#8A7A68\] {
+    color: #8A7A68;
   }
   .text-\[\#A09070\] {
     color: #A09070;
@@ -1072,6 +1110,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: #F0E4D4;
+      }
+    }
+  }
+  .hover\:bg-\[\#F0E8D8\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #F0E8D8;
       }
     }
   }

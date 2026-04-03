@@ -39,17 +39,25 @@ function Sidebar() {
   };
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40"
-      style={{ backgroundColor: "#2E1A0E" }}>
-      <div className="px-5 py-6 border-b border-white/10">
+    <aside
+      className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40 border-r"
+      style={{ backgroundColor: "#FDFAF5", borderColor: "#E5D8C4" }}
+    >
+      <div className="px-5 py-6 border-b" style={{ borderColor: "#E5D8C4" }}>
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-md flex items-center justify-center"
-            style={{ backgroundColor: "#C8A548" }}>
+          <div
+            className="w-7 h-7 rounded-md flex items-center justify-center"
+            style={{ backgroundColor: "#C8A548" }}
+          >
             <PawPrint className="w-4 h-4 text-white" />
           </div>
-          <span className="font-semibold text-white tracking-tight">Denhaus</span>
+          <span className="font-semibold tracking-tight" style={{ color: "#1C1208" }}>
+            Denhaus
+          </span>
         </Link>
-        <p className="text-xs mt-1" style={{ color: "#A89878" }}>Admin</p>
+        <p className="text-xs mt-1 font-medium tracking-wide uppercase" style={{ color: "#A09070" }}>
+          Admin
+        </p>
       </div>
 
       <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
@@ -63,10 +71,10 @@ function Sidebar() {
               className={cn(
                 "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive
-                  ? "text-white"
-                  : "text-[#A89878] hover:text-white hover:bg-white/5"
+                  ? "text-[#1C1208]"
+                  : "text-[#8A7A68] hover:text-[#1C1208] hover:bg-[#F0E8D8]"
               )}
-              style={isActive ? { backgroundColor: "#4A2C1A" } : undefined}
+              style={isActive ? { backgroundColor: "#EDE5D4", color: "#1C1208" } : undefined}
             >
               <span className="flex items-center gap-3">
                 <Icon className="w-4 h-4 flex-shrink-0" />
@@ -75,7 +83,7 @@ function Sidebar() {
               {badge !== null && (
                 <span
                   className="text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center"
-                  style={{ backgroundColor: "#C8A548", color: "#2E1A0E" }}
+                  style={{ backgroundColor: "#C8A548", color: "#fff" }}
                 >
                   {badge}
                 </span>
@@ -85,8 +93,14 @@ function Sidebar() {
         })}
       </nav>
 
-      <div className="px-5 py-4 border-t border-white/10">
-        <Link href="/" className="flex items-center gap-2 text-xs text-[#A89878] hover:text-white transition-colors">
+      <div className="px-5 py-4 border-t" style={{ borderColor: "#E5D8C4" }}>
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-xs font-medium transition-colors"
+          style={{ color: "#A09070" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#1C1208")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "#A09070")}
+        >
           <span>View Public Site</span>
           <ChevronRight className="w-3 h-3" />
         </Link>
