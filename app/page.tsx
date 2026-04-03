@@ -31,7 +31,7 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-[120vh] flex items-end pt-24 pb-28 overflow-hidden">
+        <section className="relative min-h-[115vh] flex items-end pt-24 pb-28 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
               alt="Luxurious modern dog house integrated into a lush forest landscape with floor to ceiling glass and cedar wood finishes"
