@@ -85,39 +85,39 @@ export default function HomePage() {
       <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl bg-surface/80 backdrop-blur-[20px] shadow-[0_20px_50px_rgba(25,28,27,0.06)] z-50 flex justify-between items-center px-8 py-4">
         <Link
           href="/"
-          className="mt-1 text-2xl font-bold font-headline text-emerald-900"
+          className="text-2xl font-bold font-headline text-primary"
         >
           Denhaus
         </Link>
         <nav className="hidden md:flex items-center gap-10">
           <a
             href="#process"
-            className="label-style text-xs font-medium text-emerald-800/70 hover:text-emerald-900 transition-colors"
+            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
           >
             Process
           </a>
           <Link
             href="/gallery"
-            className="label-style text-xs font-medium text-emerald-800/70 hover:text-emerald-900 transition-colors"
+            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
           >
             Portfolio
           </Link>
           <a
             href="#collections"
-            className="label-style text-xs font-medium text-emerald-800/70 hover:text-emerald-900 transition-colors"
+            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
           >
             Collections
           </a>
           <Link
             href="/admin/dashboard"
-            className="label-style text-xs font-medium text-emerald-800/70 hover:text-emerald-900 transition-colors"
+            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
           >
             Admin
           </Link>
         </nav>
         <Link
           href="/contact"
-          className="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200"
+          className="bg-primary text-on-primary px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200"
         >
           Get Started
         </Link>
@@ -145,7 +145,7 @@ export default function HomePage() {
                 Elevated <span className="italic">Outdoor Living</span> for Your
                 Pets.
               </h1>
-              <p className="text-white/80 text-xl font-light mb-10 max-w-lg leading-relaxed">
+              <p className="text-white/80 text-xl font-light mb-10 max-w-lg leading-tight">
                 Architectural sanctuaries crafted with sustainable timber and
                 modern precision. Because nature belongs to them too.
               </p>
