@@ -5,7 +5,7 @@ export default function HomePage() {
     <div className="bg-surface text-[#191c1b]">
       {/* TopNavBar */}
       <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl bg-stone-50/80 backdrop-blur-md shadow-[0_20px_50px_rgba(25,28,27,0.06)] z-50 flex justify-between items-center px-8 py-4 transition-all duration-300">
-        <div className="text-2xl font-bold font-serif text-primary">
+        <div className="text-2xl font-bold font-serif text-emerald-900">
           Groundwork
         </div>
         <nav className="hidden md:flex items-center space-x-10">
