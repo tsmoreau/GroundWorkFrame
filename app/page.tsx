@@ -43,7 +43,7 @@ export default function HomePage() {
           <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
             <div className="max-w-2xl">
               <span className="label-style text-primary-fixed-dim text-sm font-semibold mb-4 block">Groundwork Studio</span>
-              <h1 className="text-6xl md:text-8xl text-white font-light leading-tight mb-8">
+              <h1 className="text-6xl md:text-8xl text-white font-light leading-[1.05] mb-8">
                 Elevated <span className="italic">Outdoor Living</span> for Your Pets.
               </h1>
               <p className="text-white/80 text-xl font-light mb-10 max-w-lg leading-relaxed">
