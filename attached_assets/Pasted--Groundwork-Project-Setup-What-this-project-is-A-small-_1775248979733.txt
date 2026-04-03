@@ -1,0 +1,80 @@
+# Groundwork — Project Setup
+
+## What this project is
+
+A small business backend boilerplate called Groundwork. The first deployment target is Denhaus (denhaus.la), a design studio for outdoor pet environments. The app manages the full lifecycle: lead intake → client conversion → job tracking → invoicing → payment → bookkeeping export.
+
+## What already exists
+
+There is an existing repo (GroundWorkFrame) with a working frontend prototype built as a Next.js app. The prototype lives under `artifacts/groundwork/`. It has:
+
+- Full page structure: public landing, contact form, gallery, admin dashboard, admin CRUD for leads/clients/jobs/invoices, settings page, client-facing invoice page at `/invoice/[token]`
+- A `DataProvider` React context with in-memory state backed by localStorage as a stand-in for a real API
+- Realistic mock data for Denhaus (leads, clients, jobs, invoices with proper line items and payment methods)
+- Types, utils, and enums that match the spec
+- A warm/earthy Denhaus color system throughout the UI
+
+## What I need you to do
+
+### 1. Flatten the repo structure
+
+The existing repo is a Replit monorepo with workspace scaffolding wrapping a single Next.js app. Collapse it:
+
+- Hoist everything from `artifacts/groundwork/` to the repo root
+- Remove all workspace-level files: root `package.json` (the workspace one, not groundwork's), `pnpm-workspace.yaml`, `tsconfig.base.json`, root `tsconfig.json`, `scripts/`, `replit.md`, `.npmrc`, `.replitignore`, `attached_assets/`
+- The end state is a single Next.js app at root. One `package.json`, `next dev` runs the app.
+
+### 2. Keep the existing frontend prototype exactly as-is
+
+Do NOT rewrite, restyle, restructure, or "improve" any of the existing pages, components, types, utils, mock data, or styling. The frontend prototype is done and correct. Your job is to restructure the repo, not touch the UI.
+
+### 3. Add the OpenAPI spec as a reference document
+
+Create `docs/openapi.yaml` with the full API specification. This is documentation only — no code generation pipeline, no generated packages. The spec should cover all endpoints:
+
+**Endpoints:**
+- `GET/POST /api/leads`, `GET/PATCH /api/leads/:id`, `POST /api/leads/:id/convert`
+- `GET/POST /api/clients`, `GET/PATCH /api/clients/:id`
+- `GET/POST /api/jobs`, `GET/PATCH /api/jobs/:id`, `POST /api/jobs/:id/invoice`
+- `GET /api/invoices`, `GET/PATCH /api/invoices/:id`, `POST /api/invoices/:id/send`, `GET /api/invoices/:id/pdf`, `POST /api/invoices/:id/checkout`
+- `GET /api/invoices/token/:token` (public, no auth)
+- `POST /api/payments/webhook` (Stripe webhook)
+- `POST /api/upload/presign`
+- `GET /api/export/quickbooks`
+- `GET/PATCH /api/settings`
+- `GET /api/gallery`
+- `GET /api/dashboard/summary`, `GET /api/dashboard/upcoming-jobs`, `GET /api/dashboard/outstanding-invoices`
+
+**Schemas:** Lead, Client, Job, Invoice, LineItem, Note, Pet, PetInfo, BusinessSettings, GalleryItem, DashboardSummary, InvoicePublicView. Use the types already defined in `lib/types.ts` as the source of truth for field names and enums.
+
+**Key schema rules:**
+- `Note` is `{ text: string, createdAt: datetime }` — not a plain string
+- No `totalAmount` field on Job or Invoice — it's computed from lineItems at read time
+- Invoice has `token`, `sentAt`, `viewedAt`, `paymentMethod`, `paymentReference` fields
+- `paymentMethod` enum: `stripe_ach`, `stripe_card`, `zelle`, `check`, `bank_transfer`, `other`
+- Photos are GCS object keys (strings), not full URLs
+
+### 4. Do NOT add any of the following
+
+- No monorepo/workspace structure
+- No separate API server (Express or otherwise) — API routes live in the Next.js app
+- No code generation pipeline (no Orval, no generated Zod packages, no generated React Query hooks)
+- No database setup yet (keep the DataProvider/localStorage mock for now)
+- No auth setup yet
+- No component library installation (no shadcn, no radix — the prototype already has its own styled components)
+- No additional template files, boilerplate scripts, or CI configuration
+- No changes to the existing frontend code
+
+### 5. Verify
+
+After restructuring, confirm:
+- `npm install` (or `pnpm install`) works
+- `npm run dev` starts the Next.js app
+- All existing pages render correctly
+- The admin dashboard, leads, clients, jobs, invoices, and settings pages all work with the mock data
+- The public landing page, contact form, gallery, and invoice token page all work
+- No TypeScript errors
+
+## Target stack (for context only — don't implement yet)
+
+The full stack will eventually be: Next.js (App Router) + Tailwind + MongoDB Atlas + Google OAuth via NextAuth + Stripe Checkout (ACH + card) + Google Cloud Storage + Resend + Vercel. But right now, just flatten the repo and keep the working frontend prototype intact.
