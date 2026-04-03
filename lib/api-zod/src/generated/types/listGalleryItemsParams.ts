@@ -5,7 +5,8 @@
  * Groundwork small business boilerplate API
  * OpenAPI spec version: 0.1.0
  */
+import type { ListGalleryItemsType } from "./listGalleryItemsType";
 
-export interface HealthStatus {
-  status: string;
-}
+export type ListGalleryItemsParams = {
+  type?: ListGalleryItemsType;
+};

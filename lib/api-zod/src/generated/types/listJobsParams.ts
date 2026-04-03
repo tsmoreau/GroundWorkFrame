@@ -5,7 +5,9 @@
  * Groundwork small business boilerplate API
  * OpenAPI spec version: 0.1.0
  */
+import type { ListJobsStatus } from "./listJobsStatus";
 
-export interface HealthStatus {
-  status: string;
-}
+export type ListJobsParams = {
+  status?: ListJobsStatus;
+  clientId?: string;
+};

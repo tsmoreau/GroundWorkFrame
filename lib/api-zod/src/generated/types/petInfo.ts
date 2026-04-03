@@ -5,7 +5,10 @@
  * Groundwork small business boilerplate API
  * OpenAPI spec version: 0.1.0
  */
+import type { PetInfoType } from "./petInfoType";
 
-export interface HealthStatus {
-  status: string;
+export interface PetInfo {
+  type: PetInfoType;
+  breed?: string;
+  count?: number;
 }
