@@ -324,10 +324,10 @@ export default function ContactPage() {
           <nav className="flex justify-between items-center px-8 py-4 w-full">
             <Link href="/" className="text-2xl font-bold font-headline text-primary">Groundwork</Link>
             <div className="hidden md:flex items-center gap-8">
-              <Link href="/#process" className="text-primary/70 hover:text-primary transition-colors label-style text-xs font-semibold">Process</Link>
-              <Link href="/#portfolio" className="text-primary/70 hover:text-primary transition-colors label-style text-xs font-semibold">Portfolio</Link>
-              <a href="#" className="text-primary/70 hover:text-primary transition-colors label-style text-xs font-semibold">Materials</a>
-              <a href="#" className="text-primary/70 hover:text-primary transition-colors label-style text-xs font-semibold">FAQ</a>
+              <Link href="/#process" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">Process</Link>
+              <Link href="/#portfolio" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">Portfolio</Link>
+              <a href="#" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">Materials</a>
+              <a href="#" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">FAQ</a>
             </div>
             <Link
               href="/contact"
