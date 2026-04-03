@@ -1,0 +1,1458 @@
+openapi: 3.1.0
+info:
+  title: Groundwork API
+  version: 0.1.0
+  description: >
+    REST API for the Groundwork small business admin boilerplate. First deployment
+    target is Denhaus (denhaus.la), a design studio for outdoor pet environments.
+    Covers the full lifecycle: lead intake → client conversion → job tracking →
+    invoicing → payment → bookkeeping export.
+
+servers:
+  - url: /api
+    description: Next.js API routes (same origin)
+
+# ---------------------------------------------------------------------------
+# Security
+# ---------------------------------------------------------------------------
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: NextAuth session cookie (Google OAuth — not yet implemented)
+
+  schemas:
+    # -----------------------------------------------------------------------
+    # Primitive enums
+    # -----------------------------------------------------------------------
+    LeadSource:
+      type: string
+      enum: [contact_form, nextdoor, craigslist, referral, vet_card, other]
+
+    LeadStatus:
+      type: string
+      enum: [new, contacted, qualified, converted, dead]
+
+    JobType:
+      type: string
+      enum: [catio, dog_house, kennel, cat_box, tunnel, other]
+
+    JobStatus:
+      type: string
+      enum: [quoted, deposit_paid, materials_ordered, scheduled, in_progress, complete, cancelled]
+
+    InvoiceType:
+      type: string
+      enum: [deposit, final, full]
+
+    InvoiceStatus:
+      type: string
+      enum: [draft, sent, viewed, paid, void]
+
+    PaymentMethod:
+      type: string
+      enum: [stripe_ach, stripe_card, zelle, check, bank_transfer, other]
+
+    PetType:
+      type: string
+      enum: [cat, dog]
+
+    PetInfoType:
+      type: string
+      enum: [cat, dog, both]
+
+    # -----------------------------------------------------------------------
+    # Shared sub-types
+    # -----------------------------------------------------------------------
+    Note:
+      type: object
+      required: [text, createdAt]
+      properties:
+        text:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    LineItem:
+      type: object
+      required: [id, description, amount]
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        amount:
+          type: number
+          format: float
+        category:
+          type: string
+
+    Pet:
+      type: object
+      required: [type]
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/PetType'
+        breed:
+          type: string
+
+    PetInfo:
+      type: object
+      required: [type]
+      properties:
+        type:
+          $ref: '#/components/schemas/PetInfoType'
+        breed:
+          type: string
+        count:
+          type: integer
+
+    # -----------------------------------------------------------------------
+    # Core domain objects
+    # -----------------------------------------------------------------------
+    Lead:
+      type: object
+      required: [id, name, email, source, message, photos, petInfo, status, notes, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        source:
+          $ref: '#/components/schemas/LeadSource'
+        message:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+            description: GCS object key
+        petInfo:
+          $ref: '#/components/schemas/PetInfo'
+        status:
+          $ref: '#/components/schemas/LeadStatus'
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        convertedTo:
+          type: string
+          description: Client ID if this lead was converted
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    LeadCreate:
+      type: object
+      required: [name, email, source, message, petInfo]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        source:
+          $ref: '#/components/schemas/LeadSource'
+        message:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+          default: []
+        petInfo:
+          $ref: '#/components/schemas/PetInfo'
+
+    LeadPatch:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        source:
+          $ref: '#/components/schemas/LeadSource'
+        message:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        petInfo:
+          $ref: '#/components/schemas/PetInfo'
+        status:
+          $ref: '#/components/schemas/LeadStatus'
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+
+    Client:
+      type: object
+      required: [id, name, email, address, pets, notes, jobIds, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        pets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pet'
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        leadId:
+          type: string
+          description: Source lead ID if converted from a lead
+        jobIds:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ClientCreate:
+      type: object
+      required: [name, email, address]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        pets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pet'
+          default: []
+        leadId:
+          type: string
+
+    ClientPatch:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        pets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pet'
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+
+    Job:
+      type: object
+      required: [id, clientId, clientName, title, type, status, lineItems, estimatedDays, materialsCost, photos, portfolioApproved, invoiceIds, notes, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+        clientName:
+          type: string
+        title:
+          type: string
+        type:
+          $ref: '#/components/schemas/JobType'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+          description: Sum of lineItems[].amount is the computed job total — no totalAmount field
+        depositAmount:
+          type: number
+          format: float
+        estimatedDays:
+          type: integer
+        scheduledStart:
+          type: string
+          format: date
+        scheduledEnd:
+          type: string
+          format: date
+        actualStart:
+          type: string
+          format: date
+        actualEnd:
+          type: string
+          format: date
+        materialsCost:
+          type: number
+          format: float
+        materialsNotes:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+            description: GCS object key
+        portfolioApproved:
+          type: boolean
+        invoiceIds:
+          type: array
+          items:
+            type: string
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    JobCreate:
+      type: object
+      required: [clientId, title, type, lineItems, estimatedDays]
+      properties:
+        clientId:
+          type: string
+        title:
+          type: string
+        type:
+          $ref: '#/components/schemas/JobType'
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        depositAmount:
+          type: number
+          format: float
+        estimatedDays:
+          type: integer
+        scheduledStart:
+          type: string
+          format: date
+        scheduledEnd:
+          type: string
+          format: date
+        materialsCost:
+          type: number
+          format: float
+          default: 0
+        materialsNotes:
+          type: string
+
+    JobPatch:
+      type: object
+      properties:
+        title:
+          type: string
+        type:
+          $ref: '#/components/schemas/JobType'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        depositAmount:
+          type: number
+          format: float
+        estimatedDays:
+          type: integer
+        scheduledStart:
+          type: string
+          format: date
+        scheduledEnd:
+          type: string
+          format: date
+        actualStart:
+          type: string
+          format: date
+        actualEnd:
+          type: string
+          format: date
+        materialsCost:
+          type: number
+          format: float
+        materialsNotes:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        portfolioApproved:
+          type: boolean
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+
+    Invoice:
+      type: object
+      required: [id, invoiceNumber, jobId, clientId, clientName, type, lineItems, token, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        invoiceNumber:
+          type: string
+        jobId:
+          type: string
+        clientId:
+          type: string
+        clientName:
+          type: string
+        type:
+          $ref: '#/components/schemas/InvoiceType'
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+          description: Sum of lineItems[].amount is the computed invoice total — no totalAmount field
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        paymentReference:
+          type: string
+          description: Check number, Zelle confirmation, Stripe PaymentIntent ID, etc.
+        token:
+          type: string
+          description: Opaque URL-safe token for the public invoice view
+        sentAt:
+          type: string
+          format: date-time
+        viewedAt:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/InvoiceStatus'
+        paidAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    InvoicePatch:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/InvoiceStatus'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        paymentReference:
+          type: string
+        paidAt:
+          type: string
+          format: date-time
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+
+    InvoicePublicView:
+      type: object
+      description: Reduced invoice object returned for public (unauthenticated) token-based access
+      required: [id, invoiceNumber, clientName, type, lineItems, status, token, createdAt]
+      properties:
+        id:
+          type: string
+        invoiceNumber:
+          type: string
+        clientName:
+          type: string
+        type:
+          $ref: '#/components/schemas/InvoiceType'
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        status:
+          $ref: '#/components/schemas/InvoiceStatus'
+        token:
+          type: string
+        sentAt:
+          type: string
+          format: date-time
+        viewedAt:
+          type: string
+          format: date-time
+        paidAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        businessName:
+          type: string
+        businessEmail:
+          type: string
+        businessPhone:
+          type: string
+        stripeEnabled:
+          type: boolean
+        zelleEnabled:
+          type: boolean
+        zelleRecipient:
+          type: string
+        checkEnabled:
+          type: boolean
+        checkPayableTo:
+          type: string
+        checkMailingAddress:
+          type: string
+        bankTransferEnabled:
+          type: boolean
+        bankName:
+          type: string
+        bankRoutingNumber:
+          type: string
+        bankAccountLast4:
+          type: string
+
+    BusinessSettings:
+      type: object
+      required: [businessName, businessEmail, invoicePrefix, depositPercent, taxRate, stripeEnabled, zelleEnabled, checkEnabled, bankTransferEnabled]
+      properties:
+        businessName:
+          type: string
+        businessAddress:
+          type: string
+        businessPhone:
+          type: string
+        businessEmail:
+          type: string
+          format: email
+        businessLogo:
+          type: string
+          description: GCS object key
+        invoicePrefix:
+          type: string
+          example: INV-
+        depositPercent:
+          type: number
+          format: float
+          description: e.g. 50 = 50%
+        taxRate:
+          type: number
+          format: float
+          description: e.g. 9.5 = 9.5%
+        stripeEnabled:
+          type: boolean
+        zelleEnabled:
+          type: boolean
+        zelleRecipient:
+          type: string
+        checkEnabled:
+          type: boolean
+        checkPayableTo:
+          type: string
+        checkMailingAddress:
+          type: string
+        bankTransferEnabled:
+          type: boolean
+        bankName:
+          type: string
+        bankRoutingNumber:
+          type: string
+        bankAccountLast4:
+          type: string
+
+    GalleryItem:
+      type: object
+      required: [id, title, photos]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+            description: GCS object key
+        jobId:
+          type: string
+
+    DashboardSummary:
+      type: object
+      required: [newLeadsCount, activeJobsCount, outstandingInvoicesTotal, paidThisMonthTotal]
+      properties:
+        newLeadsCount:
+          type: integer
+        activeJobsCount:
+          type: integer
+        outstandingInvoicesTotal:
+          type: number
+          format: float
+        paidThisMonthTotal:
+          type: number
+          format: float
+
+    PresignResponse:
+      type: object
+      required: [uploadUrl, objectKey]
+      properties:
+        uploadUrl:
+          type: string
+          format: uri
+          description: Signed GCS PUT URL
+        objectKey:
+          type: string
+          description: The GCS object key to store for future reference
+
+    CheckoutResponse:
+      type: object
+      required: [url]
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Stripe Checkout session URL — redirect the client here
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        details:
+          type: string
+
+# ---------------------------------------------------------------------------
+# Default security — all routes require session except explicitly overridden
+# ---------------------------------------------------------------------------
+security:
+  - sessionCookie: []
+
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+paths:
+  # ---- Leads ---------------------------------------------------------------
+  /leads:
+    get:
+      summary: List all leads
+      operationId: listLeads
+      tags: [Leads]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/LeadStatus'
+        - name: source
+          in: query
+          schema:
+            $ref: '#/components/schemas/LeadSource'
+      responses:
+        '200':
+          description: Array of leads
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+    post:
+      summary: Create a lead
+      operationId: createLead
+      tags: [Leads]
+      security: []
+      description: Public endpoint — used by the contact form (no auth required)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadCreate'
+      responses:
+        '201':
+          description: Created lead
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /leads/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a lead by ID
+      operationId: getLead
+      tags: [Leads]
+      responses:
+        '200':
+          description: Lead object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update a lead
+      operationId: patchLead
+      tags: [Leads]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadPatch'
+      responses:
+        '200':
+          description: Updated lead
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /leads/{id}/convert:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Convert a lead to a client
+      operationId: convertLead
+      tags: [Leads]
+      description: >
+        Creates a new Client from the lead data, sets lead status to "converted",
+        and links the lead and client via convertedTo / leadId fields.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                  description: Override address if different from lead address
+      responses:
+        '201':
+          description: Newly created client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        '400':
+          description: Lead already converted or invalid state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Lead not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # ---- Clients -------------------------------------------------------------
+  /clients:
+    get:
+      summary: List all clients
+      operationId: listClients
+      tags: [Clients]
+      responses:
+        '200':
+          description: Array of clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+    post:
+      summary: Create a client directly (without a lead)
+      operationId: createClient
+      tags: [Clients]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCreate'
+      responses:
+        '201':
+          description: Created client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+
+  /clients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a client by ID
+      operationId: getClient
+      tags: [Clients]
+      responses:
+        '200':
+          description: Client object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update a client
+      operationId: patchClient
+      tags: [Clients]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientPatch'
+      responses:
+        '200':
+          description: Updated client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # ---- Jobs ----------------------------------------------------------------
+  /jobs:
+    get:
+      summary: List all jobs
+      operationId: listJobs
+      tags: [Jobs]
+      parameters:
+        - name: clientId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/JobStatus'
+      responses:
+        '200':
+          description: Array of jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+    post:
+      summary: Create a job
+      operationId: createJob
+      tags: [Jobs]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobCreate'
+      responses:
+        '201':
+          description: Created job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+
+  /jobs/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a job by ID
+      operationId: getJob
+      tags: [Jobs]
+      responses:
+        '200':
+          description: Job object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update a job
+      operationId: patchJob
+      tags: [Jobs]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobPatch'
+      responses:
+        '200':
+          description: Updated job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /jobs/{id}/invoice:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Generate an invoice for a job
+      operationId: createJobInvoice
+      tags: [Jobs]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type]
+              properties:
+                type:
+                  $ref: '#/components/schemas/InvoiceType'
+                lineItems:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LineItem'
+                  description: Defaults to the job's lineItems if omitted
+      responses:
+        '201':
+          description: Created invoice
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # ---- Invoices ------------------------------------------------------------
+  /invoices:
+    get:
+      summary: List all invoices
+      operationId: listInvoices
+      tags: [Invoices]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/InvoiceStatus'
+        - name: clientId
+          in: query
+          schema:
+            type: string
+        - name: jobId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of invoices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+
+  /invoices/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get an invoice by ID
+      operationId: getInvoice
+      tags: [Invoices]
+      responses:
+        '200':
+          description: Invoice object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update an invoice
+      operationId: patchInvoice
+      tags: [Invoices]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoicePatch'
+      responses:
+        '200':
+          description: Updated invoice
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /invoices/{id}/send:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Send invoice to the client via email
+      operationId: sendInvoice
+      tags: [Invoices]
+      description: >
+        Sends an email to the client with the public invoice URL
+        (/invoice/{token}). Sets sentAt and status to "sent".
+      responses:
+        '200':
+          description: Invoice with updated sentAt and status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '400':
+          description: Invoice is in a non-sendable state (e.g. already paid or void)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /invoices/{id}/pdf:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Download invoice as PDF
+      operationId: getInvoicePdf
+      tags: [Invoices]
+      responses:
+        '200':
+          description: PDF file
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /invoices/{id}/checkout:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Create a Stripe Checkout session for this invoice
+      operationId: createInvoiceCheckout
+      tags: [Invoices]
+      security: []
+      description: >
+        Public endpoint — called from the client-facing invoice page.
+        Returns a Stripe Checkout URL. The client is redirected there to pay
+        via card or ACH. After payment, Stripe sends a webhook to /api/payments/webhook.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [paymentMethod]
+              properties:
+                paymentMethod:
+                  type: string
+                  enum: [stripe_card, stripe_ach]
+      responses:
+        '200':
+          description: Checkout session URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResponse'
+        '400':
+          description: Invoice is not payable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /invoices/token/{token}:
+    parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get public invoice view by token
+      operationId: getInvoiceByToken
+      tags: [Invoices]
+      security: []
+      description: >
+        Unauthenticated. Returns the reduced InvoicePublicView object including
+        business payment settings needed for the client-facing page. Sets
+        viewedAt on first access.
+      responses:
+        '200':
+          description: Public invoice view
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoicePublicView'
+        '404':
+          description: Token not found or invoice is void
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # ---- Payments ------------------------------------------------------------
+  /payments/webhook:
+    post:
+      summary: Stripe webhook receiver
+      operationId: stripeWebhook
+      tags: [Payments]
+      security: []
+      description: >
+        Receives Stripe webhook events. Must be registered in the Stripe Dashboard.
+        Validates the Stripe-Signature header. On checkout.session.completed,
+        marks the invoice as paid and records paymentMethod and paymentReference.
+      parameters:
+        - name: Stripe-Signature
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Raw Stripe event object
+      responses:
+        '200':
+          description: Event acknowledged
+        '400':
+          description: Invalid signature or unrecognised event
+
+  # ---- Upload --------------------------------------------------------------
+  /upload/presign:
+    post:
+      summary: Generate a signed GCS upload URL
+      operationId: presignUpload
+      tags: [Upload]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [filename, contentType]
+              properties:
+                filename:
+                  type: string
+                  example: catio-front.jpg
+                contentType:
+                  type: string
+                  example: image/jpeg
+                folder:
+                  type: string
+                  description: Optional GCS folder prefix
+                  example: jobs/job_abc123
+      responses:
+        '200':
+          description: Signed upload URL and object key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PresignResponse'
+
+  # ---- Export --------------------------------------------------------------
+  /export/quickbooks:
+    get:
+      summary: Export paid invoices as a QuickBooks-compatible CSV
+      operationId: exportQuickbooks
+      tags: [Export]
+      parameters:
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Start date (inclusive)
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date
+          description: End date (inclusive)
+      responses:
+        '200':
+          description: CSV file
+          content:
+            text/csv:
+              schema:
+                type: string
+
+  # ---- Settings ------------------------------------------------------------
+  /settings:
+    get:
+      summary: Get business settings
+      operationId: getSettings
+      tags: [Settings]
+      responses:
+        '200':
+          description: Current settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessSettings'
+    patch:
+      summary: Update business settings
+      operationId: patchSettings
+      tags: [Settings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessSettings'
+      responses:
+        '200':
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessSettings'
+
+  # ---- Gallery -------------------------------------------------------------
+  /gallery:
+    get:
+      summary: Get portfolio gallery items
+      operationId: listGallery
+      tags: [Gallery]
+      security: []
+      description: Public endpoint — used by the public gallery page
+      responses:
+        '200':
+          description: Array of gallery items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GalleryItem'
+
+  # ---- Dashboard -----------------------------------------------------------
+  /dashboard/summary:
+    get:
+      summary: Get high-level KPI summary
+      operationId: getDashboardSummary
+      tags: [Dashboard]
+      responses:
+        '200':
+          description: Summary stats
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+
+  /dashboard/upcoming-jobs:
+    get:
+      summary: Get jobs scheduled to start in the next 30 days
+      operationId: getUpcomingJobs
+      tags: [Dashboard]
+      parameters:
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+      responses:
+        '200':
+          description: Array of upcoming jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+
+  /dashboard/outstanding-invoices:
+    get:
+      summary: Get sent/viewed invoices that have not been paid
+      operationId: getOutstandingInvoices
+      tags: [Dashboard]
+      responses:
+        '200':
+          description: Array of outstanding invoices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+
+# ---------------------------------------------------------------------------
+# Tags
+# ---------------------------------------------------------------------------
+tags:
+  - name: Leads
+    description: Lead intake and qualification
+  - name: Clients
+    description: Client management
+  - name: Jobs
+    description: Job tracking and scheduling
+  - name: Invoices
+    description: Invoicing and payment tracking
+  - name: Payments
+    description: Stripe webhook receiver
+  - name: Upload
+    description: GCS pre-signed upload URLs
+  - name: Export
+    description: Bookkeeping data export
+  - name: Settings
+    description: Business configuration
+  - name: Gallery
+    description: Public portfolio gallery
+  - name: Dashboard
+    description: Admin dashboard data
