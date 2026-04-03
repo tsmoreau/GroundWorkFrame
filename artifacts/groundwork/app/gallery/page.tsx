@@ -131,8 +131,8 @@ export default function GalleryPage() {
           <p className="text-[#6B5B4A] mb-8">We're happy to share more photos or sketch out ideas for your space before you commit to anything.</p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-white"
-            style={{ backgroundColor: "#2E1A0E" }}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-[#1C1208]"
+            style={{ backgroundColor: "#C8A548" }}
           >
             Start a Conversation
           </Link>

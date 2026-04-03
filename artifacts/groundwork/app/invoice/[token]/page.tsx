@@ -223,8 +223,8 @@ function InvoiceContent({ token }: { token: string }) {
             <div className="flex gap-3">
               <button
                 onClick={handleSimulatePay}
-                className="flex-1 py-3 rounded-xl font-semibold text-sm text-white"
-                style={{ backgroundColor: "#2E1A0E" }}
+                className="flex-1 py-3 rounded-xl font-semibold text-sm text-[#1C1208]"
+                style={{ backgroundColor: "#C8A548" }}
               >
                 {selectedMethod === "zelle" || selectedMethod === "check"
                   ? "I've sent payment"
@@ -256,7 +256,7 @@ function InvoiceContent({ token }: { token: string }) {
                   }`}
                 >
                   <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: selectedMethod === key ? "#2E1A0E" : "#F0EAE0" }}>
+                    style={{ backgroundColor: selectedMethod === key ? "#C8A548" : "#F0EAE0" }}>
                     <Icon className="w-4 h-4" style={{ color: selectedMethod === key ? "white" : "#6B5B4A" }} />
                   </div>
                   <div>
@@ -269,8 +269,8 @@ function InvoiceContent({ token }: { token: string }) {
             <button
               disabled={!selectedMethod}
               onClick={() => setPayStep("confirm")}
-              className="w-full py-3.5 rounded-xl font-semibold text-sm text-white disabled:opacity-40"
-              style={{ backgroundColor: "#2E1A0E" }}
+              className="w-full py-3.5 rounded-xl font-semibold text-sm text-[#1C1208] disabled:opacity-40"
+              style={{ backgroundColor: "#C8A548" }}
             >
               Continue →
             </button>

@@ -172,15 +172,15 @@ export default function InvoiceDetailPage({
                 {invoice.status === "draft" && (
                   <button
                     onClick={handleMarkSent}
-                    className="px-4 py-2.5 rounded-lg text-sm font-medium text-white"
-                    style={{ backgroundColor: "#2E1A0E" }}
+                    className="px-4 py-2.5 rounded-lg text-sm font-medium text-[#1C1208]"
+                    style={{ backgroundColor: "#C8A548" }}
                   >
                     Mark as Sent
                   </button>
                 )}
                 <button
                   onClick={() => setShowMarkPaid(true)}
-                  className="px-4 py-2.5 rounded-lg text-sm font-medium text-white"
+                  className="px-4 py-2.5 rounded-lg text-sm font-medium text-[#1C1208]"
                   style={{ backgroundColor: "#5A7840" }}
                 >
                   Mark as Paid
@@ -225,7 +225,7 @@ export default function InvoiceDetailPage({
                 <div className="flex gap-2 pt-1">
                   <button
                     onClick={handleMarkPaid}
-                    className="flex-1 py-2.5 rounded-lg text-sm font-medium text-white"
+                    className="flex-1 py-2.5 rounded-lg text-sm font-medium text-[#1C1208]"
                     style={{ backgroundColor: "#5A7840" }}
                   >
                     Confirm Payment

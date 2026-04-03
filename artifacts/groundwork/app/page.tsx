@@ -99,8 +99,8 @@ export default function HomePage() {
             <div className="flex items-center gap-5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white transition-opacity hover:opacity-90"
-                style={{ backgroundColor: "#2E1A0E" }}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-[#1C1208] transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#C8A548" }}
               >
                 Get a Free Quote
                 <ChevronRight className="w-4 h-4" />
@@ -207,8 +207,8 @@ export default function HomePage() {
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-white transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "#2E1A0E" }}
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-[#1C1208] transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "#C8A548" }}
         >
           Get in Touch
         </Link>

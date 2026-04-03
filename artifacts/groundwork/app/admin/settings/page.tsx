@@ -54,7 +54,7 @@ function Toggle({
   return (
     <label className="flex items-center gap-2 cursor-pointer">
       <div
-        className={`relative w-9 h-5 rounded-full transition-colors ${checked ? "bg-[#2E1A0E]" : "bg-[#D0C0A8]"}`}
+        className={`relative w-9 h-5 rounded-full transition-colors ${checked ? "bg-[#C8A548]" : "bg-[#D0C0A8]"}`}
         onClick={() => onChange(!checked)}
       >
         <div
@@ -211,8 +211,8 @@ export default function SettingsPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleSave}
-            className="px-6 py-2.5 rounded-lg text-sm font-medium text-white"
-            style={{ backgroundColor: "#2E1A0E" }}
+            className="px-6 py-2.5 rounded-lg text-sm font-medium text-[#1C1208]"
+            style={{ backgroundColor: "#C8A548" }}
           >
             Save Settings
           </button>

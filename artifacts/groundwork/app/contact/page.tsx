@@ -59,8 +59,8 @@ function ContactForm() {
         </p>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl text-sm font-medium text-white"
-          style={{ backgroundColor: "#2E1A0E" }}
+          className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl text-sm font-medium text-[#1C1208]"
+          style={{ backgroundColor: "#C8A548" }}
         >
           Back to Home
         </Link>
@@ -182,8 +182,8 @@ function ContactForm() {
 
       <button
         type="submit"
-        className="w-full py-3.5 rounded-xl font-semibold text-sm text-white transition-opacity hover:opacity-90"
-        style={{ backgroundColor: "#2E1A0E" }}
+        className="w-full py-3.5 rounded-xl font-semibold text-sm text-[#1C1208] transition-opacity hover:opacity-90"
+        style={{ backgroundColor: "#C8A548" }}
       >
         Send Message
       </button>

@@ -151,10 +151,10 @@ export default function JobDetailPage({
                     <div key={s} className="flex items-center gap-2 flex-shrink-0">
                       <div
                         className={`text-xs px-2 py-1 rounded-full font-medium ${
-                          isActive ? "text-white" : isDone ? "text-[#5A7840]" : "text-[#A09070]"
+                          isActive ? "text-[#1C1208]" : isDone ? "text-[#5A7840]" : "text-[#A09070]"
                         }`}
                         style={{
-                          backgroundColor: isActive ? "#2E1A0E" : isDone ? "#EDF0D8" : "#F0EAE0",
+                          backgroundColor: isActive ? "#C8A548" : isDone ? "#EDF0D8" : "#F0EAE0",
                         }}
                       >
                         {JOB_STATUS_LABELS[s]}
@@ -169,8 +169,8 @@ export default function JobDetailPage({
               {nextStatus && job.status !== "cancelled" && (
                 <button
                   onClick={handleAdvanceStatus}
-                  className="mt-3 text-sm font-medium px-4 py-2 rounded-lg text-white"
-                  style={{ backgroundColor: "#2E1A0E" }}
+                  className="mt-3 text-sm font-medium px-4 py-2 rounded-lg text-[#1C1208]"
+                  style={{ backgroundColor: "#C8A548" }}
                 >
                   Mark as {JOB_STATUS_LABELS[nextStatus]} →
                 </button>
@@ -298,8 +298,8 @@ export default function JobDetailPage({
               <button
                 onClick={handleAddNote}
                 disabled={!noteText.trim()}
-                className="px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-50 self-end"
-                style={{ backgroundColor: "#2E1A0E" }}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-[#1C1208] disabled:opacity-50 self-end"
+                style={{ backgroundColor: "#C8A548" }}
               >
                 Add
               </button>
@@ -416,8 +416,8 @@ export default function JobDetailPage({
             <div className="flex gap-2">
               <button
                 onClick={handleCreateInvoice}
-                className="flex-1 py-2.5 rounded-lg text-sm font-medium text-white"
-                style={{ backgroundColor: "#2E1A0E" }}
+                className="flex-1 py-2.5 rounded-lg text-sm font-medium text-[#1C1208]"
+                style={{ backgroundColor: "#C8A548" }}
               >
                 Create Invoice
               </button>

@@ -46,8 +46,8 @@ export default function LeadsPage() {
         </div>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white"
-          style={{ backgroundColor: "#2E1A0E" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#1C1208]"
+          style={{ backgroundColor: "#C8A548" }}
         >
           <Plus className="w-4 h-4" />
           New Lead

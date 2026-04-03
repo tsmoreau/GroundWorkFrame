@@ -77,13 +77,13 @@ export default function JobsPage() {
           <div className="flex border border-[#DDD0B8] rounded-lg overflow-hidden bg-white">
             <button
               onClick={() => setView("kanban")}
-              className={`p-2 transition-colors ${view === "kanban" ? "bg-[#2E1A0E] text-white" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
+              className={`p-2 transition-colors ${view === "kanban" ? "bg-[#C8A548] text-[#1C1208]" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
             <button
               onClick={() => setView("list")}
-              className={`p-2 transition-colors ${view === "list" ? "bg-[#2E1A0E] text-white" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
+              className={`p-2 transition-colors ${view === "list" ? "bg-[#C8A548] text-[#1C1208]" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
             >
               <List className="w-4 h-4" />
             </button>

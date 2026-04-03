@@ -186,8 +186,8 @@ export default function LeadDetailPage({
               <button
                 onClick={handleAddNote}
                 disabled={!noteText.trim()}
-                className="px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-50 self-end"
-                style={{ backgroundColor: "#2E1A0E" }}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-[#1C1208] disabled:opacity-50 self-end"
+                style={{ backgroundColor: "#C8A548" }}
               >
                 Add
               </button>
@@ -257,8 +257,8 @@ export default function LeadDetailPage({
               <button
                 onClick={handleConvert}
                 disabled={converting || lead.status === "dead"}
-                className="w-full px-4 py-2.5 rounded-lg text-sm font-medium text-white disabled:opacity-50"
-                style={{ backgroundColor: "#2E1A0E" }}
+                className="w-full px-4 py-2.5 rounded-lg text-sm font-medium text-[#1C1208] disabled:opacity-50"
+                style={{ backgroundColor: "#C8A548" }}
               >
                 {converting ? "Converting..." : "Convert to Client"}
               </button>
