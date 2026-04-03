@@ -15,7 +15,7 @@ function StatCard({
   label,
   value,
   sub,
-  color = "#1c3829",
+  color = "#2E1A0E",
 }: {
   label: string;
   value: string | number;
@@ -23,12 +23,12 @@ function StatCard({
   color?: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-[#e0dbd0] p-5">
-      <p className="text-xs font-medium text-[#5c5c54] uppercase tracking-wider">{label}</p>
+    <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
+      <p className="text-xs font-medium text-[#6B5B4A] uppercase tracking-wider">{label}</p>
       <p className="text-3xl font-bold mt-1" style={{ color }}>
         {value}
       </p>
-      {sub && <p className="text-xs text-[#5c5c54] mt-1">{sub}</p>}
+      {sub && <p className="text-xs text-[#6B5B4A] mt-1">{sub}</p>}
     </div>
   );
 }
@@ -76,8 +76,8 @@ export default function DashboardPage() {
   return (
     <div className="p-8 max-w-6xl">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#1a1a18]">Dashboard</h1>
-        <p className="text-sm text-[#5c5c54] mt-1">
+        <h1 className="text-2xl font-bold text-[#1C1208]">Dashboard</h1>
+        <p className="text-sm text-[#6B5B4A] mt-1">
           {new Date().toLocaleDateString("en-US", {
             weekday: "long",
             year: "numeric",
@@ -92,7 +92,7 @@ export default function DashboardPage() {
           label="New Leads"
           value={newLeads}
           sub={`${leads.length} total`}
-          color={newLeads > 0 ? "#c8a55a" : "#1c3829"}
+          color={newLeads > 0 ? "#C8A548" : "#2E1A0E"}
         />
         <StatCard
           label="Active Jobs"
@@ -103,46 +103,46 @@ export default function DashboardPage() {
           label="Outstanding"
           value={formatCurrency(outstandingTotal)}
           sub={`${outstanding.length} invoice${outstanding.length !== 1 ? "s" : ""}`}
-          color={outstanding.length > 0 ? "#b93232" : "#1c3829"}
+          color={outstanding.length > 0 ? "#A83028" : "#2E1A0E"}
         />
         <StatCard
           label="Revenue (MTD)"
           value={formatCurrency(revenueThisMonth)}
           sub={`${paidThisMonth.length} invoice${paidThisMonth.length !== 1 ? "s" : ""} paid`}
-          color="#2d6a4f"
+          color="#5A7840"
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         {/* Lead Pipeline */}
-        <div className="bg-white rounded-xl border border-[#e0dbd0] p-5">
+        <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-sm text-[#1a1a18] flex items-center gap-2">
-              <Users className="w-4 h-4 text-[#5c5c54]" />
+            <h2 className="font-semibold text-sm text-[#1C1208] flex items-center gap-2">
+              <Users className="w-4 h-4 text-[#6B5B4A]" />
               Lead Pipeline
             </h2>
-            <Link href="/admin/leads" className="text-xs text-[#1c3829] hover:underline font-medium">
+            <Link href="/admin/leads" className="text-xs text-[#2E1A0E] hover:underline font-medium">
               View all
             </Link>
           </div>
           <div className="space-y-2">
             {(["new", "contacted", "qualified", "converted", "dead"] as const).map((s) => (
               <div key={s} className="flex items-center justify-between">
-                <span className="text-xs capitalize text-[#5c5c54]">{s}</span>
+                <span className="text-xs capitalize text-[#6B5B4A]">{s}</span>
                 <div className="flex items-center gap-2">
                   <div
                     className="rounded-full h-1.5"
                     style={{
                       width: `${Math.max(4, ((leadsByStatus[s] || 0) / leads.length) * 80)}px`,
                       backgroundColor:
-                        s === "new" ? "#c8a55a"
+                        s === "new" ? "#C8A548"
                         : s === "contacted" ? "#6b9dc2"
-                        : s === "qualified" ? "#2d6a4f"
-                        : s === "converted" ? "#1c3829"
-                        : "#d0cbc4",
+                        : s === "qualified" ? "#5A7840"
+                        : s === "converted" ? "#2E1A0E"
+                        : "#D0C0A8",
                     }}
                   />
-                  <span className="text-xs font-semibold text-[#1a1a18] w-4 text-right">
+                  <span className="text-xs font-semibold text-[#1C1208] w-4 text-right">
                     {leadsByStatus[s] || 0}
                   </span>
                 </div>
@@ -152,35 +152,35 @@ export default function DashboardPage() {
         </div>
 
         {/* Upcoming Jobs */}
-        <div className="bg-white rounded-xl border border-[#e0dbd0] p-5 col-span-2">
+        <div className="bg-white rounded-xl border border-[#DDD0B8] p-5 col-span-2">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-sm text-[#1a1a18] flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#5c5c54]" />
+            <h2 className="font-semibold text-sm text-[#1C1208] flex items-center gap-2">
+              <Clock className="w-4 h-4 text-[#6B5B4A]" />
               Upcoming Jobs (14 days)
             </h2>
-            <Link href="/admin/jobs" className="text-xs text-[#1c3829] hover:underline font-medium">
+            <Link href="/admin/jobs" className="text-xs text-[#2E1A0E] hover:underline font-medium">
               All jobs
             </Link>
           </div>
           {upcoming.length === 0 ? (
-            <p className="text-sm text-[#5c5c54]">No jobs scheduled in the next two weeks.</p>
+            <p className="text-sm text-[#6B5B4A]">No jobs scheduled in the next two weeks.</p>
           ) : (
-            <div className="divide-y divide-[#f0ece4]">
+            <div className="divide-y divide-[#EDE4D0]">
               {upcoming.map((job) => (
                 <Link
                   key={job.id}
                   href={`/admin/jobs/${job.id}`}
-                  className="flex items-center justify-between py-3 hover:bg-[#faf8f4] -mx-5 px-5 transition-colors"
+                  className="flex items-center justify-between py-3 hover:bg-[#F8F3EA] -mx-5 px-5 transition-colors"
                 >
                   <div>
-                    <p className="text-sm font-medium text-[#1a1a18]">{job.title}</p>
-                    <p className="text-xs text-[#5c5c54] mt-0.5">{job.clientName}</p>
+                    <p className="text-sm font-medium text-[#1C1208]">{job.title}</p>
+                    <p className="text-xs text-[#6B5B4A] mt-0.5">{job.clientName}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-medium text-[#1c3829]">
+                    <p className="text-xs font-medium text-[#2E1A0E]">
                       {job.scheduledStart ? formatDate(job.scheduledStart) : "—"}
                     </p>
-                    <p className="text-xs text-[#5c5c54]">{JOB_STATUS_LABELS[job.status]}</p>
+                    <p className="text-xs text-[#6B5B4A]">{JOB_STATUS_LABELS[job.status]}</p>
                   </div>
                 </Link>
               ))}
@@ -191,17 +191,17 @@ export default function DashboardPage() {
 
       {/* Outstanding Invoices */}
       {outstanding.length > 0 && (
-        <div className="bg-white rounded-xl border border-[#e0dbd0] p-5">
+        <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-sm text-[#1a1a18] flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-[#b93232]" />
+            <h2 className="font-semibold text-sm text-[#1C1208] flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-[#A83028]" />
               Outstanding Invoices
             </h2>
-            <Link href="/admin/invoices" className="text-xs text-[#1c3829] hover:underline font-medium">
+            <Link href="/admin/invoices" className="text-xs text-[#2E1A0E] hover:underline font-medium">
               All invoices
             </Link>
           </div>
-          <div className="divide-y divide-[#f0ece4]">
+          <div className="divide-y divide-[#EDE4D0]">
             {outstanding.map((inv) => {
               const daysOld = Math.floor(
                 (Date.now() - new Date(inv.sentAt ?? inv.createdAt).getTime()) /
@@ -211,22 +211,22 @@ export default function DashboardPage() {
                 <Link
                   key={inv.id}
                   href={`/admin/invoices/${inv.id}`}
-                  className="flex items-center justify-between py-3 hover:bg-[#faf8f4] -mx-5 px-5 transition-colors"
+                  className="flex items-center justify-between py-3 hover:bg-[#F8F3EA] -mx-5 px-5 transition-colors"
                 >
                   <div>
-                    <p className="text-sm font-medium text-[#1a1a18]">{inv.invoiceNumber}</p>
-                    <p className="text-xs text-[#5c5c54] mt-0.5">{inv.clientName}</p>
+                    <p className="text-sm font-medium text-[#1C1208]">{inv.invoiceNumber}</p>
+                    <p className="text-xs text-[#6B5B4A] mt-0.5">{inv.clientName}</p>
                   </div>
                   <div className="text-right flex items-center gap-4">
                     <div>
-                      <p className="text-sm font-semibold text-[#1a1a18]">
+                      <p className="text-sm font-semibold text-[#1C1208]">
                         {formatCurrency(computeTotal(inv.lineItems))}
                       </p>
-                      <p className={`text-xs mt-0.5 ${daysOld > 14 ? "text-[#b93232]" : "text-[#5c5c54]"}`}>
+                      <p className={`text-xs mt-0.5 ${daysOld > 14 ? "text-[#A83028]" : "text-[#6B5B4A]"}`}>
                         {inv.status === "viewed" ? "Viewed" : "Sent"} {daysOld}d ago
                       </p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#5c5c54]" />
+                    <ArrowRight className="w-4 h-4 text-[#6B5B4A]" />
                   </div>
                 </Link>
               );
@@ -240,14 +240,14 @@ export default function DashboardPage() {
         <Link
           href="/admin/leads"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90"
-          style={{ backgroundColor: "#1c3829" }}
+          style={{ backgroundColor: "#2E1A0E" }}
         >
           <TrendingUp className="w-4 h-4" />
           View Leads
         </Link>
         <Link
           href="/admin/jobs"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-[#e0dbd0] text-[#1a1a18] bg-white hover:bg-[#f8f6f2] transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-[#DDD0B8] text-[#1C1208] bg-white hover:bg-[#F5F0E8] transition-colors"
         >
           View Jobs
         </Link>

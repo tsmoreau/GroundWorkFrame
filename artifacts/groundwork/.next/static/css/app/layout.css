@@ -614,14 +614,14 @@
       border-bottom-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
     }
   }
-  .divide-\[\#f0ece4\] {
+  .divide-\[\#EDE4D0\] {
     :where(& > :not(:last-child)) {
-      border-color: #f0ece4;
+      border-color: #EDE4D0;
     }
   }
-  .divide-\[\#f8f5f0\] {
+  .divide-\[\#F5EEE0\] {
     :where(& > :not(:last-child)) {
-      border-color: #f8f5f0;
+      border-color: #F5EEE0;
     }
   }
   .self-end {
@@ -695,23 +695,23 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 2px;
   }
-  .border-\[\#1c3829\] {
-    border-color: #1c3829;
+  .border-\[\#2E1A0E\] {
+    border-color: #2E1A0E;
   }
-  .border-\[\#2d6a4f\] {
-    border-color: #2d6a4f;
+  .border-\[\#5A7840\] {
+    border-color: #5A7840;
   }
-  .border-\[\#e0dbd0\] {
-    border-color: #e0dbd0;
+  .border-\[\#DDD0B8\] {
+    border-color: #DDD0B8;
   }
-  .border-\[\#e8e4dc\] {
-    border-color: #e8e4dc;
+  .border-\[\#E8D8C4\] {
+    border-color: #E8D8C4;
   }
-  .border-\[\#f0ece4\] {
-    border-color: #f0ece4;
+  .border-\[\#EDE4D0\] {
+    border-color: #EDE4D0;
   }
-  .border-\[\#f8f5f0\] {
-    border-color: #f8f5f0;
+  .border-\[\#F5EEE0\] {
+    border-color: #F5EEE0;
   }
   .border-white\/10 {
     border-color: color-mix(in srgb, #fff 10%, transparent);
@@ -719,23 +719,23 @@
       border-color: color-mix(in oklab, var(--color-white) 10%, transparent);
     }
   }
-  .bg-\[\#1c3829\] {
-    background-color: #1c3829;
+  .bg-\[\#2E1A0E\] {
+    background-color: #2E1A0E;
   }
-  .bg-\[\#d0cbc4\] {
-    background-color: #d0cbc4;
+  .bg-\[\#D0C0A8\] {
+    background-color: #D0C0A8;
   }
-  .bg-\[\#e8e4dc\] {
-    background-color: #e8e4dc;
+  .bg-\[\#E8D8C4\] {
+    background-color: #E8D8C4;
   }
-  .bg-\[\#f0ece8\] {
-    background-color: #f0ece8;
+  .bg-\[\#F0E4D4\] {
+    background-color: #F0E4D4;
   }
-  .bg-\[\#f8f6f2\] {
-    background-color: #f8f6f2;
+  .bg-\[\#F5F0E8\] {
+    background-color: #F5F0E8;
   }
-  .bg-\[\#faf8f5\] {
-    background-color: #faf8f5;
+  .bg-\[\#F8F3EA\] {
+    background-color: #F8F3EA;
   }
   .bg-black\/40 {
     background-color: color-mix(in srgb, #000 40%, transparent);
@@ -968,32 +968,32 @@
   .break-all {
     word-break: break-all;
   }
-  .text-\[\#1a1a18\] {
-    color: #1a1a18;
+  .text-\[\#1C1208\] {
+    color: #1C1208;
   }
-  .text-\[\#1c3829\] {
-    color: #1c3829;
+  .text-\[\#2E1A0E\] {
+    color: #2E1A0E;
   }
-  .text-\[\#2d6a4f\] {
-    color: #2d6a4f;
+  .text-\[\#5A7840\] {
+    color: #5A7840;
   }
-  .text-\[\#5c5c54\] {
-    color: #5c5c54;
+  .text-\[\#6B5B4A\] {
+    color: #6B5B4A;
   }
-  .text-\[\#7c7566\] {
-    color: #7c7566;
+  .text-\[\#7C6E58\] {
+    color: #7C6E58;
   }
-  .text-\[\#8aa89a\] {
-    color: #8aa89a;
+  .text-\[\#A09070\] {
+    color: #A09070;
   }
-  .text-\[\#a09890\] {
-    color: #a09890;
+  .text-\[\#A83028\] {
+    color: #A83028;
   }
-  .text-\[\#b93232\] {
-    color: #b93232;
+  .text-\[\#A89878\] {
+    color: #A89878;
   }
-  .text-\[\#d0cbc4\] {
-    color: #d0cbc4;
+  .text-\[\#D0C0A8\] {
+    color: #D0C0A8;
   }
   .text-white {
     color: var(--color-white);
@@ -1004,8 +1004,8 @@
   .uppercase {
     text-transform: uppercase;
   }
-  .accent-\[\#1c3829\] {
-    accent-color: #1c3829;
+  .accent-\[\#2E1A0E\] {
+    accent-color: #2E1A0E;
   }
   .opacity-20 {
     opacity: 20%;
@@ -1061,38 +1061,31 @@
       }
     }
   }
-  .hover\:border-\[\#c8a55a\] {
+  .hover\:border-\[\#C8A548\] {
     &:hover {
       @media (hover: hover) {
-        border-color: #c8a55a;
+        border-color: #C8A548;
       }
     }
   }
-  .hover\:bg-\[\#f0ece8\] {
+  .hover\:bg-\[\#F0E4D4\] {
     &:hover {
       @media (hover: hover) {
-        background-color: #f0ece8;
+        background-color: #F0E4D4;
       }
     }
   }
-  .hover\:bg-\[\#f8f6f2\] {
+  .hover\:bg-\[\#F5F0E8\] {
     &:hover {
       @media (hover: hover) {
-        background-color: #f8f6f2;
+        background-color: #F5F0E8;
       }
     }
   }
-  .hover\:bg-\[\#faf8f4\] {
+  .hover\:bg-\[\#F8F3EA\] {
     &:hover {
       @media (hover: hover) {
-        background-color: #faf8f4;
-      }
-    }
-  }
-  .hover\:bg-\[\#faf8f5\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #faf8f5;
+        background-color: #F8F3EA;
       }
     }
   }
@@ -1120,31 +1113,31 @@
       }
     }
   }
-  .hover\:text-\[\#1a1a18\] {
+  .hover\:text-\[\#1C1208\] {
     &:hover {
       @media (hover: hover) {
-        color: #1a1a18;
+        color: #1C1208;
       }
     }
   }
-  .hover\:text-\[\#1c3829\] {
+  .hover\:text-\[\#2E1A0E\] {
     &:hover {
       @media (hover: hover) {
-        color: #1c3829;
+        color: #2E1A0E;
       }
     }
   }
-  .hover\:text-\[\#b93232\] {
+  .hover\:text-\[\#A83028\] {
     &:hover {
       @media (hover: hover) {
-        color: #b93232;
+        color: #A83028;
       }
     }
   }
-  .hover\:text-\[\#c8a55a\] {
+  .hover\:text-\[\#C8A548\] {
     &:hover {
       @media (hover: hover) {
-        color: #c8a55a;
+        color: #C8A548;
       }
     }
   }
@@ -1183,9 +1176,9 @@
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
-  .focus\:ring-\[\#1c3829\]\/20 {
+  .focus\:ring-\[\#2E1A0E\]\/20 {
     &:focus {
-      --tw-ring-color: color-mix(in oklab, #1c3829 20%, transparent);
+      --tw-ring-color: color-mix(in oklab, #2E1A0E 20%, transparent);
     }
   }
   .focus\:outline-none {
@@ -1223,8 +1216,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  background-color: #f8f6f2;
-  color: #1a1a18;
+  background-color: #F5F0E8;
+  color: #1C1208;
   font-family: "Inter", system-ui, sans-serif;
   margin: 0;
   padding: 0;
@@ -1237,7 +1230,7 @@ input, select, textarea {
   font-family: inherit;
 }
 ::selection {
-  background-color: #c8a55a33;
+  background-color: #C8A54833;
 }
 @property --tw-translate-x {
   syntax: "*";

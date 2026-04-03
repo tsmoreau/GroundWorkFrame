@@ -40,16 +40,16 @@ function Sidebar() {
 
   return (
     <aside className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40"
-      style={{ backgroundColor: "#1c3829" }}>
+      style={{ backgroundColor: "#2E1A0E" }}>
       <div className="px-5 py-6 border-b border-white/10">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-md flex items-center justify-center"
-            style={{ backgroundColor: "#c8a55a" }}>
+            style={{ backgroundColor: "#C8A548" }}>
             <PawPrint className="w-4 h-4 text-white" />
           </div>
           <span className="font-semibold text-white tracking-tight">Denhaus</span>
         </Link>
-        <p className="text-xs mt-1" style={{ color: "#8aa89a" }}>Admin</p>
+        <p className="text-xs mt-1" style={{ color: "#A89878" }}>Admin</p>
       </div>
 
       <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
@@ -64,9 +64,9 @@ function Sidebar() {
                 "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive
                   ? "text-white"
-                  : "text-[#8aa89a] hover:text-white hover:bg-white/5"
+                  : "text-[#A89878] hover:text-white hover:bg-white/5"
               )}
-              style={isActive ? { backgroundColor: "#2e5c42" } : undefined}
+              style={isActive ? { backgroundColor: "#4A2C1A" } : undefined}
             >
               <span className="flex items-center gap-3">
                 <Icon className="w-4 h-4 flex-shrink-0" />
@@ -75,7 +75,7 @@ function Sidebar() {
               {badge !== null && (
                 <span
                   className="text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center"
-                  style={{ backgroundColor: "#c8a55a", color: "#1c3829" }}
+                  style={{ backgroundColor: "#C8A548", color: "#2E1A0E" }}
                 >
                   {badge}
                 </span>
@@ -86,7 +86,7 @@ function Sidebar() {
       </nav>
 
       <div className="px-5 py-4 border-t border-white/10">
-        <Link href="/" className="flex items-center gap-2 text-xs text-[#8aa89a] hover:text-white transition-colors">
+        <Link href="/" className="flex items-center gap-2 text-xs text-[#A89878] hover:text-white transition-colors">
           <span>View Public Site</span>
           <ChevronRight className="w-3 h-3" />
         </Link>
@@ -99,7 +99,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 ml-56 min-h-screen" style={{ backgroundColor: "#f8f6f2" }}>
+      <main className="flex-1 ml-56 min-h-screen" style={{ backgroundColor: "#F5F0E8" }}>
         {children}
       </main>
     </div>

@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-forest: #1c3829;
-  --color-forest-light: #2e5c42;
-  --color-forest-dim: #152b1f;
-  --color-sage: #c8d8cc;
-  --color-sage-muted: #8aa89a;
-  --color-parchment: #f8f6f2;
-  --color-parchment-dark: #eeeae3;
-  --color-gold: #c8a55a;
-  --color-gold-light: #e8c97a;
-  --color-stone: #5c5c54;
-  --color-charcoal: #1a1a18;
-  --color-border: #e0dbd0;
-  --color-paid: #2d6a4f;
-  --color-danger: #b93232;
+  --color-espresso: #2E1A0E;
+  --color-espresso-light: #4A2C1A;
+  --color-espresso-dim: #1E1008;
+  --color-sand: #C8B8A0;
+  --color-sand-muted: #A89878;
+  --color-parchment: #F5F0E8;
+  --color-parchment-dark: #EDE4D0;
+  --color-gold: #C8A548;
+  --color-gold-light: #E8C860;
+  --color-stone: #6B5B4A;
+  --color-charcoal: #1C1208;
+  --color-border: #DDD0B8;
+  --color-paid: #5A7840;
+  --color-danger: #A83028;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
@@ -28,8 +28,8 @@ html {
 }
 
 body {
-  background-color: #f8f6f2;
-  color: #1a1a18;
+  background-color: #F5F0E8;
+  color: #1C1208;
   font-family: "Inter", system-ui, sans-serif;
   margin: 0;
   padding: 0;
@@ -45,5 +45,5 @@ input, select, textarea {
 }
 
 ::selection {
-  background-color: #c8a55a33;
+  background-color: #C8A54833;
 }

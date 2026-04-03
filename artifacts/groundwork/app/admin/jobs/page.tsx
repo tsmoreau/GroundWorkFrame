@@ -14,13 +14,13 @@ import {
 import { LayoutGrid, List, ChevronRight } from "lucide-react";
 
 const STATUS_STYLES: Record<string, { bg: string; color: string; border: string }> = {
-  quoted: { bg: "#f5f3ef", color: "#7c7566", border: "#e0dbd0" },
+  quoted: { bg: "#F0EAE0", color: "#7C6E58", border: "#DDD0B8" },
   deposit_paid: { bg: "#e8f2fa", color: "#3a7db8", border: "#b8d4ed" },
-  materials_ordered: { bg: "#fdf3e0", color: "#b07d20", border: "#f0d090" },
+  materials_ordered: { bg: "#fdf3e0", color: "#9A7018", border: "#f0d090" },
   scheduled: { bg: "#f0eaff", color: "#6b52c8", border: "#c8baee" },
-  in_progress: { bg: "#e0f2f0", color: "#2a7c70", border: "#90ccc5" },
-  complete: { bg: "#e8f5ee", color: "#2d6a4f", border: "#90c8a8" },
-  cancelled: { bg: "#fce8e8", color: "#b93232", border: "#e8a0a0" },
+  in_progress: { bg: "#E8F0D8", color: "#5A7840", border: "#90BC88" },
+  complete: { bg: "#EDF0D8", color: "#5A7840", border: "#90BC78" },
+  cancelled: { bg: "#fce8e8", color: "#A83028", border: "#e8a0a0" },
 };
 
 function KanbanCard({ job }: { job: ReturnType<typeof useData>["jobs"][0] }) {
@@ -28,18 +28,18 @@ function KanbanCard({ job }: { job: ReturnType<typeof useData>["jobs"][0] }) {
   return (
     <Link
       href={`/admin/jobs/${job.id}`}
-      className="block bg-white rounded-lg border border-[#e0dbd0] p-3 hover:shadow-sm transition-shadow cursor-pointer"
+      className="block bg-white rounded-lg border border-[#DDD0B8] p-3 hover:shadow-sm transition-shadow cursor-pointer"
     >
-      <p className="text-xs font-semibold text-[#1a1a18] leading-tight">{job.title}</p>
-      <p className="text-xs text-[#5c5c54] mt-1">{job.clientName}</p>
+      <p className="text-xs font-semibold text-[#1C1208] leading-tight">{job.title}</p>
+      <p className="text-xs text-[#6B5B4A] mt-1">{job.clientName}</p>
       <div className="flex items-center justify-between mt-3">
-        <span className="text-xs font-bold text-[#1a1a18]">{formatCurrency(total)}</span>
+        <span className="text-xs font-bold text-[#1C1208]">{formatCurrency(total)}</span>
         {job.scheduledStart && (
-          <span className="text-xs text-[#a09890]">{formatDate(job.scheduledStart)}</span>
+          <span className="text-xs text-[#A09070]">{formatDate(job.scheduledStart)}</span>
         )}
       </div>
       <div className="flex items-center gap-1.5 mt-2">
-        <span className="text-xs px-1.5 py-0.5 rounded-full bg-[#f0ece8] text-[#7c7566]">
+        <span className="text-xs px-1.5 py-0.5 rounded-full bg-[#F0E4D4] text-[#7C6E58]">
           {JOB_TYPE_LABELS[job.type]}
         </span>
       </div>
@@ -63,8 +63,8 @@ export default function JobsPage() {
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-[#1a1a18]">Jobs</h1>
-          <p className="text-sm text-[#5c5c54] mt-1">{jobs.length} total</p>
+          <h1 className="text-2xl font-bold text-[#1C1208]">Jobs</h1>
+          <p className="text-sm text-[#6B5B4A] mt-1">{jobs.length} total</p>
         </div>
         <div className="flex items-center gap-2">
           <input
@@ -72,18 +72,18 @@ export default function JobsPage() {
             placeholder="Search jobs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="text-sm border border-[#e0dbd0] rounded-lg px-3 py-2 w-48 focus:outline-none focus:ring-2 focus:ring-[#1c3829]/20 bg-white"
+            className="text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 w-48 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20 bg-white"
           />
-          <div className="flex border border-[#e0dbd0] rounded-lg overflow-hidden bg-white">
+          <div className="flex border border-[#DDD0B8] rounded-lg overflow-hidden bg-white">
             <button
               onClick={() => setView("kanban")}
-              className={`p-2 transition-colors ${view === "kanban" ? "bg-[#1c3829] text-white" : "text-[#5c5c54] hover:bg-[#f8f6f2]"}`}
+              className={`p-2 transition-colors ${view === "kanban" ? "bg-[#2E1A0E] text-white" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
             <button
               onClick={() => setView("list")}
-              className={`p-2 transition-colors ${view === "list" ? "bg-[#1c3829] text-white" : "text-[#5c5c54] hover:bg-[#f8f6f2]"}`}
+              className={`p-2 transition-colors ${view === "list" ? "bg-[#2E1A0E] text-white" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
             >
               <List className="w-4 h-4" />
             </button>
@@ -128,40 +128,40 @@ export default function JobsPage() {
           })}
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-[#e0dbd0] overflow-hidden">
+        <div className="bg-white rounded-xl border border-[#DDD0B8] overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-[#f0ece4]">
+              <tr className="border-b border-[#EDE4D0]">
                 {["Job", "Client", "Type", "Status", "Total", "Scheduled"].map((h) => (
-                  <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-[#5c5c54] uppercase tracking-wider">
+                  <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider">
                     {h}
                   </th>
                 ))}
                 <th />
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f8f5f0]">
+            <tbody className="divide-y divide-[#F5EEE0]">
               {filtered.map((job) => {
                 const sc = STATUS_STYLES[job.status];
                 return (
-                  <tr key={job.id} className="hover:bg-[#faf8f5] transition-colors">
-                    <td className="px-4 py-3 font-medium text-sm text-[#1a1a18]">{job.title}</td>
-                    <td className="px-4 py-3 text-xs text-[#5c5c54]">{job.clientName}</td>
-                    <td className="px-4 py-3 text-xs text-[#5c5c54]">{JOB_TYPE_LABELS[job.type]}</td>
+                  <tr key={job.id} className="hover:bg-[#F8F3EA] transition-colors">
+                    <td className="px-4 py-3 font-medium text-sm text-[#1C1208]">{job.title}</td>
+                    <td className="px-4 py-3 text-xs text-[#6B5B4A]">{job.clientName}</td>
+                    <td className="px-4 py-3 text-xs text-[#6B5B4A]">{JOB_TYPE_LABELS[job.type]}</td>
                     <td className="px-4 py-3">
                       <span className="text-xs font-medium px-2 py-0.5 rounded-full"
                         style={{ backgroundColor: sc.bg, color: sc.color }}>
                         {JOB_STATUS_LABELS[job.status]}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm font-semibold text-[#1a1a18]">
+                    <td className="px-4 py-3 text-sm font-semibold text-[#1C1208]">
                       {formatCurrency(computeTotal(job.lineItems))}
                     </td>
-                    <td className="px-4 py-3 text-xs text-[#5c5c54]">
+                    <td className="px-4 py-3 text-xs text-[#6B5B4A]">
                       {job.scheduledStart ? formatDate(job.scheduledStart) : "—"}
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <Link href={`/admin/jobs/${job.id}`} className="inline-flex items-center gap-1 text-xs font-medium text-[#1c3829] hover:underline">
+                      <Link href={`/admin/jobs/${job.id}`} className="inline-flex items-center gap-1 text-xs font-medium text-[#2E1A0E] hover:underline">
                         View <ChevronRight className="w-3 h-3" />
                       </Link>
                     </td>
