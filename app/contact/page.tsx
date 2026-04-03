@@ -60,12 +60,12 @@ function ContactForm() {
           <span className="material-symbols-outlined text-primary text-3xl">check_circle</span>
         </div>
         <h2 className="text-3xl font-headline text-primary mb-4">Inquiry received.</h2>
-        <p className="text-on-surface-variant max-w-sm mx-auto leading-relaxed mb-10">
+        <p className="text-[#424844] max-w-sm mx-auto leading-relaxed mb-10">
           Our team reviews your space and vision. Expect to hear from us within one business day.
         </p>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 rounded-lg font-medium hover:opacity-90 transition-all"
+          className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-lg font-medium hover:opacity-90 transition-all"
         >
           Back to Home
         </Link>
@@ -87,15 +87,15 @@ function ContactForm() {
                 <span
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
                     active || done
-                      ? "bg-primary text-on-primary"
-                      : "bg-surface-container-highest text-on-surface-variant"
+                      ? "bg-primary text-white"
+                      : "bg-surface-container-highest text-[#424844]"
                   }`}
                 >
                   {done ? <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check</span> : n}
                 </span>
                 <span
                   className={`text-sm whitespace-nowrap transition-colors ${
-                    active ? "text-primary font-medium border-b-2 border-secondary pb-1" : "text-on-surface-variant"
+                    active ? "text-primary font-medium border-b-2 border-secondary pb-1" : "text-[#424844]"
                   }`}
                 >
                   {label}
@@ -132,7 +132,7 @@ function ContactForm() {
                     <div className="p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-lg transition-all group-hover:bg-surface-bright">
                       <span className="material-symbols-outlined text-secondary mb-3 block">{opt.icon}</span>
                       <h3 className="font-bold text-primary mb-1">{opt.label}</h3>
-                      <p className="text-xs text-on-surface-variant leading-tight">{opt.desc}</p>
+                      <p className="text-xs text-[#424844] leading-tight">{opt.desc}</p>
                     </div>
                   </label>
                 ))}
@@ -144,7 +144,7 @@ function ContactForm() {
                 value={form.vision}
                 onChange={(e) => set("vision", e.target.value)}
                 rows={5}
-                className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface placeholder:text-on-surface-variant/50 transition-all outline-none resize-none"
+                className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-[#191c1b] placeholder:text-[#424844]/50 transition-all outline-none resize-none"
                 placeholder="Tell us about your pet's personality and any specific features you're dreaming of..."
               />
             </div>
@@ -152,7 +152,7 @@ function ContactForm() {
               <button
                 onClick={() => setStep(2)}
                 disabled={!form.vision.trim()}
-                className="bg-primary text-on-primary px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 disabled:opacity-50"
+                className="bg-primary text-white px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 disabled:opacity-50"
               >
                 Continue to Space
                 <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -165,7 +165,7 @@ function ContactForm() {
           <div className="space-y-10">
             <div className="bg-surface-container rounded-lg p-6 flex items-start gap-4">
               <span className="material-symbols-outlined text-secondary shrink-0">info</span>
-              <p className="text-sm text-on-surface-variant leading-relaxed">
+              <p className="text-sm text-[#424844] leading-relaxed">
                 Photos help our architects understand the context of your terrain and existing structures. Natural lighting and wide angles are preferred.
               </p>
             </div>
@@ -175,7 +175,7 @@ function ContactForm() {
                 type="text"
                 value={form.address}
                 onChange={(e) => set("address", e.target.value)}
-                className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface outline-none"
+                className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-[#191c1b] outline-none"
                 placeholder="123 Naturalist Way, Los Angeles, CA"
               />
             </div>
@@ -183,8 +183,8 @@ function ContactForm() {
               <label className="block text-sm label-style font-bold text-primary">Upload Space Photos</label>
               <div className="border-2 border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center justify-center bg-surface-container-lowest hover:bg-surface-bright transition-colors cursor-pointer group">
                 <span className="material-symbols-outlined text-4xl text-outline mb-4 group-hover:text-primary transition-colors">cloud_upload</span>
-                <p className="text-on-surface font-medium mb-1">Click or drag photos here</p>
-                <p className="text-xs text-on-surface-variant">JPG, PNG up to 20MB each</p>
+                <p className="text-[#191c1b] font-medium mb-1">Click or drag photos here</p>
+                <p className="text-xs text-[#424844]">JPG, PNG up to 20MB each</p>
               </div>
             </div>
             <div className="pt-6 flex justify-between">
@@ -197,7 +197,7 @@ function ContactForm() {
               </button>
               <button
                 onClick={() => setStep(3)}
-                className="bg-primary text-on-primary px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95"
+                className="bg-primary text-white px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95"
               >
                 Continue to Details
                 <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -216,7 +216,7 @@ function ContactForm() {
                   type="text"
                   value={form.name}
                   onChange={(e) => set("name", e.target.value)}
-                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface outline-none"
+                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-[#191c1b] outline-none"
                   placeholder="Julian Vane"
                 />
               </div>
@@ -226,7 +226,7 @@ function ContactForm() {
                   type="email"
                   value={form.email}
                   onChange={(e) => set("email", e.target.value)}
-                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface outline-none"
+                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-[#191c1b] outline-none"
                   placeholder="you@example.com"
                 />
               </div>
@@ -236,7 +236,7 @@ function ContactForm() {
                   type="tel"
                   value={form.phone}
                   onChange={(e) => set("phone", e.target.value)}
-                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface outline-none"
+                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-[#191c1b] outline-none"
                   placeholder="(213) 555-0000"
                 />
               </div>
@@ -245,7 +245,7 @@ function ContactForm() {
                 <select
                   value={form.source}
                   onChange={(e) => set("source", e.target.value as LeadSource)}
-                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface outline-none appearance-none"
+                  className="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-[#191c1b] outline-none appearance-none"
                 >
                   <option value="contact_form">Web Search</option>
                   <option value="referral">Referral</option>
@@ -265,7 +265,7 @@ function ContactForm() {
               <button
                 onClick={() => setStep(4)}
                 disabled={!form.name.trim() || !form.email.trim()}
-                className="bg-primary text-on-primary px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 disabled:opacity-50"
+                className="bg-primary text-white px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 disabled:opacity-50"
               >
                 Review Inquiry
                 <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -287,8 +287,8 @@ function ContactForm() {
                 { label: "Phone", value: form.phone || "—" },
               ].map(({ label, value }) => (
                 <div key={label} className="flex gap-6 py-4 border-b border-outline-variant/30">
-                  <span className="label-style text-xs font-bold text-on-surface-variant w-32 shrink-0 pt-0.5">{label}</span>
-                  <span className="text-on-surface text-sm leading-relaxed">{value}</span>
+                  <span className="label-style text-xs font-bold text-[#424844] w-32 shrink-0 pt-0.5">{label}</span>
+                  <span className="text-[#191c1b] text-sm leading-relaxed">{value}</span>
                 </div>
               ))}
             </div>
@@ -302,7 +302,7 @@ function ContactForm() {
               </button>
               <button
                 onClick={handleSubmit}
-                className="bg-secondary text-on-secondary px-10 py-4 rounded font-bold flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 text-lg"
+                className="bg-secondary text-white px-10 py-4 rounded font-bold flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 text-lg"
               >
                 Submit Inquiry
                 <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">send</span>
@@ -318,7 +318,7 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <DataProvider>
-      <div className="bg-surface text-on-background min-h-screen flex flex-col">
+      <div className="bg-surface text-[#191c1b] min-h-screen flex flex-col">
         {/* Top Navigation */}
         <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl z-50 backdrop-blur-[20px] bg-stone-50/80 shadow-[0_20px_50px_rgba(25,28,27,0.06)]">
           <nav className="flex justify-between items-center px-8 py-4 w-full">
@@ -331,7 +331,7 @@ export default function ContactPage() {
             </div>
             <Link
               href="/contact"
-              className="bg-primary text-on-primary px-6 py-2.5 rounded hover:opacity-90 transition-all active:scale-95 text-sm font-medium"
+              className="bg-primary text-white px-6 py-2.5 rounded hover:opacity-90 transition-all active:scale-95 text-sm font-medium"
             >
               Get Started
             </Link>
@@ -346,7 +346,7 @@ export default function ContactPage() {
               <h1 className="text-4xl md:text-5xl font-headline text-primary mb-4 leading-tight">
                 Bring your vision to life.
               </h1>
-              <p className="text-on-surface-variant max-w-xl leading-relaxed">
+              <p className="text-[#424844] max-w-xl leading-relaxed">
                 Let's begin the architectural journey for your companion's sanctuary. Please share the details of your project below.
               </p>
             </div>
@@ -374,14 +374,14 @@ export default function ContactPage() {
                     <span className="material-symbols-outlined text-secondary shrink-0">counter_1</span>
                     <div>
                       <p className="font-bold text-primary mb-1">Curation Phase</p>
-                      <p className="text-sm text-on-surface-variant">Our team reviews your space and vision to see if we're a match for your timeline.</p>
+                      <p className="text-sm text-[#424844]">Our team reviews your space and vision to see if we're a match for your timeline.</p>
                     </div>
                   </li>
                   <li className="flex gap-4">
                     <span className="material-symbols-outlined text-secondary shrink-0">counter_2</span>
                     <div>
                       <p className="font-bold text-primary mb-1">Blueprint Call</p>
-                      <p className="text-sm text-on-surface-variant">A 15-minute alignment call to discuss materials, terrain, and pricing tiers.</p>
+                      <p className="text-sm text-[#424844]">A 15-minute alignment call to discuss materials, terrain, and pricing tiers.</p>
                     </div>
                   </li>
                 </ul>

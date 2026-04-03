@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div className="bg-surface text-on-surface">
+    <div className="bg-surface text-[#191c1b]">
 
       {/* TopNavBar */}
       <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl bg-stone-50/80 backdrop-blur-md shadow-[0_20px_50px_rgba(25,28,27,0.06)] z-50 flex justify-between items-center px-8 py-4 transition-all duration-300">
@@ -16,7 +16,7 @@ export default function HomePage() {
         <div className="flex items-center gap-4">
           <Link
             href="/contact"
-            className="bg-primary text-on-primary px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200"
+            className="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200"
           >
             Get Started
           </Link>
@@ -52,7 +52,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="bg-secondary text-on-secondary px-8 py-4 rounded-lg text-lg font-medium hover:opacity-90 transition-all flex items-center justify-center"
+                  className="bg-secondary text-white px-8 py-4 rounded-lg text-lg font-medium hover:opacity-90 transition-all flex items-center justify-center"
                 >
                   Start Your Project
                 </Link>
@@ -73,7 +73,7 @@ export default function HomePage() {
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
               <div className="max-w-xl">
                 <span className="label-style text-primary text-sm font-bold mb-4 block">Collections</span>
-                <h2 className="text-5xl text-on-surface">Precision Built for Every Instinct.</h2>
+                <h2 className="text-5xl text-[#191c1b]">Precision Built for Every Instinct.</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -149,7 +149,7 @@ export default function HomePage() {
               <div className="col-span-12 lg:col-span-4 lg:sticky lg:top-32">
                 <span className="label-style text-primary text-sm font-bold mb-4 block">The Studio Portfolio</span>
                 <h2 className="text-5xl mb-8">Architectural Works.</h2>
-                <p className="text-on-surface-variant text-lg leading-relaxed mb-10">
+                <p className="text-[#424844] text-lg leading-relaxed mb-10">
                   Our projects are more than structures; they are permanent installations that harmonize with your home's existing architecture.
                 </p>
                 <button className="flex items-center gap-4 text-primary font-bold label-style hover:gap-6 transition-all group">
@@ -228,17 +228,17 @@ export default function HomePage() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -mr-32 -mt-32" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -ml-32 -mb-32" />
               <h2 className="text-5xl md:text-6xl mb-8 max-w-2xl mx-auto">Ready to build something special?</h2>
-              <p className="text-on-surface-variant text-xl mb-12 max-w-xl mx-auto">
+              <p className="text-[#424844] text-xl mb-12 max-w-xl mx-auto">
                 Join the waiting list for our next design window. Limited commissions accepted each season.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   href="/contact"
-                  className="bg-primary text-on-primary px-10 py-5 rounded-lg text-lg font-bold transition-all hover:scale-105 active:scale-95"
+                  className="bg-primary text-white px-10 py-5 rounded-lg text-lg font-bold transition-all hover:scale-105 active:scale-95"
                 >
                   Contact Our Studio
                 </Link>
-                <p className="text-on-surface-variant/60 text-sm font-medium label-style">Est. Project Start: Sept 2025</p>
+                <p className="text-[#424844]/60 text-sm font-medium label-style">Est. Project Start: Sept 2025</p>
               </div>
             </div>
           </div>
