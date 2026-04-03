@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Groundwork | Lead Intake</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#727973",
+                    "on-primary-fixed": "#062014",
+                    "on-secondary-fixed-variant": "#5c421f",
+                    "secondary-fixed-dim": "#e6c093",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#fed6a7",
+                    "on-primary-container": "#98b5a3",
+                    "inverse-on-surface": "#f0f1ee",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c2c8c2",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#324c3e",
+                    "surface": "#f9faf7",
+                    "on-background": "#191c1b",
+                    "primary-fixed": "#ccead6",
+                    "primary": "#173124",
+                    "error": "#ba1a1a",
+                    "background": "#f9faf7",
+                    "on-tertiary-fixed": "#181d0e",
+                    "primary-fixed-dim": "#b0cdbb",
+                    "inverse-surface": "#2e312f",
+                    "surface-tint": "#496455",
+                    "surface-container": "#edeeeb",
+                    "tertiary": "#282e1d",
+                    "tertiary-container": "#3e4432",
+                    "on-secondary-fixed": "#2a1800",
+                    "surface-dim": "#d9dad7",
+                    "on-surface-variant": "#424844",
+                    "secondary": "#765934",
+                    "surface-variant": "#e2e3e0",
+                    "tertiary-fixed-dim": "#c3c9b1",
+                    "primary-container": "#2d4739",
+                    "tertiary-fixed": "#dfe5cc",
+                    "surface-container-high": "#e7e8e6",
+                    "surface-container-low": "#f3f4f1",
+                    "surface-bright": "#f9faf7",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#434936",
+                    "inverse-primary": "#b0cdbb",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffddb6",
+                    "on-secondary-container": "#795b36",
+                    "surface-container-highest": "#e2e3e0",
+                    "on-tertiary-container": "#abb199"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Newsreader', serif; }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Shell -->
+<header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl z-50 glass-nav bg-stone-50/80 dark:bg-emerald-950/80 shadow-[0_20px_50px_rgba(25,28,27,0.06)]">
+<nav class="flex justify-between items-center px-8 py-4 w-full">
+<div class="text-2xl font-bold font-serif text-emerald-900 dark:text-emerald-50">Groundwork</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-emerald-800/70 dark:text-emerald-100/70 hover:text-emerald-900 dark:hover:text-white transition-colors tracking-widest uppercase text-xs font-semibold" href="#">Process</a>
+<a class="text-emerald-800/70 dark:text-emerald-100/70 hover:text-emerald-900 dark:hover:text-white transition-colors tracking-widest uppercase text-xs font-semibold" href="#">Portfolio</a>
+<a class="text-emerald-800/70 dark:text-emerald-100/70 hover:text-emerald-900 dark:hover:text-white transition-colors tracking-widest uppercase text-xs font-semibold" href="#">Materials</a>
+<a class="text-emerald-800/70 dark:text-emerald-100/70 hover:text-emerald-900 dark:hover:text-white transition-colors tracking-widest uppercase text-xs font-semibold" href="#">FAQ</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded hover:opacity-90 transition-all active:scale-95 text-sm font-medium">
+                Get Started
+            </button>
+</nav>
+</header>
+<main class="flex-grow pt-32 pb-16 px-6">
+<div class="max-w-4xl mx-auto">
+<!-- Form Header -->
+<div class="mb-12">
+<span class="text-secondary font-label tracking-widest uppercase text-xs font-bold mb-3 block">Project Inquiry</span>
+<h1 class="text-4xl md:text-5xl font-headline text-primary mb-4 leading-tight">Bring your vision to life.</h1>
+<p class="text-on-surface-variant max-w-xl font-body leading-relaxed">Let's begin the architectural journey for your companion's sanctuary. Please share the details of your project below.</p>
+</div>
+<!-- Stepper Component -->
+<div class="flex items-center justify-between mb-12 gap-2 overflow-x-auto pb-4">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">1</span>
+<span class="text-primary font-medium text-sm whitespace-nowrap border-b-2 border-secondary pb-1">Your Vision</span>
+</div>
+<div class="h-[1px] flex-grow bg-outline-variant min-w-[20px]"></div>
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">2</span>
+<span class="text-on-surface-variant text-sm whitespace-nowrap">Your Space</span>
+</div>
+<div class="h-[1px] flex-grow bg-outline-variant min-w-[20px]"></div>
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">3</span>
+<span class="text-on-surface-variant text-sm whitespace-nowrap">Your Details</span>
+</div>
+<div class="h-[1px] flex-grow bg-outline-variant min-w-[20px]"></div>
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold">4</span>
+<span class="text-on-surface-variant text-sm whitespace-nowrap">Review</span>
+</div>
+</div>
+<!-- Multi-Step Content Area -->
+<div class="bg-surface-container-low p-8 md:p-12 rounded-xl shadow-[0_20px_50px_rgba(25,28,27,0.06)]">
+<!-- Step 1: Your Vision -->
+<section class="space-y-10" id="step-1">
+<div>
+<h2 class="text-2xl font-headline text-primary mb-6">What are we building together?</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Project Type Selection -->
+<label class="relative block group cursor-pointer">
+<input checked="" class="peer sr-only" name="project_type" type="radio"/>
+<div class="p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-lg transition-all group-hover:bg-surface-bright">
+<span class="material-symbols-outlined text-secondary mb-3" data-icon="house">house</span>
+<h3 class="font-bold text-primary mb-1">Dog House</h3>
+<p class="text-xs text-on-surface-variant leading-tight">Custom exterior insulation &amp; craftsmanship.</p>
+</div>
+</label>
+<label class="relative block group cursor-pointer">
+<input class="peer sr-only" name="project_type" type="radio"/>
+<div class="p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-lg transition-all group-hover:bg-surface-bright">
+<span class="material-symbols-outlined text-secondary mb-3" data-icon="pets">pets</span>
+<h3 class="font-bold text-primary mb-1">Catio</h3>
+<p class="text-xs text-on-surface-variant leading-tight">Integrated multi-level climbing environments.</p>
+</div>
+</label>
+<label class="relative block group cursor-pointer">
+<input class="peer sr-only" name="project_type" type="radio"/>
+<div class="p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-lg transition-all group-hover:bg-surface-bright">
+<span class="material-symbols-outlined text-secondary mb-3" data-icon="architecture">architecture</span>
+<h3 class="font-bold text-primary mb-1">Other Build</h3>
+<p class="text-xs text-on-surface-variant leading-tight">Aviaries, terrariums, or bespoke structures.</p>
+</div>
+</label>
+</div>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-label tracking-widest uppercase font-bold text-primary">The Vision</label>
+<textarea class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface placeholder:text-on-surface-variant/50 transition-all font-body" placeholder="Tell us about your pet's personality and any specific features you're dreaming of..." rows="5"></textarea>
+</div>
+<div class="pt-6 flex justify-end">
+<button class="bg-primary text-on-primary px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95">
+                            Continue to Space
+                            <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Hidden sections for the multi-step feel in a single-page output -->
+<section class="hidden space-y-10" id="step-2">
+<div class="bg-surface-container rounded-lg p-6 flex items-start gap-4 mb-8">
+<span class="material-symbols-outlined text-secondary" data-icon="info">info</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Photos help our architects understand the context of your terrain and existing structures. Natural lighting and wide angles are preferred.
+                        </p>
+</div>
+<div class="space-y-6">
+<div class="space-y-4">
+<label class="block text-sm font-label tracking-widest uppercase font-bold text-primary">Project Address</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface font-body" placeholder="123 Naturalist Way, Portland, OR" type="text"/>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-label tracking-widest uppercase font-bold text-primary">Upload Space Photos</label>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center justify-center bg-surface-container-lowest hover:bg-surface-bright transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline mb-4 group-hover:text-primary transition-colors" data-icon="cloud_upload">cloud_upload</span>
+<p class="text-on-surface font-medium mb-1">Click or drag photos here</p>
+<p class="text-xs text-on-surface-variant">JPG, PNG up to 20MB each</p>
+</div>
+<div class="grid grid-cols-4 gap-4 mt-4">
+<div class="aspect-square bg-surface-container-highest rounded-lg overflow-hidden relative group">
+<img class="w-full h-full object-cover opacity-60" data-alt="architectural site survey photo showing a wooded backyard with dappled sunlight and clear space for a small structure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC-3gd4RwVYjwyswQiPFT6X0PH1xfJAHn_KCMYFXu5arTMSHCuC333zZp46a5a3oP4R5wzQ3BoKwpej8PVC2hungGZLbXvBzhg31xu_UF4ZbpMN7vguP8KY589Ba8Z0PumfYtav5zunz7BDUtksMgCNLnkRtkuNR57rY2Gc1bHIJi9k_ZsFU9VZiIm2BNlGz8142bi_sByz-yeAf9VPJqzMdbMM84azTORAlmMVbxy0K7IMqoE6GWt45bWCNqNobNTrQ8ZuRAbdI4"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="aspect-square border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="hidden space-y-10" id="step-3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<label class="block text-sm font-label tracking-widest uppercase font-bold text-primary">Full Name</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface font-body" placeholder="Julian Vane" type="text"/>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-label tracking-widest uppercase font-bold text-primary">Email Address</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface font-body" placeholder="julian@denhaus.com" type="email"/>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-label tracking-widest uppercase font-bold text-primary">Phone Number</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface font-body" placeholder="(503) 555-0123" type="tel"/>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-label tracking-widest uppercase font-bold text-primary">How did you find us?</label>
+<select class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary rounded-lg p-4 text-on-surface font-body appearance-none">
+<option>Social Media</option>
+<option>Referral</option>
+<option>Architectural Digest</option>
+<option>Other</option>
+</select>
+</div>
+</div>
+</section>
+</div>
+<!-- Asymmetric Supporting Content -->
+<div class="mt-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-7 rounded-xl overflow-hidden relative h-96 group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="close up of a modern architectural studio desk with sketches, wood samples, and a brass compass in soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd7RzO0U5tw21EN-FNR2WBbGy033KgT1317j2xrwFYvqk6jOeb1LtqgkOfJRonA5EBcdEcqhjXtdiMre2Eton8o_FXLx30nheoTgKPzNYAnluwnMF-PtDuv_ZrWREKxo33sOQnHErDkmlMeVF0f5QRpOwXUyBLNBD8qg8pLb4H1_Q3U_KFXauxbLD_OJUZxN6p_k4jqTrsZaPgFbNg6o-KwqZHqyzTjB9K-egSCZbSeyqe0-DCZePtiozVU2i1dpyJT0w3JT-Acx0"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+<div class="absolute bottom-8 left-8 text-white">
+<span class="label-md font-label uppercase tracking-widest text-[10px] bg-secondary px-3 py-1 mb-2 inline-block">The Groundwork Standard</span>
+<h4 class="text-2xl font-headline italic">Precision meets soul.</h4>
+</div>
+</div>
+<div class="md:col-span-5 space-y-6 md:pl-8">
+<h3 class="text-3xl font-headline text-primary">What happens next?</h3>
+<ul class="space-y-6">
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-secondary shrink-0" data-icon="counter_1">counter_1</span>
+<div>
+<p class="font-bold text-primary mb-1">Curation Phase</p>
+<p class="text-sm text-on-surface-variant">Our team reviews your space and vision to see if we're a match for your timeline.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-secondary shrink-0" data-icon="counter_2">counter_2</span>
+<div>
+<p class="font-bold text-primary mb-1">Blueprint Call</p>
+<p class="text-sm text-on-surface-variant">A 15-minute alignment call to discuss materials, terrain, and pricing tiers.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-100 dark:bg-emerald-950 mt-32">
+<div class="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="md:col-span-1">
+<div class="font-serif text-xl text-emerald-900 dark:text-emerald-50 mb-6">Groundwork</div>
+<p class="text-stone-600 dark:text-emerald-200/60 text-sm leading-relaxed">
+                    Crafting bespoke ecological structures for the modern architectural naturalist and their companions.
+                </p>
+</div>
+<div>
+<h4 class="font-headline text-lg text-emerald-900 dark:text-emerald-50 mb-4">Philosophy</h4>
+<ul class="space-y-3">
+<li><a class="text-stone-600 dark:text-emerald-200/60 hover:text-emerald-700 dark:hover:text-emerald-200 underline decoration-amber-700/30 text-sm" href="#">Environmental Impact</a></li>
+<li><a class="text-stone-600 dark:text-emerald-200/60 hover:text-emerald-700 dark:hover:text-emerald-200 underline decoration-amber-700/30 text-sm" href="#">Material Sourcing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-lg text-emerald-900 dark:text-emerald-50 mb-4">Legal</h4>
+<ul class="space-y-3">
+<li><a class="text-stone-600 dark:text-emerald-200/60 hover:text-emerald-700 dark:hover:text-emerald-200 underline decoration-amber-700/30 text-sm" href="#">Terms of Service</a></li>
+<li><a class="text-stone-600 dark:text-emerald-200/60 hover:text-emerald-700 dark:hover:text-emerald-200 underline decoration-amber-700/30 text-sm" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-lg text-emerald-900 dark:text-emerald-50 mb-4">Connect</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-stone-200 dark:bg-emerald-900 flex items-center justify-center text-emerald-900 dark:text-emerald-50 hover:bg-amber-700 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-stone-200 dark:bg-emerald-900 flex items-center justify-center text-emerald-900 dark:text-emerald-50 hover:bg-amber-700 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-stone-200 dark:border-emerald-900">
+<p class="text-stone-600 dark:text-emerald-200/60 text-sm">© 2024 Groundwork Studio. All rights reserved. Crafted for the Architectural Naturalist.</p>
+</div>
+</footer>
+</body></html>
