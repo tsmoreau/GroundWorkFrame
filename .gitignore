@@ -8,6 +8,10 @@ out-tsc
 .expo
 .expo-shared
 
+# Next.js build output & cache
+.next
+out
+
 # dependencies
 node_modules
 
