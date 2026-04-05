@@ -82,12 +82,12 @@ export default function HomePage() {
   return (
     <div className="bg-surface text-on-surface">
       {/* ── Floating Nav ── */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl bg-surface/80 backdrop-blur-[20px] shadow-[0_20px_50px_rgba(25,28,27,0.06)] z-50 flex justify-between items-center px-8 py-4">
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl bg-surface/80 backdrop-blur-[20px] shadow-[0_20px_50px_rgba(25,28,27,0.06)] z-50 flex justify-between items-center px-8 py-3">
         <Link
           href="/"
-          className="text-2xl font-bold font-headline text-primary"
+          className="mt-1 text-[28px] font-bold font-headline text-emerald-900"
         >
-          Denhaus
+          Groundwork
         </Link>
         <nav className="hidden md:flex items-center gap-10">
           <a
@@ -138,14 +138,14 @@ export default function HomePage() {
 
           <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
             <div className="max-w-2xl">
-              <span className="label-style text-primary-fixed-dim text-sm font-semibold mb-4 block">
+              <span className="hidden label-style text-primary-fixed-dim text-sm font-semibold mb-4 block">
                 Denhaus Studio
               </span>
-              <h1 className="text-6xl md:text-8xl text-white font-light leading-none mb-8">
+              <h1 className="text-6xl md:text-8xl text-white font-light leading-none mb-8 mt-3">
                 Elevated <span className="italic">Outdoor Living</span> for Your
                 Pets.
               </h1>
-              <p className="text-white/80 text-xl font-light mb-10 max-w-lg leading-tight">
+              <p className="text-white/80 text-xl font-light mb-10 max-w-lg leading-relaxed">
                 Architectural sanctuaries crafted with sustainable timber and
                 modern precision. Because nature belongs to them too.
               </p>
