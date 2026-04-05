@@ -87,12 +87,12 @@ export default function HomePage() {
           href="/"
           className="mt-1 text-[28px] font-bold font-headline text-emerald-900"
         >
-          Groundwork
+          Denhaus
         </Link>
         <nav className="hidden md:flex items-center gap-10">
           <a
             href="#process"
-            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
+            className="label-style text-xs font-medium text-emerald-700 hover:text-primary "
           >
             Process
           </a>
@@ -110,7 +110,7 @@ export default function HomePage() {
           </a>
           <Link
             href="/admin/dashboard"
-            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
+            className="hidden label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
           >
             Admin
           </Link>
