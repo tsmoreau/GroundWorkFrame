@@ -57,11 +57,16 @@ function ContactForm() {
     return (
       <div className="text-center py-20">
         <div className="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mx-auto mb-6">
-          <span className="material-symbols-outlined text-primary text-3xl">check_circle</span>
+          <span className="material-symbols-outlined text-primary text-3xl">
+            check_circle
+          </span>
         </div>
-        <h2 className="text-3xl font-headline text-primary mb-4">Inquiry received.</h2>
+        <h2 className="text-3xl font-headline text-primary mb-4">
+          Inquiry received.
+        </h2>
         <p className="text-[#424844] max-w-sm mx-auto leading-relaxed mb-10">
-          Our team reviews your space and vision. Expect to hear from us within one business day.
+          Our team reviews your space and vision. Expect to hear from us within
+          one business day.
         </p>
         <Link
           href="/"
@@ -91,11 +96,22 @@ function ContactForm() {
                       : "bg-surface-container-highest text-[#424844]"
                   }`}
                 >
-                  {done ? <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check</span> : n}
+                  {done ? (
+                    <span
+                      className="material-symbols-outlined text-sm"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      check
+                    </span>
+                  ) : (
+                    n
+                  )}
                 </span>
                 <span
                   className={`text-sm whitespace-nowrap transition-colors ${
-                    active ? "text-primary font-medium border-b-2 border-secondary pb-1" : "text-[#424844]"
+                    active
+                      ? "text-primary font-medium border-b-2 border-secondary pb-1"
+                      : "text-[#424844]"
                   }`}
                 >
                   {label}
@@ -114,14 +130,41 @@ function ContactForm() {
         {step === 1 && (
           <div className="space-y-10">
             <div>
-              <h2 className="text-2xl font-headline text-primary mb-6">What are we building together?</h2>
+              <h2 className="text-2xl font-headline text-primary mb-6">
+                What are we building together?
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {([
-                  { value: "dog_house", icon: "house", label: "Dog House", desc: "Custom exterior insulation & craftsmanship." },
-                  { value: "catio", icon: "pets", label: "Catio", desc: "Integrated multi-level climbing environments." },
-                  { value: "other", icon: "architecture", label: "Other Build", desc: "Aviaries, terrariums, or bespoke structures." },
-                ] as { value: ProjectType; icon: string; label: string; desc: string }[]).map((opt) => (
-                  <label key={opt.value} className="relative block group cursor-pointer">
+                {(
+                  [
+                    {
+                      value: "dog_house",
+                      icon: "house",
+                      label: "Dog House",
+                      desc: "Custom exterior insulation & craftsmanship.",
+                    },
+                    {
+                      value: "catio",
+                      icon: "pets",
+                      label: "Catio",
+                      desc: "Integrated multi-level climbing environments.",
+                    },
+                    {
+                      value: "other",
+                      icon: "architecture",
+                      label: "Other Build",
+                      desc: "Aviaries, terrariums, or bespoke structures.",
+                    },
+                  ] as {
+                    value: ProjectType;
+                    icon: string;
+                    label: string;
+                    desc: string;
+                  }[]
+                ).map((opt) => (
+                  <label
+                    key={opt.value}
+                    className="relative block group cursor-pointer"
+                  >
                     <input
                       type="radio"
                       name="project_type"
@@ -130,16 +173,24 @@ function ContactForm() {
                       className="sr-only peer"
                     />
                     <div className="p-6 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-lg transition-all group-hover:bg-surface-bright">
-                      <span className="material-symbols-outlined text-secondary mb-3 block">{opt.icon}</span>
-                      <h3 className="font-bold text-primary mb-1">{opt.label}</h3>
-                      <p className="text-xs text-[#424844] leading-tight">{opt.desc}</p>
+                      <span className="material-symbols-outlined text-secondary mb-3 block">
+                        {opt.icon}
+                      </span>
+                      <h3 className="font-bold text-primary mb-1">
+                        {opt.label}
+                      </h3>
+                      <p className="text-xs text-[#424844] leading-tight">
+                        {opt.desc}
+                      </p>
                     </div>
                   </label>
                 ))}
               </div>
             </div>
             <div className="space-y-4">
-              <label className="block text-sm label-style font-bold text-primary">The Vision</label>
+              <label className="block text-sm label-style font-bold text-primary">
+                The Vision
+              </label>
               <textarea
                 value={form.vision}
                 onChange={(e) => set("vision", e.target.value)}
@@ -155,7 +206,9 @@ function ContactForm() {
                 className="bg-primary text-white px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 disabled:opacity-50"
               >
                 Continue to Space
-                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
               </button>
             </div>
           </div>
@@ -164,13 +217,19 @@ function ContactForm() {
         {step === 2 && (
           <div className="space-y-10">
             <div className="bg-surface-container rounded-lg p-6 flex items-start gap-4">
-              <span className="material-symbols-outlined text-secondary shrink-0">info</span>
+              <span className="material-symbols-outlined text-secondary shrink-0">
+                info
+              </span>
               <p className="text-sm text-[#424844] leading-relaxed">
-                Photos help our architects understand the context of your terrain and existing structures. Natural lighting and wide angles are preferred.
+                Photos help our architects understand the context of your
+                terrain and existing structures. Natural lighting and wide
+                angles are preferred.
               </p>
             </div>
             <div className="space-y-4">
-              <label className="block text-sm label-style font-bold text-primary">Project Address</label>
+              <label className="block text-sm label-style font-bold text-primary">
+                Project Address
+              </label>
               <input
                 type="text"
                 value={form.address}
@@ -180,11 +239,19 @@ function ContactForm() {
               />
             </div>
             <div className="space-y-4">
-              <label className="block text-sm label-style font-bold text-primary">Upload Space Photos</label>
+              <label className="block text-sm label-style font-bold text-primary">
+                Upload Space Photos
+              </label>
               <div className="border-2 border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center justify-center bg-surface-container-lowest hover:bg-surface-bright transition-colors cursor-pointer group">
-                <span className="material-symbols-outlined text-4xl text-outline mb-4 group-hover:text-primary transition-colors">cloud_upload</span>
-                <p className="text-[#191c1b] font-medium mb-1">Click or drag photos here</p>
-                <p className="text-xs text-[#424844]">JPG, PNG up to 20MB each</p>
+                <span className="material-symbols-outlined text-4xl text-outline mb-4 group-hover:text-primary transition-colors">
+                  cloud_upload
+                </span>
+                <p className="text-[#191c1b] font-medium mb-1">
+                  Click or drag photos here
+                </p>
+                <p className="text-xs text-[#424844]">
+                  JPG, PNG up to 20MB each
+                </p>
               </div>
             </div>
             <div className="pt-6 flex justify-between">
@@ -192,7 +259,9 @@ function ContactForm() {
                 onClick={() => setStep(1)}
                 className="text-primary font-medium flex items-center gap-2 hover:opacity-70 transition-all"
               >
-                <span className="material-symbols-outlined text-lg">arrow_back</span>
+                <span className="material-symbols-outlined text-lg">
+                  arrow_back
+                </span>
                 Back
               </button>
               <button
@@ -200,7 +269,9 @@ function ContactForm() {
                 className="bg-primary text-white px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95"
               >
                 Continue to Details
-                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
               </button>
             </div>
           </div>
@@ -208,10 +279,14 @@ function ContactForm() {
 
         {step === 3 && (
           <div className="space-y-10">
-            <h2 className="text-2xl font-headline text-primary">Tell us about yourself.</h2>
+            <h2 className="text-2xl font-headline text-primary">
+              Tell us about yourself.
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <label className="block text-sm label-style font-bold text-primary">Full Name</label>
+                <label className="block text-sm label-style font-bold text-primary">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   value={form.name}
@@ -221,7 +296,9 @@ function ContactForm() {
                 />
               </div>
               <div className="space-y-4">
-                <label className="block text-sm label-style font-bold text-primary">Email Address</label>
+                <label className="block text-sm label-style font-bold text-primary">
+                  Email Address
+                </label>
                 <input
                   type="email"
                   value={form.email}
@@ -231,7 +308,9 @@ function ContactForm() {
                 />
               </div>
               <div className="space-y-4">
-                <label className="block text-sm label-style font-bold text-primary">Phone Number</label>
+                <label className="block text-sm label-style font-bold text-primary">
+                  Phone Number
+                </label>
                 <input
                   type="tel"
                   value={form.phone}
@@ -241,7 +320,9 @@ function ContactForm() {
                 />
               </div>
               <div className="space-y-4">
-                <label className="block text-sm label-style font-bold text-primary">How did you find us?</label>
+                <label className="block text-sm label-style font-bold text-primary">
+                  How did you find us?
+                </label>
                 <select
                   value={form.source}
                   onChange={(e) => set("source", e.target.value as LeadSource)}
@@ -259,7 +340,9 @@ function ContactForm() {
                 onClick={() => setStep(2)}
                 className="text-primary font-medium flex items-center gap-2 hover:opacity-70 transition-all"
               >
-                <span className="material-symbols-outlined text-lg">arrow_back</span>
+                <span className="material-symbols-outlined text-lg">
+                  arrow_back
+                </span>
                 Back
               </button>
               <button
@@ -268,7 +351,9 @@ function ContactForm() {
                 className="bg-primary text-white px-10 py-4 rounded font-medium flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 disabled:opacity-50"
               >
                 Review Inquiry
-                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
               </button>
             </div>
           </div>
@@ -276,19 +361,33 @@ function ContactForm() {
 
         {step === 4 && (
           <div className="space-y-10">
-            <h2 className="text-2xl font-headline text-primary">Review your inquiry.</h2>
+            <h2 className="text-2xl font-headline text-primary">
+              Review your inquiry.
+            </h2>
             <div className="space-y-4">
               {[
-                { label: "Project Type", value: form.projectType.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase()) },
+                {
+                  label: "Project Type",
+                  value: form.projectType
+                    .replace("_", " ")
+                    .replace(/\b\w/g, (c) => c.toUpperCase()),
+                },
                 { label: "Vision", value: form.vision },
                 { label: "Address", value: form.address || "—" },
                 { label: "Name", value: form.name },
                 { label: "Email", value: form.email },
                 { label: "Phone", value: form.phone || "—" },
               ].map(({ label, value }) => (
-                <div key={label} className="flex gap-6 py-4 border-b border-outline-variant/30">
-                  <span className="label-style text-xs font-bold text-[#424844] w-32 shrink-0 pt-0.5">{label}</span>
-                  <span className="text-[#191c1b] text-sm leading-relaxed">{value}</span>
+                <div
+                  key={label}
+                  className="flex gap-6 py-4 border-b border-outline-variant/30"
+                >
+                  <span className="label-style text-xs font-bold text-[#424844] w-32 shrink-0 pt-0.5">
+                    {label}
+                  </span>
+                  <span className="text-[#191c1b] text-sm leading-relaxed">
+                    {value}
+                  </span>
                 </div>
               ))}
             </div>
@@ -297,7 +396,9 @@ function ContactForm() {
                 onClick={() => setStep(3)}
                 className="text-primary font-medium flex items-center gap-2 hover:opacity-70 transition-all"
               >
-                <span className="material-symbols-outlined text-lg">arrow_back</span>
+                <span className="material-symbols-outlined text-lg">
+                  arrow_back
+                </span>
                 Edit Details
               </button>
               <button
@@ -305,7 +406,9 @@ function ContactForm() {
                 className="bg-secondary text-white px-10 py-4 rounded font-bold flex items-center gap-2 hover:opacity-95 transition-all group active:scale-95 text-lg"
               >
                 Submit Inquiry
-                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">send</span>
+                <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">
+                  send
+                </span>
               </button>
             </div>
           </div>
@@ -322,12 +425,37 @@ export default function ContactPage() {
         {/* Top Navigation */}
         <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl z-50 backdrop-blur-[20px] bg-stone-50/80 shadow-[0_20px_50px_rgba(25,28,27,0.06)]">
           <nav className="flex justify-between items-center px-8 py-4 w-full">
-            <Link href="/" className="text-2xl font-bold font-headline text-emerald-900">Groundwork</Link>
+            <Link
+              href="/"
+              className="text-2xl font-bold font-headline text-emerald-900"
+            >
+              Denhaus
+            </Link>
             <div className="hidden md:flex items-center gap-8">
-              <Link href="/#process" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">Process</Link>
-              <Link href="/#portfolio" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">Portfolio</Link>
-              <a href="#" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">Materials</a>
-              <a href="#" className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold">FAQ</a>
+              <Link
+                href="/#process"
+                className=" text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+              >
+                Designs
+              </Link>
+              <Link
+                href="/#portfolio"
+                className=" text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+              >
+                Materials
+              </Link>
+              <a
+                href="#"
+                className="hidden text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+              >
+                Materials
+              </a>
+              <a
+                href="#"
+                className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+              >
+                FAQ
+              </a>
             </div>
             <Link
               href="/contact"
@@ -342,12 +470,15 @@ export default function ContactPage() {
           <div className="max-w-4xl mx-auto">
             {/* Form Header */}
             <div className="mb-12">
-              <span className="text-secondary label-style text-xs font-bold mb-3 block">Project Inquiry</span>
+              <span className="text-secondary label-style text-xs font-bold mb-3 block">
+                Project Inquiry
+              </span>
               <h1 className="text-4xl md:text-5xl font-headline text-primary mb-4 leading-tight">
                 Bring your vision to life.
               </h1>
               <p className="text-[#424844] max-w-xl leading-relaxed">
-                Let's begin the architectural journey for your companion's sanctuary. Please share the details of your project below.
+                Let's begin the architectural journey for your companion's
+                sanctuary. Please share the details of your project below.
               </p>
             </div>
 
@@ -363,25 +494,45 @@ export default function ContactPage() {
                 />
                 <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
                 <div className="absolute bottom-8 left-8 text-white">
-                  <span className="label-style text-[10px] bg-secondary px-3 py-1 mb-2 inline-block">The Groundwork Standard</span>
-                  <h4 className="text-2xl font-headline italic">Precision meets soul.</h4>
+                  <span className="label-style text-[10px] bg-secondary px-3 py-1 mb-2 inline-block">
+                    The Groundwork Standard
+                  </span>
+                  <h4 className="text-2xl font-headline italic">
+                    Precision meets soul.
+                  </h4>
                 </div>
               </div>
               <div className="md:col-span-5 space-y-6 md:pl-8">
-                <h3 className="text-3xl font-headline text-primary">What happens next?</h3>
+                <h3 className="text-3xl font-headline text-primary">
+                  What happens next?
+                </h3>
                 <ul className="space-y-6">
                   <li className="flex gap-4">
-                    <span className="material-symbols-outlined text-secondary shrink-0">counter_1</span>
+                    <span className="material-symbols-outlined text-secondary shrink-0">
+                      counter_1
+                    </span>
                     <div>
-                      <p className="font-bold text-primary mb-1">Curation Phase</p>
-                      <p className="text-sm text-[#424844]">Our team reviews your space and vision to see if we're a match for your timeline.</p>
+                      <p className="font-bold text-primary mb-1">
+                        Curation Phase
+                      </p>
+                      <p className="text-sm text-[#424844]">
+                        Our team reviews your space and vision to see if we're a
+                        match for your timeline.
+                      </p>
                     </div>
                   </li>
                   <li className="flex gap-4">
-                    <span className="material-symbols-outlined text-secondary shrink-0">counter_2</span>
+                    <span className="material-symbols-outlined text-secondary shrink-0">
+                      counter_2
+                    </span>
                     <div>
-                      <p className="font-bold text-primary mb-1">Blueprint Call</p>
-                      <p className="text-sm text-[#424844]">A 15-minute alignment call to discuss materials, terrain, and pricing tiers.</p>
+                      <p className="font-bold text-primary mb-1">
+                        Blueprint Call
+                      </p>
+                      <p className="text-sm text-[#424844]">
+                        A 15-minute alignment call to discuss materials,
+                        terrain, and pricing tiers.
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -394,39 +545,87 @@ export default function ContactPage() {
         <footer className="bg-stone-100 mt-32">
           <div className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="md:col-span-1">
-              <div className="font-headline text-xl text-primary mb-6">Groundwork</div>
+              <div className="font-headline text-xl text-primary mb-6">
+                Groundwork
+              </div>
               <p className="text-stone-600 text-sm leading-relaxed">
-                Crafting bespoke ecological structures for the modern architectural naturalist and their companions.
+                Crafting bespoke ecological structures for the modern
+                architectural naturalist and their companions.
               </p>
             </div>
             <div>
-              <h4 className="font-headline text-lg text-primary mb-4">Philosophy</h4>
+              <h4 className="font-headline text-lg text-primary mb-4">
+                Philosophy
+              </h4>
               <ul className="space-y-3">
-                <li><a href="#" className="text-stone-600 hover:text-primary text-sm transition-colors">Environmental Impact</a></li>
-                <li><a href="#" className="text-stone-600 hover:text-primary text-sm transition-colors">Material Sourcing</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-stone-600 hover:text-primary text-sm transition-colors"
+                  >
+                    Environmental Impact
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-stone-600 hover:text-primary text-sm transition-colors"
+                  >
+                    Material Sourcing
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-headline text-lg text-primary mb-4">Legal</h4>
               <ul className="space-y-3">
-                <li><a href="#" className="text-stone-600 hover:text-primary text-sm transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="text-stone-600 hover:text-primary text-sm transition-colors">Privacy Policy</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-stone-600 hover:text-primary text-sm transition-colors"
+                  >
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-stone-600 hover:text-primary text-sm transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-headline text-lg text-primary mb-4">Connect</h4>
+              <h4 className="font-headline text-lg text-primary mb-4">
+                Connect
+              </h4>
               <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-stone-200 flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-all">
-                  <span className="material-symbols-outlined text-sm">alternate_email</span>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-stone-200 flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-all"
+                >
+                  <span className="material-symbols-outlined text-sm">
+                    alternate_email
+                  </span>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-stone-200 flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-all">
-                  <span className="material-symbols-outlined text-sm">photo_camera</span>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-stone-200 flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-all"
+                >
+                  <span className="material-symbols-outlined text-sm">
+                    photo_camera
+                  </span>
                 </a>
               </div>
             </div>
           </div>
           <div className="max-w-7xl mx-auto px-8 py-8 border-t border-stone-200">
-            <p className="text-stone-600 text-sm">© 2025 Groundwork Studio. All rights reserved. Crafted for the Architectural Naturalist.</p>
+            <p className="text-stone-600 text-sm">
+              © 2025 Groundwork Studio. All rights reserved. Crafted for the
+              Architectural Naturalist.
+            </p>
           </div>
         </footer>
       </div>

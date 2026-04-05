@@ -82,45 +82,47 @@ export default function HomePage() {
   return (
     <div className="bg-surface text-on-surface">
       {/* ── Floating Nav ── */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl bg-surface/80 backdrop-blur-[20px] shadow-[0_20px_50px_rgba(25,28,27,0.06)] z-50 flex justify-between items-center px-8 py-3">
-        <Link
-          href="/"
-          className="mt-1 text-[28px] font-bold font-headline text-emerald-900"
-        >
-          Denhaus
-        </Link>
-        <nav className="hidden md:flex items-center gap-10">
-          <a
-            href="#process"
-            className="label-style text-xs font-medium text-emerald-700 hover:text-primary "
-          >
-            Process
-          </a>
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-xl z-50 backdrop-blur-[20px] bg-stone-50/80 shadow-[0_20px_50px_rgba(25,28,27,0.06)]">
+        <nav className="flex justify-between items-center px-8 py-4 w-full">
           <Link
-            href="/gallery"
-            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
+            href="/"
+            className="text-2xl font-bold font-headline text-emerald-900"
           >
-            Portfolio
+            Denhaus
           </Link>
-          <a
-            href="#collections"
-            className="label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
-          >
-            Collections
-          </a>
+          <div className="hidden md:flex items-center gap-8">
+            <Link
+              href="/#process"
+              className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+            >
+              Designs
+            </Link>
+            <Link
+              href="/#portfolio"
+              className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+            >
+              Portfolio
+            </Link>
+            <a
+              href="#"
+              className="hidden text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+            >
+              Materials
+            </a>
+            <a
+              href="#"
+              className="text-emerald-800/70 hover:text-emerald-900 transition-colors label-style text-xs font-semibold"
+            >
+              FAQ
+            </a>
+          </div>
           <Link
-            href="/admin/dashboard"
-            className="hidden label-style text-xs font-medium text-on-surface-variant hover:text-primary transition-colors"
+            href="/contact"
+            className="bg-primary text-white px-6 py-2.5 rounded hover:opacity-90 transition-all active:scale-95 text-sm font-medium"
           >
-            Admin
+            Get Started
           </Link>
         </nav>
-        <Link
-          href="/contact"
-          className="bg-primary text-on-primary px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200"
-        >
-          Get Started
-        </Link>
       </header>
 
       <main>
@@ -152,7 +154,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="bg-secondary text-on-secondary px-8 py-4 rounded-lg text-lg font-medium hover:opacity-90 transition-all flex items-center justify-center"
+                  className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-lg text-lg font-medium hover:bg-white/20 transition-all flex items-center justify-center"
                 >
                   Start Your Project
                 </Link>
@@ -173,7 +175,7 @@ export default function HomePage() {
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
               <div className="max-w-xl">
                 <span className="label-style text-primary text-sm font-bold mb-4 block">
-                  Collections
+                  Designs
                 </span>
                 <h2 className="text-5xl text-on-surface">
                   Precision Built for Every Instinct.
