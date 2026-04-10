@@ -24,11 +24,11 @@ import {
 const STATUS_OPTIONS = ["new", "contacted", "qualified", "converted", "dead"];
 
 const STATUS_COLORS: Record<string, string> = {
-  new: "#C8A548",
+  new: "#173124",
   contacted: "#6b9dc2",
   qualified: "#5A7840",
-  converted: "#2E1A0E",
-  dead: "#A09070",
+  converted: "#173124",
+  dead: "#727973",
 };
 
 export default function LeadDetailPage({
@@ -47,8 +47,8 @@ export default function LeadDetailPage({
   if (!lead) {
     return (
       <div className="p-8">
-        <p className="text-[#6B5B4A]">Lead not found.</p>
-        <Link href="/admin/leads" className="text-sm text-[#2E1A0E] hover:underline mt-2 inline-block">
+        <p className="text-[#424844]">Lead not found.</p>
+        <Link href="/admin/leads" className="text-sm text-[#173124] hover:underline mt-2 inline-block">
           Back to leads
         </Link>
       </div>
@@ -87,36 +87,36 @@ export default function LeadDetailPage({
       <div className="flex items-center gap-3 mb-6">
         <Link
           href="/admin/leads"
-          className="flex items-center gap-1 text-sm text-[#6B5B4A] hover:text-[#1C1208] transition-colors"
+          className="flex items-center gap-1 text-sm text-[#424844] hover:text-[#191c1b] transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
           Leads
         </Link>
-        <span className="text-[#D0C0A8]">/</span>
-        <span className="text-sm text-[#1C1208] font-medium">{lead.name}</span>
+        <span className="text-[#c2c8c2]">/</span>
+        <span className="text-sm text-[#191c1b] font-medium">{lead.name}</span>
       </div>
 
       <div className="grid grid-cols-3 gap-6">
         {/* Main Info */}
         <div className="col-span-2 space-y-5">
           {/* Header */}
-          <div className="bg-white rounded-xl border border-[#DDD0B8] p-6">
+          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
             <div className="flex items-start justify-between">
               <div>
-                <h1 className="text-xl font-bold text-[#1C1208]">{lead.name}</h1>
-                <p className="text-xs text-[#6B5B4A] mt-1">
+                <h1 className="text-xl font-bold text-[#191c1b]">{lead.name}</h1>
+                <p className="text-xs text-[#424844] mt-1">
                   {SOURCE_LABELS[lead.source]} · {timeAgo(lead.createdAt)}
                 </p>
               </div>
               <select
                 value={lead.status}
                 onChange={(e) => handleStatusChange(e.target.value)}
-                className="text-sm border border-[#DDD0B8] rounded-lg px-3 py-1.5 focus:outline-none"
+                className="text-sm border border-[#c2c8c2] rounded-lg px-3 py-1.5 focus:outline-none"
                 disabled={lead.status === "converted"}
                 style={{ color: STATUS_COLORS[lead.status] }}
               >
                 {STATUS_OPTIONS.map((s) => (
-                  <option key={s} value={s} className="text-[#1C1208] capitalize">
+                  <option key={s} value={s} className="text-[#191c1b] capitalize">
                     {s.charAt(0).toUpperCase() + s.slice(1)}
                   </option>
                 ))}
@@ -124,26 +124,26 @@ export default function LeadDetailPage({
             </div>
 
             <div className="mt-4 space-y-2">
-              <div className="flex items-center gap-2 text-sm text-[#6B5B4A]">
+              <div className="flex items-center gap-2 text-sm text-[#424844]">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <a href={`mailto:${lead.email}`} className="hover:text-[#2E1A0E]">
+                <a href={`mailto:${lead.email}`} className="hover:text-[#173124]">
                   {lead.email}
                 </a>
               </div>
               {lead.phone && (
-                <div className="flex items-center gap-2 text-sm text-[#6B5B4A]">
+                <div className="flex items-center gap-2 text-sm text-[#424844]">
                   <Phone className="w-4 h-4 flex-shrink-0" />
                   <span>{lead.phone}</span>
                 </div>
               )}
               {lead.address && (
-                <div className="flex items-center gap-2 text-sm text-[#6B5B4A]">
+                <div className="flex items-center gap-2 text-sm text-[#424844]">
                   <MapPin className="w-4 h-4 flex-shrink-0" />
                   <a
                     href={`https://maps.google.com/?q=${encodeURIComponent(lead.address)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-[#2E1A0E]"
+                    className="hover:text-[#173124]"
                   >
                     {lead.address}
                   </a>
@@ -152,26 +152,26 @@ export default function LeadDetailPage({
             </div>
 
             {/* Message */}
-            <div className="mt-4 pt-4 border-t border-[#EDE4D0]">
-              <p className="text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <div className="mt-4 pt-4 border-t border-[#e7e8e6]">
+              <p className="text-xs font-semibold text-[#424844] uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <MessageSquare className="w-3.5 h-3.5" />
                 Message
               </p>
-              <p className="text-sm text-[#1C1208] leading-relaxed">{lead.message}</p>
+              <p className="text-sm text-[#191c1b] leading-relaxed">{lead.message}</p>
             </div>
           </div>
 
           {/* Notes Timeline */}
-          <div className="bg-white rounded-xl border border-[#DDD0B8] p-6">
-            <h2 className="font-semibold text-sm text-[#1C1208] mb-4">Notes</h2>
+          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+            <h2 className="font-semibold text-sm text-[#191c1b] mb-4">Notes</h2>
             {lead.notes.length === 0 && (
-              <p className="text-sm text-[#6B5B4A] mb-4">No notes yet.</p>
+              <p className="text-sm text-[#424844] mb-4">No notes yet.</p>
             )}
             <div className="space-y-3 mb-4">
               {lead.notes.map((note, i) => (
-                <div key={i} className="relative pl-4 border-l-2 border-[#DDD0B8]">
-                  <p className="text-sm text-[#1C1208] leading-relaxed">{note.text}</p>
-                  <p className="text-xs text-[#A09070] mt-1">{formatDateTime(note.createdAt)}</p>
+                <div key={i} className="relative pl-4 border-l-2 border-[#c2c8c2]">
+                  <p className="text-sm text-[#191c1b] leading-relaxed">{note.text}</p>
+                  <p className="text-xs text-[#727973] mt-1">{formatDateTime(note.createdAt)}</p>
                 </div>
               ))}
             </div>
@@ -181,13 +181,13 @@ export default function LeadDetailPage({
                 onChange={(e) => setNoteText(e.target.value)}
                 placeholder="Add a note..."
                 rows={2}
-                className="flex-1 text-sm border border-[#DDD0B8] rounded-lg p-2.5 resize-none focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
+                className="flex-1 text-sm border border-[#c2c8c2] rounded-lg p-2.5 resize-none focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
               />
               <button
                 onClick={handleAddNote}
                 disabled={!noteText.trim()}
-                className="px-4 py-2 rounded-lg text-sm font-medium text-[#1C1208] disabled:opacity-50 self-end"
-                style={{ backgroundColor: "#C8A548" }}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-50 self-end"
+                style={{ backgroundColor: "#173124" }}
               >
                 Add
               </button>
@@ -198,25 +198,25 @@ export default function LeadDetailPage({
         {/* Sidebar */}
         <div className="space-y-5">
           {/* Pet Info */}
-          <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
-            <h3 className="font-semibold text-sm text-[#1C1208] mb-3 flex items-center gap-2">
-              <PawPrint className="w-4 h-4 text-[#6B5B4A]" />
+          <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+            <h3 className="font-semibold text-sm text-[#191c1b] mb-3 flex items-center gap-2">
+              <PawPrint className="w-4 h-4 text-[#424844]" />
               Pet Info
             </h3>
             <div className="space-y-1.5">
               <div className="flex justify-between text-sm">
-                <span className="text-[#6B5B4A]">Type</span>
+                <span className="text-[#424844]">Type</span>
                 <span className="font-medium capitalize">{lead.petInfo.type}</span>
               </div>
               {lead.petInfo.breed && (
                 <div className="flex justify-between text-sm">
-                  <span className="text-[#6B5B4A]">Breed</span>
+                  <span className="text-[#424844]">Breed</span>
                   <span className="font-medium">{lead.petInfo.breed}</span>
                 </div>
               )}
               {lead.petInfo.count && (
                 <div className="flex justify-between text-sm">
-                  <span className="text-[#6B5B4A]">Count</span>
+                  <span className="text-[#424844]">Count</span>
                   <span className="font-medium">{lead.petInfo.count}</span>
                 </div>
               )}
@@ -225,17 +225,17 @@ export default function LeadDetailPage({
 
           {/* Map Preview */}
           {lead.address && (
-            <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
-              <h3 className="font-semibold text-sm text-[#1C1208] mb-3 flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#6B5B4A]" />
+            <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+              <h3 className="font-semibold text-sm text-[#191c1b] mb-3 flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#424844]" />
                 Location
               </h3>
-              <p className="text-xs text-[#6B5B4A] mb-3">{lead.address}</p>
+              <p className="text-xs text-[#424844] mb-3">{lead.address}</p>
               <a
                 href={`https://maps.google.com/?q=${encodeURIComponent(lead.address)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs font-medium text-[#2E1A0E] hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-medium text-[#173124] hover:underline"
               >
                 Open in Maps <ArrowRight className="w-3 h-3" />
               </a>
@@ -243,12 +243,12 @@ export default function LeadDetailPage({
           )}
 
           {/* Actions */}
-          <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
-            <h3 className="font-semibold text-sm text-[#1C1208] mb-3">Actions</h3>
+          <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+            <h3 className="font-semibold text-sm text-[#191c1b] mb-3">Actions</h3>
             {lead.status === "converted" && lead.convertedTo ? (
               <Link
                 href={`/admin/clients/${lead.convertedTo}`}
-                className="flex items-center justify-between w-full px-4 py-2.5 rounded-lg text-sm font-medium border border-[#DDD0B8] text-[#2E1A0E] hover:bg-[#F5F0E8]"
+                className="flex items-center justify-between w-full px-4 py-2.5 rounded-lg text-sm font-medium border border-[#c2c8c2] text-[#173124] hover:bg-[#f3f4f1]"
               >
                 View Client Record
                 <ArrowRight className="w-4 h-4" />
@@ -257,8 +257,8 @@ export default function LeadDetailPage({
               <button
                 onClick={handleConvert}
                 disabled={converting || lead.status === "dead"}
-                className="w-full px-4 py-2.5 rounded-lg text-sm font-medium text-[#1C1208] disabled:opacity-50"
-                style={{ backgroundColor: "#C8A548" }}
+                className="w-full px-4 py-2.5 rounded-lg text-sm font-medium text-white disabled:opacity-50"
+                style={{ backgroundColor: "#173124" }}
               >
                 {converting ? "Converting..." : "Convert to Client"}
               </button>
@@ -266,7 +266,7 @@ export default function LeadDetailPage({
           </div>
 
           {/* Meta */}
-          <div className="text-xs text-[#A09070] space-y-1">
+          <div className="text-xs text-[#727973] space-y-1">
             <p>Created {formatDate(lead.createdAt)}</p>
             <p>Updated {formatDate(lead.updatedAt)}</p>
           </div>

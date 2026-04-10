@@ -27,7 +27,7 @@ const STATUS_STYLES: Record<
 > = {
   quoted: { bg: "var(--color-parchment-dark)", color: "var(--color-stone)", border: "var(--color-border)" },
   deposit_paid: { bg: "#e8f2fa", color: "#3a7db8", border: "#b8d4ed" },
-  materials_ordered: { bg: "#fdf3e0", color: "#9A7018", border: "#f0d090" },
+  materials_ordered: { bg: "#e8f4ec", color: "#496455", border: "#b0cdbb" },
   scheduled: { bg: "#f0eaff", color: "#6b52c8", border: "#c8baee" },
   in_progress: { bg: "#E8F0D8", color: "#5A7840", border: "#90BC88" },
   complete: { bg: "var(--color-parchment-dark)", color: "var(--color-paid)", border: "var(--color-border)" },

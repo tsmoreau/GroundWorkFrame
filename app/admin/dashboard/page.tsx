@@ -135,10 +135,10 @@ export default function DashboardPage() {
                     style={{
                       width: `${Math.max(4, ((leadsByStatus[s] || 0) / leads.length) * 80)}px`,
                       backgroundColor:
-                        s === "new" ? "#C8A548"
+                        s === "new" ? "#173124"
                         : s === "contacted" ? "#6b9dc2"
                         : s === "qualified" ? "#5A7840"
-                        : s === "converted" ? "#2E1A0E"
+                        : s === "converted" ? "#173124"
                         : "var(--color-sand)",
                     }}
                   />
@@ -201,7 +201,7 @@ export default function DashboardPage() {
               All invoices
             </Link>
           </div>
-          <div className="divide-y divide-[#EDE4D0]">
+          <div className="divide-y divide-[#e7e8e6]">
             {outstanding.map((inv) => {
               const daysOld = Math.floor(
                 (Date.now() - new Date(inv.sentAt ?? inv.createdAt).getTime()) /
@@ -211,22 +211,22 @@ export default function DashboardPage() {
                 <Link
                   key={inv.id}
                   href={`/admin/invoices/${inv.id}`}
-                  className="flex items-center justify-between py-3 hover:bg-[#F8F3EA] -mx-5 px-5 transition-colors"
+                  className="flex items-center justify-between py-3 hover:bg-[#f3f4f1] -mx-5 px-5 transition-colors"
                 >
                   <div>
-                    <p className="text-sm font-medium text-[#1C1208]">{inv.invoiceNumber}</p>
-                    <p className="text-xs text-[#6B5B4A] mt-0.5">{inv.clientName}</p>
+                    <p className="text-sm font-medium text-[#191c1b]">{inv.invoiceNumber}</p>
+                    <p className="text-xs text-[#424844] mt-0.5">{inv.clientName}</p>
                   </div>
                   <div className="text-right flex items-center gap-4">
                     <div>
-                      <p className="text-sm font-semibold text-[#1C1208]">
+                      <p className="text-sm font-semibold text-[#191c1b]">
                         {formatCurrency(computeTotal(inv.lineItems))}
                       </p>
-                      <p className={`text-xs mt-0.5 ${daysOld > 14 ? "text-[#A83028]" : "text-[#6B5B4A]"}`}>
+                      <p className={`text-xs mt-0.5 ${daysOld > 14 ? "text-[#A83028]" : "text-[#424844]"}`}>
                         {inv.status === "viewed" ? "Viewed" : "Sent"} {daysOld}d ago
                       </p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#6B5B4A]" />
+                    <ArrowRight className="w-4 h-4 text-[#424844]" />
                   </div>
                 </Link>
               );
@@ -239,15 +239,15 @@ export default function DashboardPage() {
       <div className="mt-6 flex gap-3">
         <Link
           href="/admin/leads"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#1C1208] transition-colors hover:opacity-90"
-          style={{ backgroundColor: "#C8A548" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90"
+          style={{ backgroundColor: "#173124" }}
         >
           <TrendingUp className="w-4 h-4" />
           View Leads
         </Link>
         <Link
           href="/admin/jobs"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-[#DDD0B8] text-[#1C1208] bg-white hover:bg-[#F5F0E8] transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-[#c2c8c2] text-[#191c1b] bg-white hover:bg-[#f3f4f1] transition-colors"
         >
           View Jobs
         </Link>
