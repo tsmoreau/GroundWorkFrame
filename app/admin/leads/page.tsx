@@ -1,17 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useData } from "../data-context";
 import { SOURCE_LABELS, formatDate } from "@/lib/utils";
-import {
-  Search,
-  Plus,
-  ChevronRight,
-  ChevronUp,
-  ChevronDown,
-  X,
-} from "lucide-react";
+import { Search, Plus, ChevronUp, ChevronDown, X } from "lucide-react";
 import type { Lead, LeadSource } from "@/lib/types";
 
 const STATUS_COLORS: Record<string, string> = {
@@ -61,6 +54,7 @@ const COLUMNS: { key: SortKey; label: string }[] = [
 
 export default function LeadsPage() {
   const { leads, addLead } = useData();
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [sourceFilter, setSourceFilter] = useState<string>("all");
@@ -169,14 +163,14 @@ export default function LeadsPage() {
                   </span>
                 </th>
               ))}
-              <th />
             </tr>
           </thead>
           <tbody className="divide-y divide-[#F5EEE0]">
             {filtered.map((lead) => (
               <tr
                 key={lead.id}
-                className="hover:bg-[#F8F3EA] transition-colors"
+                onClick={() => router.push(`/admin/leads/${lead.id}`)}
+                className="hover:bg-[#F8F3EA] transition-colors cursor-pointer"
               >
                 <td className="px-4 py-3">
                   <div>
@@ -213,14 +207,6 @@ export default function LeadsPage() {
                 </td>
                 <td className="px-4 py-3 text-xs text-[#6B5B4A]">
                   {formatDate(lead.createdAt)}
-                </td>
-                <td className="px-4 py-3 text-right">
-                  <Link
-                    href={`/admin/leads/${lead.id}`}
-                    className="inline-flex items-center gap-1 text-xs font-medium text-[#2E1A0E] hover:underline"
-                  >
-                    View <ChevronRight className="w-3 h-3" />
-                  </Link>
                 </td>
               </tr>
             ))}
