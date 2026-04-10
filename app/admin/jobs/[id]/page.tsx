@@ -118,7 +118,7 @@ export default function JobDetailPage({
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2 space-y-5">
           {/* Header */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <div className="flex items-start justify-between">
               <div>
                 <h1 className="text-xl font-bold text-[#191c1b]">{job.title}</h1>
@@ -179,7 +179,7 @@ export default function JobDetailPage({
           </div>
 
           {/* Line Items */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <h2 className="font-semibold text-sm text-[#191c1b] mb-4">Line Items</h2>
             <div className="divide-y divide-[#edeeeb]">
               {job.lineItems.map((li) => (
@@ -246,7 +246,7 @@ export default function JobDetailPage({
           </div>
 
           {/* Photos */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-sm text-[#191c1b] flex items-center gap-2">
                 <ImageIcon className="w-4 h-4 text-[#424844]" />
@@ -276,7 +276,7 @@ export default function JobDetailPage({
           </div>
 
           {/* Notes */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <h2 className="font-semibold text-sm text-[#191c1b] mb-4">Notes</h2>
             {job.notes.length === 0 && <p className="text-sm text-[#424844] mb-4">No notes yet.</p>}
             <div className="space-y-3 mb-4">
@@ -310,7 +310,7 @@ export default function JobDetailPage({
         {/* Sidebar */}
         <div className="space-y-5">
           {/* Schedule */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+          <div className="admin-card p-5">
             <h3 className="font-semibold text-sm text-[#191c1b] mb-3">Schedule</h3>
             <div className="space-y-2 text-sm">
               {job.scheduledStart ? (
@@ -337,7 +337,7 @@ export default function JobDetailPage({
           </div>
 
           {/* Invoices */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+          <div className="admin-card p-5">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-semibold text-sm text-[#191c1b]">Invoices</h3>
               <button
@@ -367,7 +367,7 @@ export default function JobDetailPage({
           </div>
 
           {client && (
-            <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+            <div className="admin-card p-5">
               <h3 className="font-semibold text-sm text-[#191c1b] mb-2">Client</h3>
               <Link
                 href={`/admin/clients/${client.id}`}
@@ -389,7 +389,7 @@ export default function JobDetailPage({
       {/* Invoice Modal */}
       {showInvoiceModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setShowInvoiceModal(false)}>
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6 w-96 shadow-xl" onClick={(e) => e.stopPropagation()}>
+          <div className="admin-card p-6 w-96 shadow-xl" onClick={(e) => e.stopPropagation()}>
             <h3 className="font-semibold text-[#191c1b] mb-1">Create Invoice</h3>
             <p className="text-xs text-[#424844] mb-4">for {job.title}</p>
             <div className="space-y-2 mb-5">

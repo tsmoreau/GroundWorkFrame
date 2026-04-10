@@ -87,7 +87,7 @@ export default function InvoiceDetailPage({
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2 space-y-5">
           {/* Invoice Card */}
-          <div className="bg-white rounded-xl border border-[var(--color-border)] p-6">
+          <div className="admin-card p-6">
             <div className="flex items-start justify-between mb-6">
               <div>
                 <p className="font-mono text-xs text-[var(--color-stone)] font-semibold">{invoice.invoiceNumber}</p>
@@ -166,7 +166,7 @@ export default function InvoiceDetailPage({
 
           {/* Actions */}
           {invoice.status !== "paid" && invoice.status !== "void" && (
-            <div className="bg-white rounded-xl border border-[var(--color-border)] p-6">
+            <div className="admin-card p-6">
               <h2 className="font-semibold text-sm text-[var(--color-charcoal)] mb-4">Actions</h2>
               <div className="flex flex-wrap gap-3">
                 {invoice.status === "draft" && (
@@ -244,7 +244,7 @@ export default function InvoiceDetailPage({
 
         {/* Sidebar */}
         <div className="space-y-5">
-          <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
+          <div className="admin-card p-5">
             <h3 className="font-semibold text-sm text-[var(--color-charcoal)] mb-3">Timeline</h3>
             <div className="space-y-2 text-xs text-[var(--color-stone)]">
               <div className="flex justify-between">
@@ -273,7 +273,7 @@ export default function InvoiceDetailPage({
           </div>
 
           {job && (
-            <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
+            <div className="admin-card p-5">
               <h3 className="font-semibold text-sm text-[var(--color-charcoal)] mb-2">Job</h3>
               <Link
                 href={`/admin/jobs/${job.id}`}
@@ -284,7 +284,7 @@ export default function InvoiceDetailPage({
             </div>
           )}
 
-          <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
+          <div className="admin-card p-5">
             <h3 className="font-semibold text-sm text-[var(--color-charcoal)] mb-2">Client Invoice Link</h3>
             <Link
               href={`/invoice/${invoice.token}`}

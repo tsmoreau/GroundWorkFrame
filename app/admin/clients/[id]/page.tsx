@@ -89,7 +89,7 @@ export default function ClientDetailPage({
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2 space-y-5">
           {/* Contact Card */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <h1 className="text-xl font-bold text-[#191c1b]">{client.name}</h1>
             <div className="mt-4 space-y-2">
               <div className="flex items-center gap-2 text-sm text-[#424844]">
@@ -117,7 +117,7 @@ export default function ClientDetailPage({
           </div>
 
           {/* Jobs */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-sm text-[#191c1b] flex items-center gap-2">
                 <Briefcase className="w-4 h-4 text-[#424844]" />
@@ -162,7 +162,7 @@ export default function ClientDetailPage({
           </div>
 
           {/* Invoices */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-sm text-[#191c1b] flex items-center gap-2">
                 <FileText className="w-4 h-4 text-[#424844]" />
@@ -204,7 +204,7 @@ export default function ClientDetailPage({
           </div>
 
           {/* Notes */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <h2 className="font-semibold text-sm text-[#191c1b] mb-4">Notes</h2>
             {client.notes.length === 0 && <p className="text-sm text-[#424844] mb-4">No notes yet.</p>}
             <div className="space-y-3 mb-4">
@@ -237,7 +237,7 @@ export default function ClientDetailPage({
 
         {/* Sidebar */}
         <div className="space-y-5">
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+          <div className="admin-card p-5">
             <h3 className="font-semibold text-sm text-[#191c1b] mb-3 flex items-center gap-2">
               <PawPrint className="w-4 h-4 text-[#424844]" />
               Pets
@@ -255,7 +255,7 @@ export default function ClientDetailPage({
           </div>
 
           {client.leadId && (
-            <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+            <div className="admin-card p-5">
               <h3 className="font-semibold text-sm text-[#191c1b] mb-3">Origin</h3>
               <Link
                 href={`/admin/leads/${client.leadId}`}

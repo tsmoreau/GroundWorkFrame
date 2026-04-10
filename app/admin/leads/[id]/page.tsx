@@ -100,7 +100,7 @@ export default function LeadDetailPage({
         {/* Main Info */}
         <div className="col-span-2 space-y-5">
           {/* Header */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <div className="flex items-start justify-between">
               <div>
                 <h1 className="text-xl font-bold text-[#191c1b]">{lead.name}</h1>
@@ -162,7 +162,7 @@ export default function LeadDetailPage({
           </div>
 
           {/* Notes Timeline */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-6">
+          <div className="admin-card p-6">
             <h2 className="font-semibold text-sm text-[#191c1b] mb-4">Notes</h2>
             {lead.notes.length === 0 && (
               <p className="text-sm text-[#424844] mb-4">No notes yet.</p>
@@ -198,7 +198,7 @@ export default function LeadDetailPage({
         {/* Sidebar */}
         <div className="space-y-5">
           {/* Pet Info */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+          <div className="admin-card p-5">
             <h3 className="font-semibold text-sm text-[#191c1b] mb-3 flex items-center gap-2">
               <PawPrint className="w-4 h-4 text-[#424844]" />
               Pet Info
@@ -225,7 +225,7 @@ export default function LeadDetailPage({
 
           {/* Map Preview */}
           {lead.address && (
-            <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+            <div className="admin-card p-5">
               <h3 className="font-semibold text-sm text-[#191c1b] mb-3 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#424844]" />
                 Location
@@ -243,7 +243,7 @@ export default function LeadDetailPage({
           )}
 
           {/* Actions */}
-          <div className="bg-white rounded-xl border border-[#c2c8c2] p-5">
+          <div className="admin-card p-5">
             <h3 className="font-semibold text-sm text-[#191c1b] mb-3">Actions</h3>
             {lead.status === "converted" && lead.convertedTo ? (
               <Link

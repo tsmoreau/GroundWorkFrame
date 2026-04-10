@@ -135,3 +135,10 @@ h1, h2, h3, h4 {
   background-color: #ccead6;
   color: #062014;
 }
+
+/* Admin card elevation — white cards lift off the page background */
+.admin-card {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(25, 28, 27, 0.07), 0 0 0 1px rgba(25, 28, 27, 0.05);
+  border-radius: 0.75rem;
+}

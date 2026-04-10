@@ -100,7 +100,7 @@ export default function ClientsPage() {
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-[#c2c8c2] overflow-hidden">
+      <div className="admin-card overflow-hidden">
         <div className="p-4 border-b border-[#e7e8e6]">
           <div className="relative max-w-sm">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#727973]" />
@@ -265,7 +265,7 @@ function AddClientModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl border border-[#c2c8c2] p-6 w-full max-w-lg shadow-xl"
+        className="admin-card p-6 w-full max-w-lg shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">

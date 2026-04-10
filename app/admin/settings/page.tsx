@@ -94,7 +94,7 @@ export default function SettingsPage() {
 
       <div className="space-y-6">
         {/* Business Info */}
-        <div className="bg-white rounded-xl border border-[var(--color-border)] p-6">
+        <div className="admin-card p-6">
           <h2 className="font-semibold text-[var(--color-charcoal)] mb-5">Business Information</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
@@ -117,7 +117,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Invoice Settings */}
-        <div className="bg-white rounded-xl border border-[var(--color-border)] p-6">
+        <div className="admin-card p-6">
           <h2 className="font-semibold text-[var(--color-charcoal)] mb-5">Invoice Settings</h2>
           <div className="grid grid-cols-3 gap-4">
             <Field label="Invoice Prefix" hint="e.g. DNH for DNH-2025-001">
@@ -148,7 +148,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Payment Methods */}
-        <div className="bg-white rounded-xl border border-[var(--color-border)] p-6">
+        <div className="admin-card p-6">
           <h2 className="font-semibold text-[var(--color-charcoal)] mb-5">Payment Methods</h2>
           <div className="space-y-6">
             {/* Stripe */}

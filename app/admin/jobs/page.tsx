@@ -223,7 +223,7 @@ export default function JobsPage() {
         </div>
       ) : (
         /* List view */
-        <div className="bg-white rounded-xl border border-[var(--color-border)] overflow-hidden">
+        <div className="admin-card overflow-hidden">
           <table className="w-full">
             <thead>
               <tr className="border-b border-[var(--color-parchment-dark)]">
@@ -354,7 +354,7 @@ function AddJobModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl border border-[var(--color-border)] p-6 w-full max-w-md shadow-xl"
+        className="admin-card p-6 w-full max-w-md shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">

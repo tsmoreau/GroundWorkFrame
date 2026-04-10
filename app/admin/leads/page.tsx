@@ -104,7 +104,7 @@ export default function LeadsPage() {
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-[#c2c8c2] overflow-hidden">
+      <div className="admin-card overflow-hidden">
         {/* Filters */}
         <div className="flex items-center gap-3 p-4 border-b border-[#e7e8e6]">
           <div className="relative flex-1 max-w-sm">
@@ -276,7 +276,7 @@ function AddLeadModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl border border-[#c2c8c2] p-6 w-full max-w-lg shadow-xl"
+        className="admin-card p-6 w-full max-w-lg shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">

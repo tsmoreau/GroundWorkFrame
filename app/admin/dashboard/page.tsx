@@ -23,7 +23,7 @@ function StatCard({
   color?: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
+    <div className="admin-card p-5">
       <p className="text-xs font-medium text-[var(--color-stone)] uppercase tracking-wider">{label}</p>
       <p className="text-3xl font-bold mt-1" style={{ color }}>
         {value}
@@ -115,7 +115,7 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         {/* Lead Pipeline */}
-        <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
+        <div className="admin-card p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-sm text-[var(--color-charcoal)] flex items-center gap-2">
               <Users className="w-4 h-4 text-[var(--color-stone)]" />
@@ -152,7 +152,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Upcoming Jobs */}
-        <div className="bg-white rounded-xl border border-[var(--color-border)] p-5 col-span-2">
+        <div className="admin-card p-5 col-span-2">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-sm text-[var(--color-charcoal)] flex items-center gap-2">
               <Clock className="w-4 h-4 text-[var(--color-stone)]" />
@@ -191,7 +191,7 @@ export default function DashboardPage() {
 
       {/* Outstanding Invoices */}
       {outstanding.length > 0 && (
-        <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
+        <div className="admin-card p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-sm text-[var(--color-charcoal)] flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-[var(--color-danger)]" />
