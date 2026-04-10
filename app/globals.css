@@ -2,34 +2,34 @@
 
 @theme {
   /* === Legacy admin tokens === */
-  --color-espresso: #2E1A0E;
-  --color-espresso-light: #4A2C1A;
-  --color-espresso-dim: #1E1008;
-  --color-sand: #C8B8A0;
-  --color-sand-muted: #A89878;
-  --color-sand-dim: #A09070;
-  --color-parchment: #F5F0E8;
-  --color-parchment-dark: #EDE4D0;
-  --color-parchment-mid: #E8D8C4;
-  --color-gold: #C8A548;
-  --color-gold-light: #E8C860;
-  --color-stone: #6B5B4A;
-  --color-charcoal: #1C1208;
-  --color-border: #DDD0B8;
-  --color-border-warm: #E5D8C4;
+  --color-espresso: #3a5438;
+  --color-espresso-light: #4d6e4a;
+  --color-espresso-dim: #283c27;
+  --color-sand: #a8b4a8;
+  --color-sand-muted: #8a9888;
+  --color-sand-dim: #7a8878;
+  --color-parchment: #f3f4f1;
+  --color-parchment-dark: #edeeeb;
+  --color-parchment-mid: #e7e8e6;
+  --color-gold: #6b8f63;
+  --color-gold-light: #9dbd96;
+  --color-stone: #5e6b5c;
+  --color-charcoal: #191c1b;
+  --color-border: #c2c8c2;
+  --color-border-warm: #d9dad7;
   --color-paid: #5A7840;
   --color-danger: #A83028;
 
   /* === UI surface & interaction === */
-  --color-separator: #D0C0A8;
-  --color-surface-cream: #FDFAF5;
-  --color-surface-hover: #F8F3EA;
-  --color-row-divider: #F5EEE0;
-  --color-warm-sand: #F0E4D4;
+  --color-separator: #c2c8c2;
+  --color-surface-cream: #f9faf7;
+  --color-surface-hover: #f3f4f1;
+  --color-row-divider: #edeeeb;
+  --color-warm-sand: #e7e8e6;
 
   /* === Status system === */
-  --color-status-neutral-bg: #F0EAE0;
-  --color-status-neutral: #7C6E58;
+  --color-status-neutral-bg: #edeeeb;
+  --color-status-neutral: #5e6b5c;
   --color-status-blue-bg: #e8f2fa;
   --color-status-blue: #3a7db8;
   --color-status-amber-bg: #fdf3e0;
@@ -41,9 +41,9 @@
   --color-status-red-bg: #fce8e8;
 
   /* === Lead status === */
-  --color-lead-new-bg: #fff8e8;
+  --color-lead-new-bg: #f0f4ef;
   --color-lead-contacted: #6b9dc2;
-  --color-lead-converted-bg: #EEE4D0;
+  --color-lead-converted-bg: #edeeeb;
 
   /* === Job kanban border colors === */
   --color-job-border-blue: #b8d4ed;
