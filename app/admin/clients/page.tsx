@@ -93,7 +93,7 @@ export default function ClientsPage() {
         <button
           onClick={() => setShowAddModal(true)}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white"
-          style={{ backgroundColor: "#173124" }}
+          style={{ backgroundColor: "#c8d5cc" }}
         >
           <Plus className="w-4 h-4" />
           Add Client
@@ -387,8 +387,8 @@ function AddClientModal({
           <button
             onClick={handleSubmit}
             disabled={!canSubmit}
-            className="flex-1 py-2.5 rounded-lg text-sm font-medium text-white disabled:opacity-50"
-            style={{ backgroundColor: "#173124" }}
+            className="flex-1 py-2.5 rounded-lg text-sm font-medium text-[#2d3d38] disabled:opacity-50"
+            style={{ backgroundColor: "#c8d5cc" }}
           >
             Add Client
           </button>

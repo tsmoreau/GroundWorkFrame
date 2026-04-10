@@ -239,8 +239,8 @@ export default function DashboardPage() {
       <div className="mt-6 flex gap-3">
         <Link
           href="/admin/leads"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90"
-          style={{ backgroundColor: "#173124" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#2d3d38] transition-colors hover:opacity-90"
+          style={{ backgroundColor: "#c8d5cc" }}
         >
           <TrendingUp className="w-4 h-4" />
           View Leads

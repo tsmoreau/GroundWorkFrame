@@ -170,7 +170,7 @@ export default function JobDetailPage({
                 <button
                   onClick={handleAdvanceStatus}
                   className="mt-3 text-sm font-medium px-4 py-2 rounded-lg text-white"
-                  style={{ backgroundColor: "#173124" }}
+                  style={{ backgroundColor: "#c8d5cc" }}
                 >
                   Mark as {JOB_STATUS_LABELS[nextStatus]} →
                 </button>
@@ -298,8 +298,8 @@ export default function JobDetailPage({
               <button
                 onClick={handleAddNote}
                 disabled={!noteText.trim()}
-                className="px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-50 self-end"
-                style={{ backgroundColor: "#173124" }}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-[#2d3d38] disabled:opacity-50 self-end"
+                style={{ backgroundColor: "#c8d5cc" }}
               >
                 Add
               </button>
@@ -417,7 +417,7 @@ export default function JobDetailPage({
               <button
                 onClick={handleCreateInvoice}
                 className="flex-1 py-2.5 rounded-lg text-sm font-medium text-white"
-                style={{ backgroundColor: "#173124" }}
+                style={{ backgroundColor: "#c8d5cc" }}
               >
                 Create Invoice
               </button>
