@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { useData } from "../data-context";
 import {
   computeTotal,
@@ -36,8 +37,13 @@ function StatCard({
 
 export default function DashboardPage() {
   const { leads, jobs, invoices } = useData();
+  const [today, setToday] = useState<Date | null>(null);
 
-  const now = new Date();
+  useEffect(() => {
+    setToday(new Date());
+  }, []);
+
+  const now = today ?? new Date(0);
   const twoWeeks = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
 
   const newLeads = leads.filter((l) => l.status === "new").length;
@@ -52,22 +58,24 @@ export default function DashboardPage() {
     0
   );
 
-  const thisMonth = new Date();
-  thisMonth.setDate(1);
-  thisMonth.setHours(0, 0, 0, 0);
-  const paidThisMonth = invoices.filter(
-    (i) => i.status === "paid" && i.paidAt && new Date(i.paidAt) >= thisMonth
-  );
+  const thisMonth = today ? new Date(today.getFullYear(), today.getMonth(), 1) : new Date(0);
+  const paidThisMonth = today
+    ? invoices.filter(
+        (i) => i.status === "paid" && i.paidAt && new Date(i.paidAt) >= thisMonth
+      )
+    : [];
   const revenueThisMonth = paidThisMonth.reduce(
     (s, i) => s + computeTotal(i.lineItems),
     0
   );
 
-  const upcoming = jobs.filter((j) => {
-    if (!j.scheduledStart) return false;
-    const start = new Date(j.scheduledStart);
-    return start >= now && start <= twoWeeks && !["complete", "cancelled"].includes(j.status);
-  });
+  const upcoming = today
+    ? jobs.filter((j) => {
+        if (!j.scheduledStart) return false;
+        const start = new Date(j.scheduledStart);
+        return start >= now && start <= twoWeeks && !["complete", "cancelled"].includes(j.status);
+      })
+    : [];
 
   const leadsByStatus = leads.reduce<Record<string, number>>((acc, l) => {
     acc[l.status] = (acc[l.status] || 0) + 1;
@@ -78,13 +86,15 @@ export default function DashboardPage() {
     <div className="p-8 max-w-6xl">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-charcoal">Dashboard</h1>
-        <p className="text-sm text-stone mt-1">
-          {new Date().toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+        <p className="text-sm text-stone mt-1" suppressHydrationWarning>
+          {today
+            ? today.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            : ""}
         </p>
       </div>
 
@@ -199,10 +209,12 @@ export default function DashboardPage() {
           </div>
           <div className="divide-y divide-parchment-dark">
             {outstanding.map((inv) => {
-              const daysOld = Math.floor(
-                (Date.now() - new Date(inv.sentAt ?? inv.createdAt).getTime()) /
-                  (1000 * 60 * 60 * 24)
-              );
+              const daysOld = today
+                ? Math.floor(
+                    (today.getTime() - new Date(inv.sentAt ?? inv.createdAt).getTime()) /
+                      (1000 * 60 * 60 * 24)
+                  )
+                : 0;
               return (
                 <Link
                   key={inv.id}
