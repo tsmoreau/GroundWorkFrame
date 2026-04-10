@@ -28,10 +28,14 @@ interface DataContextType {
   addLead: (lead: Omit<Lead, "id" | "createdAt" | "updatedAt">) => Lead;
   convertLead: (leadId: string) => Client | null;
   updateClient: (id: string, updates: Partial<Client>) => void;
+  addClient: (client: Omit<Client, "id" | "createdAt" | "updatedAt">) => Client;
   updateJob: (id: string, updates: Partial<Job>) => void;
   addJob: (job: Omit<Job, "id" | "createdAt" | "updatedAt">) => Job;
   updateInvoice: (id: string, updates: Partial<Invoice>) => void;
-  createInvoiceFromJob: (jobId: string, type: Invoice["type"]) => Invoice | null;
+  createInvoiceFromJob: (
+    jobId: string,
+    type: Invoice["type"],
+  ) => Invoice | null;
   updateSettings: (updates: Partial<BusinessSettings>) => void;
   nextInvoiceNumber: () => string;
 }
@@ -87,7 +91,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const updateLead = useCallback((id: string, updates: Partial<Lead>) => {
     setLeads((prev) =>
-      prev.map((l) => (l.id === id ? { ...l, ...updates, updatedAt: now() } : l))
+      prev.map((l) =>
+        l.id === id ? { ...l, ...updates, updatedAt: now() } : l,
+      ),
     );
   }, []);
 
@@ -102,7 +108,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
       setLeads((prev) => [newLead, ...prev]);
       return newLead;
     },
-    []
+    [],
   );
 
   const convertLead = useCallback(
@@ -116,7 +122,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
         phone: lead.phone,
         address: lead.address ?? "",
         pets: lead.petInfo
-          ? [{ type: lead.petInfo.type === "both" ? "cat" : lead.petInfo.type, breed: lead.petInfo.breed }]
+          ? [
+              {
+                type: lead.petInfo.type === "both" ? "cat" : lead.petInfo.type,
+                breed: lead.petInfo.breed,
+              },
+            ]
           : [],
         notes: [],
         leadId: lead.id,
@@ -128,26 +139,47 @@ export function DataProvider({ children }: { children: ReactNode }) {
       setLeads((prev) =>
         prev.map((l) =>
           l.id === leadId
-            ? { ...l, status: "converted", convertedTo: newClient.id, updatedAt: now() }
-            : l
-        )
+            ? {
+                ...l,
+                status: "converted",
+                convertedTo: newClient.id,
+                updatedAt: now(),
+              }
+            : l,
+        ),
       );
       return newClient;
     },
-    [leads]
+    [leads],
   );
 
   const updateClient = useCallback((id: string, updates: Partial<Client>) => {
     setClients((prev) =>
       prev.map((c) =>
-        c.id === id ? { ...c, ...updates, updatedAt: now() } : c
-      )
+        c.id === id ? { ...c, ...updates, updatedAt: now() } : c,
+      ),
     );
   }, []);
 
+  const addClient = useCallback(
+    (client: Omit<Client, "id" | "createdAt" | "updatedAt">) => {
+      const newClient: Client = {
+        ...client,
+        id: generateId("client"),
+        createdAt: now(),
+        updatedAt: now(),
+      };
+      setClients((prev) => [newClient, ...prev]);
+      return newClient;
+    },
+    [],
+  );
+
   const updateJob = useCallback((id: string, updates: Partial<Job>) => {
     setJobs((prev) =>
-      prev.map((j) => (j.id === id ? { ...j, ...updates, updatedAt: now() } : j))
+      prev.map((j) =>
+        j.id === id ? { ...j, ...updates, updatedAt: now() } : j,
+      ),
     );
   }, []);
 
@@ -164,19 +196,19 @@ export function DataProvider({ children }: { children: ReactNode }) {
         prev.map((c) =>
           c.id === job.clientId
             ? { ...c, jobIds: [...c.jobIds, newJob.id], updatedAt: now() }
-            : c
-        )
+            : c,
+        ),
       );
       return newJob;
     },
-    []
+    [],
   );
 
   const updateInvoice = useCallback((id: string, updates: Partial<Invoice>) => {
     setInvoices((prev) =>
       prev.map((i) =>
-        i.id === id ? { ...i, ...updates, updatedAt: now() } : i
-      )
+        i.id === id ? { ...i, ...updates, updatedAt: now() } : i,
+      ),
     );
   }, []);
 
@@ -224,13 +256,23 @@ export function DataProvider({ children }: { children: ReactNode }) {
       setJobs((prev) =>
         prev.map((j) =>
           j.id === jobId
-            ? { ...j, invoiceIds: [...j.invoiceIds, invoice.id], updatedAt: now() }
-            : j
-        )
+            ? {
+                ...j,
+                invoiceIds: [...j.invoiceIds, invoice.id],
+                updatedAt: now(),
+              }
+            : j,
+        ),
       );
       return invoice;
     },
-    [jobs, clients, settings.depositPercent, settings.invoicePrefix, nextInvoiceNumber]
+    [
+      jobs,
+      clients,
+      settings.depositPercent,
+      settings.invoicePrefix,
+      nextInvoiceNumber,
+    ],
   );
 
   const updateSettings = useCallback((updates: Partial<BusinessSettings>) => {
@@ -249,6 +291,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         addLead,
         convertLead,
         updateClient,
+        addClient,
         updateJob,
         addJob,
         updateInvoice,

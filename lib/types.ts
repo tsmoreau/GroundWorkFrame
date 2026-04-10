@@ -95,8 +95,15 @@ export interface Job {
   updatedAt: string;
 }
 
-export type InvoiceType = "deposit" | "final" | "full";
-export type InvoiceStatus = "draft" | "sent" | "viewed" | "paid" | "void";
+export type InvoiceType = "quote" | "deposit" | "final" | "full";
+export type InvoiceStatus =
+  | "draft"
+  | "sent"
+  | "viewed"
+  | "approved"
+  | "declined"
+  | "paid"
+  | "void";
 export type PaymentMethod =
   | "stripe_ach"
   | "stripe_card"

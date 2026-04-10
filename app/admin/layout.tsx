@@ -17,10 +17,25 @@ import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/leads", label: "Leads", icon: Users, countKey: "leads" as const },
+  {
+    href: "/admin/leads",
+    label: "Leads",
+    icon: Users,
+    countKey: "leads" as const,
+  },
   { href: "/admin/clients", label: "Clients", icon: UserCheck },
-  { href: "/admin/jobs", label: "Jobs", icon: Briefcase, countKey: "jobs" as const },
-  { href: "/admin/invoices", label: "Invoices", icon: FileText, countKey: "invoices" as const },
+  {
+    href: "/admin/jobs",
+    label: "Jobs",
+    icon: Briefcase,
+    countKey: "jobs" as const,
+  },
+  {
+    href: "/admin/invoices",
+    label: "Documents",
+    icon: FileText,
+    countKey: "invoices" as const,
+  },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
@@ -29,12 +44,13 @@ function Sidebar() {
   const { leads, invoices } = useData();
   const newLeads = leads.filter((l) => l.status === "new").length;
   const outstandingInvoices = invoices.filter(
-    (i) => i.status === "sent" || i.status === "viewed"
+    (i) => i.status === "sent" || i.status === "viewed",
   ).length;
 
   const getBadge = (countKey?: string) => {
     if (countKey === "leads" && newLeads > 0) return newLeads;
-    if (countKey === "invoices" && outstandingInvoices > 0) return outstandingInvoices;
+    if (countKey === "invoices" && outstandingInvoices > 0)
+      return outstandingInvoices;
     return null;
   };
 
@@ -51,11 +67,17 @@ function Sidebar() {
           >
             <PawPrint className="w-4 h-4 text-white" />
           </div>
-          <span className="font-semibold tracking-tight" style={{ color: "#1C1208" }}>
+          <span
+            className="font-semibold tracking-tight"
+            style={{ color: "#1C1208" }}
+          >
             Denhaus
           </span>
         </Link>
-        <p className="text-xs mt-1 font-medium tracking-wide uppercase" style={{ color: "#A09070" }}>
+        <p
+          className="text-xs mt-1 font-medium tracking-wide uppercase"
+          style={{ color: "#A09070" }}
+        >
           Admin
         </p>
       </div>
@@ -72,9 +94,13 @@ function Sidebar() {
                 "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive
                   ? "text-[#1C1208]"
-                  : "text-[#8A7A68] hover:text-[#1C1208] hover:bg-[#F0E8D8]"
+                  : "text-[#8A7A68] hover:text-[#1C1208] hover:bg-[#F0E8D8]",
               )}
-              style={isActive ? { backgroundColor: "#EDE5D4", color: "#1C1208" } : undefined}
+              style={
+                isActive
+                  ? { backgroundColor: "#EDE5D4", color: "#1C1208" }
+                  : undefined
+              }
             >
               <span className="flex items-center gap-3">
                 <Icon className="w-4 h-4 flex-shrink-0" />
@@ -113,14 +139,21 @@ function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 ml-56 min-h-screen" style={{ backgroundColor: "#F5F0E8" }}>
+      <main
+        className="flex-1 ml-56 min-h-screen"
+        style={{ backgroundColor: "#F5F0E8" }}
+      >
         {children}
       </main>
     </div>
   );
 }
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <DataProvider>
       <AdminShell>{children}</AdminShell>

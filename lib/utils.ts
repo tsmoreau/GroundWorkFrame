@@ -36,7 +36,9 @@ export function generateId(prefix: string): string {
 }
 
 export function generateToken(): string {
-  return Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+  return (
+    Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)
+  );
 }
 
 export const SOURCE_LABELS: Record<string, string> = {
@@ -71,8 +73,17 @@ export const INVOICE_STATUS_LABELS: Record<string, string> = {
   draft: "Draft",
   sent: "Sent",
   viewed: "Viewed",
+  approved: "Approved",
+  declined: "Declined",
   paid: "Paid",
   void: "Void",
+};
+
+export const INVOICE_TYPE_LABELS: Record<string, string> = {
+  quote: "Quote",
+  deposit: "Deposit",
+  final: "Final",
+  full: "Full",
 };
 
 export const PAYMENT_METHOD_LABELS: Record<string, string> = {
