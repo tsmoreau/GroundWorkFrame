@@ -15,7 +15,7 @@ function StatCard({
   label,
   value,
   sub,
-  color = "#2E1A0E",
+  color = "var(--color-espresso)",
 }: {
   label: string;
   value: string | number;
@@ -23,12 +23,12 @@ function StatCard({
   color?: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
-      <p className="text-xs font-medium text-[#6B5B4A] uppercase tracking-wider">{label}</p>
+    <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
+      <p className="text-xs font-medium text-[var(--color-stone)] uppercase tracking-wider">{label}</p>
       <p className="text-3xl font-bold mt-1" style={{ color }}>
         {value}
       </p>
-      {sub && <p className="text-xs text-[#6B5B4A] mt-1">{sub}</p>}
+      {sub && <p className="text-xs text-[var(--color-stone)] mt-1">{sub}</p>}
     </div>
   );
 }
@@ -76,8 +76,8 @@ export default function DashboardPage() {
   return (
     <div className="p-8 max-w-6xl">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#1C1208]">Dashboard</h1>
-        <p className="text-sm text-[#6B5B4A] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-charcoal)]">Dashboard</h1>
+        <p className="text-sm text-[var(--color-stone)] mt-1">
           {new Date().toLocaleDateString("en-US", {
             weekday: "long",
             year: "numeric",
@@ -92,7 +92,7 @@ export default function DashboardPage() {
           label="New Leads"
           value={newLeads}
           sub={`${leads.length} total`}
-          color={newLeads > 0 ? "#C8A548" : "#2E1A0E"}
+          color={newLeads > 0 ? "var(--color-gold)" : "var(--color-espresso)"}
         />
         <StatCard
           label="Active Jobs"
@@ -103,32 +103,32 @@ export default function DashboardPage() {
           label="Outstanding"
           value={formatCurrency(outstandingTotal)}
           sub={`${outstanding.length} invoice${outstanding.length !== 1 ? "s" : ""}`}
-          color={outstanding.length > 0 ? "#A83028" : "#2E1A0E"}
+          color={outstanding.length > 0 ? "var(--color-danger)" : "var(--color-espresso)"}
         />
         <StatCard
           label="Revenue (MTD)"
           value={formatCurrency(revenueThisMonth)}
           sub={`${paidThisMonth.length} invoice${paidThisMonth.length !== 1 ? "s" : ""} paid`}
-          color="#5A7840"
+          color="var(--color-paid)"
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         {/* Lead Pipeline */}
-        <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
+        <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-sm text-[#1C1208] flex items-center gap-2">
-              <Users className="w-4 h-4 text-[#6B5B4A]" />
+            <h2 className="font-semibold text-sm text-[var(--color-charcoal)] flex items-center gap-2">
+              <Users className="w-4 h-4 text-[var(--color-stone)]" />
               Lead Pipeline
             </h2>
-            <Link href="/admin/leads" className="text-xs text-[#2E1A0E] hover:underline font-medium">
+            <Link href="/admin/leads" className="text-xs text-[var(--color-espresso)] hover:underline font-medium">
               View all
             </Link>
           </div>
           <div className="space-y-2">
             {(["new", "contacted", "qualified", "converted", "dead"] as const).map((s) => (
               <div key={s} className="flex items-center justify-between">
-                <span className="text-xs capitalize text-[#6B5B4A]">{s}</span>
+                <span className="text-xs capitalize text-[var(--color-stone)]">{s}</span>
                 <div className="flex items-center gap-2">
                   <div
                     className="rounded-full h-1.5"
@@ -139,10 +139,10 @@ export default function DashboardPage() {
                         : s === "contacted" ? "#6b9dc2"
                         : s === "qualified" ? "#5A7840"
                         : s === "converted" ? "#2E1A0E"
-                        : "#D0C0A8",
+                        : "var(--color-sand)",
                     }}
                   />
-                  <span className="text-xs font-semibold text-[#1C1208] w-4 text-right">
+                  <span className="text-xs font-semibold text-[var(--color-charcoal)] w-4 text-right">
                     {leadsByStatus[s] || 0}
                   </span>
                 </div>
@@ -152,35 +152,35 @@ export default function DashboardPage() {
         </div>
 
         {/* Upcoming Jobs */}
-        <div className="bg-white rounded-xl border border-[#DDD0B8] p-5 col-span-2">
+        <div className="bg-white rounded-xl border border-[var(--color-border)] p-5 col-span-2">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-sm text-[#1C1208] flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#6B5B4A]" />
+            <h2 className="font-semibold text-sm text-[var(--color-charcoal)] flex items-center gap-2">
+              <Clock className="w-4 h-4 text-[var(--color-stone)]" />
               Upcoming Jobs (14 days)
             </h2>
-            <Link href="/admin/jobs" className="text-xs text-[#2E1A0E] hover:underline font-medium">
+            <Link href="/admin/jobs" className="text-xs text-[var(--color-espresso)] hover:underline font-medium">
               All jobs
             </Link>
           </div>
           {upcoming.length === 0 ? (
-            <p className="text-sm text-[#6B5B4A]">No jobs scheduled in the next two weeks.</p>
+            <p className="text-sm text-[var(--color-stone)]">No jobs scheduled in the next two weeks.</p>
           ) : (
-            <div className="divide-y divide-[#EDE4D0]">
+            <div className="divide-y divide-[var(--color-parchment-dark)]">
               {upcoming.map((job) => (
                 <Link
                   key={job.id}
                   href={`/admin/jobs/${job.id}`}
-                  className="flex items-center justify-between py-3 hover:bg-[#F8F3EA] -mx-5 px-5 transition-colors"
+                  className="flex items-center justify-between py-3 hover:bg-[var(--color-parchment-dark)] -mx-5 px-5 transition-colors"
                 >
                   <div>
-                    <p className="text-sm font-medium text-[#1C1208]">{job.title}</p>
-                    <p className="text-xs text-[#6B5B4A] mt-0.5">{job.clientName}</p>
+                    <p className="text-sm font-medium text-[var(--color-charcoal)]">{job.title}</p>
+                    <p className="text-xs text-[var(--color-stone)] mt-0.5">{job.clientName}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-medium text-[#2E1A0E]">
+                    <p className="text-xs font-medium text-[var(--color-espresso)]">
                       {job.scheduledStart ? formatDate(job.scheduledStart) : "—"}
                     </p>
-                    <p className="text-xs text-[#6B5B4A]">{JOB_STATUS_LABELS[job.status]}</p>
+                    <p className="text-xs text-[var(--color-stone)]">{JOB_STATUS_LABELS[job.status]}</p>
                   </div>
                 </Link>
               ))}
@@ -191,13 +191,13 @@ export default function DashboardPage() {
 
       {/* Outstanding Invoices */}
       {outstanding.length > 0 && (
-        <div className="bg-white rounded-xl border border-[#DDD0B8] p-5">
+        <div className="bg-white rounded-xl border border-[var(--color-border)] p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-sm text-[#1C1208] flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-[#A83028]" />
+            <h2 className="font-semibold text-sm text-[var(--color-charcoal)] flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-[var(--color-danger)]" />
               Outstanding Invoices
             </h2>
-            <Link href="/admin/invoices" className="text-xs text-[#2E1A0E] hover:underline font-medium">
+            <Link href="/admin/invoices" className="text-xs text-[var(--color-espresso)] hover:underline font-medium">
               All invoices
             </Link>
           </div>

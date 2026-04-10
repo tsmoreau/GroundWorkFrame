@@ -57,26 +57,26 @@ function Sidebar() {
   return (
     <aside
       className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40 border-r"
-      style={{ backgroundColor: "#FDFAF5", borderColor: "#E5D8C4" }}
+      style={{ backgroundColor: "var(--color-surface)", borderColor: "var(--color-border)" }}
     >
-      <div className="px-5 py-6 border-b" style={{ borderColor: "#E5D8C4" }}>
+      <div className="px-5 py-6 border-b" style={{ borderColor: "var(--color-border)" }}>
         <Link href="/" className="flex items-center gap-2.5">
           <div
             className="w-7 h-7 rounded-md flex items-center justify-center"
-            style={{ backgroundColor: "#C8A548" }}
+            style={{ backgroundColor: "var(--color-gold)" }}
           >
             <PawPrint className="w-4 h-4 text-white" />
           </div>
           <span
             className="font-semibold tracking-tight"
-            style={{ color: "#1C1208" }}
+            style={{ color: "var(--color-charcoal)" }}
           >
             Denhaus
           </span>
         </Link>
         <p
           className="text-xs mt-1 font-medium tracking-wide uppercase"
-          style={{ color: "#A09070" }}
+          style={{ color: "var(--color-stone)" }}
         >
           Admin
         </p>
@@ -93,12 +93,12 @@ function Sidebar() {
               className={cn(
                 "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive
-                  ? "text-[#1C1208]"
-                  : "text-[#8A7A68] hover:text-[#1C1208] hover:bg-[#F0E8D8]",
+                  ? "text-[var(--color-charcoal)]"
+                  : "text-[var(--color-stone)] hover:text-[var(--color-charcoal)] hover:bg-[var(--color-parchment-dark)]",
               )}
               style={
                 isActive
-                  ? { backgroundColor: "#EDE5D4", color: "#1C1208" }
+                  ? { backgroundColor: "var(--color-parchment-dark)", color: "var(--color-charcoal)" }
                   : undefined
               }
             >
@@ -109,7 +109,7 @@ function Sidebar() {
               {badge !== null && (
                 <span
                   className="text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center"
-                  style={{ backgroundColor: "#C8A548", color: "#fff" }}
+                  style={{ backgroundColor: "var(--color-gold)", color: "#fff" }}
                 >
                   {badge}
                 </span>
@@ -123,9 +123,9 @@ function Sidebar() {
         <Link
           href="/"
           className="flex items-center gap-2 text-xs font-medium transition-colors"
-          style={{ color: "#A09070" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#1C1208")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#A09070")}
+          style={{ color: "var(--color-stone)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-charcoal)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-stone)")}
         >
           <span>View Public Site</span>
           <ChevronRight className="w-3 h-3" />
@@ -141,7 +141,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <main
         className="flex-1 ml-56 min-h-screen min-w-0"
-        style={{ backgroundColor: "#F5F0E8" }}
+        style={{ backgroundColor: "var(--color-parchment)" }}
       >
         {children}
       </main>
