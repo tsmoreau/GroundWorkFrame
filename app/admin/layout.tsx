@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -11,6 +12,8 @@ import {
   Settings,
   PawPrint,
   ChevronRight,
+  Menu,
+  X,
 } from "lucide-react";
 import { DataProvider, useData } from "./data-context";
 import { cn } from "@/lib/utils";
@@ -39,7 +42,7 @@ const NAV_ITEMS = [
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
-function Sidebar() {
+function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const { leads, invoices } = useData();
   const newLeads = leads.filter((l) => l.status === "new").length;
@@ -55,9 +58,13 @@ function Sidebar() {
   };
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40 border-r bg-surface border-border">
+    <>
       <div className="px-5 py-6 border-b border-border">
-        <Link href="/" className="flex items-center gap-2.5">
+        <Link
+          href="/"
+          className="flex items-center gap-2.5"
+          onClick={onNavigate}
+        >
           <div className="w-7 h-7 rounded-md flex items-center justify-center bg-gold">
             <PawPrint className="w-4 h-4 text-white" />
           </div>
@@ -78,6 +85,7 @@ function Sidebar() {
             <Link
               key={href}
               href={href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive
@@ -102,21 +110,89 @@ function Sidebar() {
       <div className="px-5 py-4 border-t border-border-warm">
         <Link
           href="/"
+          onClick={onNavigate}
           className="flex items-center gap-2 text-xs font-medium transition-colors text-stone hover:text-charcoal"
         >
           <span>View Public Site</span>
           <ChevronRight className="w-3 h-3" />
         </Link>
       </div>
-    </aside>
+    </>
   );
 }
 
 function AdminShell({ children }: { children: React.ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close drawer on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
-      <main className="flex-1 ml-56 min-h-screen min-w-0 bg-parchment">
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex fixed top-0 left-0 h-screen w-56 flex-col z-40 border-r bg-surface border-border">
+        <Sidebar />
+      </aside>
+
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* Mobile drawer */}
+      <aside
+        className={cn(
+          "fixed top-0 left-0 h-screen w-64 flex flex-col z-50 bg-surface border-r border-border transition-transform duration-200 ease-out md:hidden",
+          mobileOpen ? "translate-x-0" : "-translate-x-full",
+        )}
+      >
+        <button
+          onClick={() => setMobileOpen(false)}
+          className="absolute top-5 right-4 p-1 text-stone hover:text-charcoal"
+        >
+          <X className="w-5 h-5" />
+        </button>
+        <Sidebar onNavigate={() => setMobileOpen(false)} />
+      </aside>
+
+      {/* Mobile top bar */}
+      <div className="fixed top-0 left-0 right-0 h-14 flex items-center gap-3 px-4 bg-surface border-b border-border z-30 md:hidden">
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="p-1.5 -ml-1 text-stone hover:text-charcoal"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-md flex items-center justify-center bg-gold">
+            <PawPrint className="w-3.5 h-3.5 text-white" />
+          </div>
+          <span className="font-semibold text-sm tracking-tight text-charcoal">
+            Denhaus
+          </span>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <main className="flex-1 md:ml-56 min-h-screen min-w-0 bg-parchment pt-14 md:pt-0">
         {children}
       </main>
     </div>

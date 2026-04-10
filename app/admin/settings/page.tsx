@@ -15,7 +15,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-charcoal mb-1">{label}</label>
+      <label className="block text-sm font-medium text-charcoal mb-1">
+        {label}
+      </label>
       {hint && <p className="text-xs text-sand-dim mb-1.5">{hint}</p>}
       {children}
     </div>
@@ -75,7 +77,10 @@ export default function SettingsPage() {
     setForm(settings);
   }, [settings]);
 
-  const set = <K extends keyof BusinessSettings>(key: K, value: BusinessSettings[K]) => {
+  const set = <K extends keyof BusinessSettings>(
+    key: K,
+    value: BusinessSettings[K],
+  ) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -86,42 +91,61 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="p-8 max-w-3xl">
+    <div className="p-4 md:p-8 max-w-3xl">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-charcoal">Settings</h1>
-        <p className="text-sm text-stone mt-1">Business configuration and payment methods</p>
+        <p className="text-sm text-stone mt-1">
+          Business configuration and payment methods
+        </p>
       </div>
 
       <div className="space-y-6">
         {/* Business Info */}
-        <div className="bg-white rounded-xl border border-border p-6">
-          <h2 className="font-semibold text-charcoal mb-5">Business Information</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2">
+        <div className="bg-white rounded-xl border border-border p-4 md:p-6">
+          <h2 className="font-semibold text-charcoal mb-5">
+            Business Information
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="md:col-span-2">
               <Field label="Business Name">
-                <TextInput value={form.businessName} onChange={(v) => set("businessName", v)} />
+                <TextInput
+                  value={form.businessName}
+                  onChange={(v) => set("businessName", v)}
+                />
               </Field>
             </div>
             <Field label="Email">
-              <TextInput value={form.businessEmail} onChange={(v) => set("businessEmail", v)} />
+              <TextInput
+                value={form.businessEmail}
+                onChange={(v) => set("businessEmail", v)}
+              />
             </Field>
             <Field label="Phone">
-              <TextInput value={form.businessPhone ?? ""} onChange={(v) => set("businessPhone", v)} />
+              <TextInput
+                value={form.businessPhone ?? ""}
+                onChange={(v) => set("businessPhone", v)}
+              />
             </Field>
-            <div className="col-span-2">
+            <div className="md:col-span-2">
               <Field label="Address">
-                <TextInput value={form.businessAddress ?? ""} onChange={(v) => set("businessAddress", v)} />
+                <TextInput
+                  value={form.businessAddress ?? ""}
+                  onChange={(v) => set("businessAddress", v)}
+                />
               </Field>
             </div>
           </div>
         </div>
 
         {/* Invoice Settings */}
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-white rounded-xl border border-border p-4 md:p-6">
           <h2 className="font-semibold text-charcoal mb-5">Invoice Settings</h2>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Field label="Invoice Prefix" hint="e.g. DNH for DNH-2025-001">
-              <TextInput value={form.invoicePrefix} onChange={(v) => set("invoicePrefix", v)} />
+              <TextInput
+                value={form.invoicePrefix}
+                onChange={(v) => set("invoicePrefix", v)}
+              />
             </Field>
             <Field label="Deposit %" hint="Default deposit percentage">
               <input
@@ -148,26 +172,39 @@ export default function SettingsPage() {
         </div>
 
         {/* Payment Methods */}
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-white rounded-xl border border-border p-4 md:p-6">
           <h2 className="font-semibold text-charcoal mb-5">Payment Methods</h2>
           <div className="space-y-6">
             {/* Stripe */}
             <div>
-              <Toggle checked={form.stripeEnabled} onChange={(v) => set("stripeEnabled", v)} label="Stripe (ACH + Card)" />
+              <Toggle
+                checked={form.stripeEnabled}
+                onChange={(v) => set("stripeEnabled", v)}
+                label="Stripe (ACH + Card)"
+              />
               {form.stripeEnabled && (
-                <p className="text-xs text-stone mt-2 pl-11">
-                  ACH capped at $5 · Card 2.9% + 30¢ · Stripe handles checkout and PCI compliance
+                <p className="text-xs text-stone mt-2 md:pl-11">
+                  ACH capped at $5 · Card 2.9% + 30¢ · Stripe handles checkout
+                  and PCI compliance
                 </p>
               )}
             </div>
 
             {/* Zelle */}
             <div>
-              <Toggle checked={form.zelleEnabled} onChange={(v) => set("zelleEnabled", v)} label="Zelle" />
+              <Toggle
+                checked={form.zelleEnabled}
+                onChange={(v) => set("zelleEnabled", v)}
+                label="Zelle"
+              />
               {form.zelleEnabled && (
-                <div className="mt-3 pl-11">
+                <div className="mt-3 md:pl-11">
                   <Field label="Zelle recipient email/phone">
-                    <TextInput value={form.zelleRecipient ?? ""} onChange={(v) => set("zelleRecipient", v)} placeholder="you@email.com" />
+                    <TextInput
+                      value={form.zelleRecipient ?? ""}
+                      onChange={(v) => set("zelleRecipient", v)}
+                      placeholder="you@email.com"
+                    />
                   </Field>
                 </div>
               )}
@@ -175,14 +212,25 @@ export default function SettingsPage() {
 
             {/* Check */}
             <div>
-              <Toggle checked={form.checkEnabled} onChange={(v) => set("checkEnabled", v)} label="Check" />
+              <Toggle
+                checked={form.checkEnabled}
+                onChange={(v) => set("checkEnabled", v)}
+                label="Check"
+              />
               {form.checkEnabled && (
-                <div className="mt-3 pl-11 grid grid-cols-2 gap-3">
+                <div className="mt-3 md:pl-11 grid grid-cols-1 md:grid-cols-2 gap-3">
                   <Field label="Payable to">
-                    <TextInput value={form.checkPayableTo ?? ""} onChange={(v) => set("checkPayableTo", v)} placeholder="Your LLC Name" />
+                    <TextInput
+                      value={form.checkPayableTo ?? ""}
+                      onChange={(v) => set("checkPayableTo", v)}
+                      placeholder="Your LLC Name"
+                    />
                   </Field>
                   <Field label="Mailing address">
-                    <TextInput value={form.checkMailingAddress ?? ""} onChange={(v) => set("checkMailingAddress", v)} />
+                    <TextInput
+                      value={form.checkMailingAddress ?? ""}
+                      onChange={(v) => set("checkMailingAddress", v)}
+                    />
                   </Field>
                 </div>
               )}
@@ -190,17 +238,31 @@ export default function SettingsPage() {
 
             {/* Bank Transfer */}
             <div>
-              <Toggle checked={form.bankTransferEnabled} onChange={(v) => set("bankTransferEnabled", v)} label="Bank Transfer (ACH/Wire)" />
+              <Toggle
+                checked={form.bankTransferEnabled}
+                onChange={(v) => set("bankTransferEnabled", v)}
+                label="Bank Transfer (ACH/Wire)"
+              />
               {form.bankTransferEnabled && (
-                <div className="mt-3 pl-11 grid grid-cols-3 gap-3">
+                <div className="mt-3 md:pl-11 grid grid-cols-1 md:grid-cols-3 gap-3">
                   <Field label="Bank name">
-                    <TextInput value={form.bankName ?? ""} onChange={(v) => set("bankName", v)} />
+                    <TextInput
+                      value={form.bankName ?? ""}
+                      onChange={(v) => set("bankName", v)}
+                    />
                   </Field>
                   <Field label="Routing number">
-                    <TextInput value={form.bankRoutingNumber ?? ""} onChange={(v) => set("bankRoutingNumber", v)} />
+                    <TextInput
+                      value={form.bankRoutingNumber ?? ""}
+                      onChange={(v) => set("bankRoutingNumber", v)}
+                    />
                   </Field>
                   <Field label="Account last 4">
-                    <TextInput value={form.bankAccountLast4 ?? ""} onChange={(v) => set("bankAccountLast4", v)} placeholder="1234" />
+                    <TextInput
+                      value={form.bankAccountLast4 ?? ""}
+                      onChange={(v) => set("bankAccountLast4", v)}
+                      placeholder="1234"
+                    />
                   </Field>
                 </div>
               )}

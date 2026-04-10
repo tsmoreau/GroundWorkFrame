@@ -11,7 +11,13 @@ import {
   INVOICE_STATUS_LABELS,
 } from "@/lib/utils";
 import { LEAD_STATUS_COLORS } from "@/lib/status-colors";
-import { ArrowRight, TrendingUp, Clock, AlertCircle, Users } from "lucide-react";
+import {
+  ArrowRight,
+  TrendingUp,
+  Clock,
+  AlertCircle,
+  Users,
+} from "lucide-react";
 
 function StatCard({
   label,
@@ -25,9 +31,11 @@ function StatCard({
   color?: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-border p-5">
-      <p className="text-xs font-medium text-stone uppercase tracking-wider">{label}</p>
-      <p className="text-3xl font-bold mt-1" style={{ color }}>
+    <div className="bg-white rounded-xl border border-border p-4 md:p-5">
+      <p className="text-xs font-medium text-stone uppercase tracking-wider">
+        {label}
+      </p>
+      <p className="text-2xl md:text-3xl font-bold mt-1" style={{ color }}>
         {value}
       </p>
       {sub && <p className="text-xs text-stone mt-1">{sub}</p>}
@@ -48,32 +56,39 @@ export default function DashboardPage() {
 
   const newLeads = leads.filter((l) => l.status === "new").length;
   const activeJobs = jobs.filter(
-    (j) => !["complete", "cancelled"].includes(j.status)
+    (j) => !["complete", "cancelled"].includes(j.status),
   ).length;
   const outstanding = invoices.filter(
-    (i) => i.status === "sent" || i.status === "viewed"
+    (i) => i.status === "sent" || i.status === "viewed",
   );
   const outstandingTotal = outstanding.reduce(
     (s, i) => s + computeTotal(i.lineItems),
-    0
+    0,
   );
 
-  const thisMonth = today ? new Date(today.getFullYear(), today.getMonth(), 1) : new Date(0);
+  const thisMonth = today
+    ? new Date(today.getFullYear(), today.getMonth(), 1)
+    : new Date(0);
   const paidThisMonth = today
     ? invoices.filter(
-        (i) => i.status === "paid" && i.paidAt && new Date(i.paidAt) >= thisMonth
+        (i) =>
+          i.status === "paid" && i.paidAt && new Date(i.paidAt) >= thisMonth,
       )
     : [];
   const revenueThisMonth = paidThisMonth.reduce(
     (s, i) => s + computeTotal(i.lineItems),
-    0
+    0,
   );
 
   const upcoming = today
     ? jobs.filter((j) => {
         if (!j.scheduledStart) return false;
         const start = new Date(j.scheduledStart);
-        return start >= now && start <= twoWeeks && !["complete", "cancelled"].includes(j.status);
+        return (
+          start >= now &&
+          start <= twoWeeks &&
+          !["complete", "cancelled"].includes(j.status)
+        );
       })
     : [];
 
@@ -83,8 +98,8 @@ export default function DashboardPage() {
   }, {});
 
   return (
-    <div className="p-8 max-w-6xl">
-      <div className="mb-8">
+    <div className="p-4 md:p-8 max-w-6xl">
+      <div className="mb-6 md:mb-8">
         <h1 className="text-2xl font-bold text-charcoal">Dashboard</h1>
         <p className="text-sm text-stone mt-1" suppressHydrationWarning>
           {today
@@ -98,7 +113,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
         <StatCard
           label="New Leads"
           value={newLeads}
@@ -114,7 +129,11 @@ export default function DashboardPage() {
           label="Outstanding"
           value={formatCurrency(outstandingTotal)}
           sub={`${outstanding.length} invoice${outstanding.length !== 1 ? "s" : ""}`}
-          color={outstanding.length > 0 ? "var(--color-danger)" : "var(--color-espresso)"}
+          color={
+            outstanding.length > 0
+              ? "var(--color-danger)"
+              : "var(--color-espresso)"
+          }
         />
         <StatCard
           label="Revenue (MTD)"
@@ -132,12 +151,17 @@ export default function DashboardPage() {
               <Users className="w-4 h-4 text-stone" />
               Lead Pipeline
             </h2>
-            <Link href="/admin/leads" className="text-xs text-espresso hover:underline font-medium">
+            <Link
+              href="/admin/leads"
+              className="text-xs text-espresso hover:underline font-medium"
+            >
               View all
             </Link>
           </div>
           <div className="space-y-2">
-            {(["new", "contacted", "qualified", "converted", "dead"] as const).map((s) => (
+            {(
+              ["new", "contacted", "qualified", "converted", "dead"] as const
+            ).map((s) => (
               <div key={s} className="flex items-center justify-between">
                 <span className="text-xs capitalize text-stone">{s}</span>
                 <div className="flex items-center gap-2">
@@ -145,7 +169,8 @@ export default function DashboardPage() {
                     className="rounded-full h-1.5"
                     style={{
                       width: `${Math.max(4, ((leadsByStatus[s] || 0) / leads.length) * 80)}px`,
-                      backgroundColor: LEAD_STATUS_COLORS[s] || "var(--color-sand)",
+                      backgroundColor:
+                        LEAD_STATUS_COLORS[s] || "var(--color-sand)",
                     }}
                   />
                   <span className="text-xs font-semibold text-charcoal w-4 text-right">
@@ -158,18 +183,23 @@ export default function DashboardPage() {
         </div>
 
         {/* Upcoming Jobs */}
-        <div className="bg-white rounded-xl border border-border p-5 col-span-2">
+        <div className="bg-white rounded-xl border border-border p-5 lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-sm text-charcoal flex items-center gap-2">
               <Clock className="w-4 h-4 text-stone" />
               Upcoming Jobs (14 days)
             </h2>
-            <Link href="/admin/jobs" className="text-xs text-espresso hover:underline font-medium">
+            <Link
+              href="/admin/jobs"
+              className="text-xs text-espresso hover:underline font-medium"
+            >
               All jobs
             </Link>
           </div>
           {upcoming.length === 0 ? (
-            <p className="text-sm text-stone">No jobs scheduled in the next two weeks.</p>
+            <p className="text-sm text-stone">
+              No jobs scheduled in the next two weeks.
+            </p>
           ) : (
             <div className="divide-y divide-parchment-dark">
               {upcoming.map((job) => (
@@ -179,14 +209,22 @@ export default function DashboardPage() {
                   className="flex items-center justify-between py-3 hover:bg-parchment-dark -mx-5 px-5 transition-colors"
                 >
                   <div>
-                    <p className="text-sm font-medium text-charcoal">{job.title}</p>
-                    <p className="text-xs text-stone mt-0.5">{job.clientName}</p>
+                    <p className="text-sm font-medium text-charcoal">
+                      {job.title}
+                    </p>
+                    <p className="text-xs text-stone mt-0.5">
+                      {job.clientName}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-xs font-medium text-espresso">
-                      {job.scheduledStart ? formatDate(job.scheduledStart) : "—"}
+                      {job.scheduledStart
+                        ? formatDate(job.scheduledStart)
+                        : "—"}
                     </p>
-                    <p className="text-xs text-stone">{JOB_STATUS_LABELS[job.status]}</p>
+                    <p className="text-xs text-stone">
+                      {JOB_STATUS_LABELS[job.status]}
+                    </p>
                   </div>
                 </Link>
               ))}
@@ -203,7 +241,10 @@ export default function DashboardPage() {
               <AlertCircle className="w-4 h-4 text-danger" />
               Outstanding Invoices
             </h2>
-            <Link href="/admin/invoices" className="text-xs text-espresso hover:underline font-medium">
+            <Link
+              href="/admin/invoices"
+              className="text-xs text-espresso hover:underline font-medium"
+            >
               All invoices
             </Link>
           </div>
@@ -211,8 +252,9 @@ export default function DashboardPage() {
             {outstanding.map((inv) => {
               const daysOld = today
                 ? Math.floor(
-                    (today.getTime() - new Date(inv.sentAt ?? inv.createdAt).getTime()) /
-                      (1000 * 60 * 60 * 24)
+                    (today.getTime() -
+                      new Date(inv.sentAt ?? inv.createdAt).getTime()) /
+                      (1000 * 60 * 60 * 24),
                   )
                 : 0;
               return (
@@ -222,19 +264,26 @@ export default function DashboardPage() {
                   className="flex items-center justify-between py-3 hover:bg-surface-hover -mx-5 px-5 transition-colors"
                 >
                   <div>
-                    <p className="text-sm font-medium text-charcoal">{inv.invoiceNumber}</p>
-                    <p className="text-xs text-stone mt-0.5">{inv.clientName}</p>
+                    <p className="text-sm font-medium text-charcoal">
+                      {inv.invoiceNumber}
+                    </p>
+                    <p className="text-xs text-stone mt-0.5">
+                      {inv.clientName}
+                    </p>
                   </div>
-                  <div className="text-right flex items-center gap-4">
+                  <div className="text-right flex items-center gap-2 md:gap-4">
                     <div>
                       <p className="text-sm font-semibold text-charcoal">
                         {formatCurrency(computeTotal(inv.lineItems))}
                       </p>
-                      <p className={`text-xs mt-0.5 ${daysOld > 14 ? "text-danger" : "text-stone"}`}>
-                        {inv.status === "viewed" ? "Viewed" : "Sent"} {daysOld}d ago
+                      <p
+                        className={`text-xs mt-0.5 ${daysOld > 14 ? "text-danger" : "text-stone"}`}
+                      >
+                        {inv.status === "viewed" ? "Viewed" : "Sent"} {daysOld}d
+                        ago
                       </p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-stone" />
+                    <ArrowRight className="w-4 h-4 text-stone hidden md:block" />
                   </div>
                 </Link>
               );
@@ -244,17 +293,17 @@ export default function DashboardPage() {
       )}
 
       {/* Quick Actions */}
-      <div className="mt-6 flex gap-3">
+      <div className="mt-6 flex flex-col sm:flex-row gap-3">
         <Link
           href="/admin/leads"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-charcoal bg-gold transition-colors hover:opacity-90"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-charcoal bg-gold transition-colors hover:opacity-90"
         >
           <TrendingUp className="w-4 h-4" />
           View Leads
         </Link>
         <Link
           href="/admin/jobs"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-border text-charcoal bg-white hover:bg-parchment transition-colors"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-border text-charcoal bg-white hover:bg-parchment transition-colors"
         >
           View Jobs
         </Link>

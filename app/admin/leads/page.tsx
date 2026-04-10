@@ -73,7 +73,7 @@ export default function LeadsPage() {
     });
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-4 md:p-8 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-charcoal">Leads</h1>
@@ -90,8 +90,8 @@ export default function LeadsPage() {
 
       <div className="bg-white rounded-xl border border-border overflow-hidden">
         {/* Filters */}
-        <div className="flex items-center gap-3 p-4 border-b border-parchment-dark">
-          <div className="relative flex-1 max-w-sm">
+        <div className="flex flex-col md:flex-row md:items-center gap-3 p-4 border-b border-parchment-dark">
+          <div className="relative flex-1 md:max-w-sm">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-sand-dim" />
             <input
               type="search"
@@ -101,33 +101,76 @@ export default function LeadsPage() {
               className="w-full pl-9 pr-3 py-2 text-sm border border-border rounded-lg bg-surface-hover focus:outline-none focus:ring-2 focus:ring-espresso/20"
             />
           </div>
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-sm border border-border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-espresso/20"
-          >
-            <option value="all">All statuses</option>
-            {["new", "contacted", "qualified", "converted", "dead"].map((s) => (
-              <option key={s} value={s} className="capitalize">
-                {s}
-              </option>
-            ))}
-          </select>
-          <select
-            value={sourceFilter}
-            onChange={(e) => setSourceFilter(e.target.value)}
-            className="text-sm border border-border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-espresso/20"
-          >
-            <option value="all">All sources</option>
-            {Object.entries(SOURCE_LABELS).map(([k, v]) => (
-              <option key={k} value={k}>
-                {v}
-              </option>
-            ))}
-          </select>
+          <div className="flex gap-3">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="text-sm border border-border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-espresso/20 flex-1 md:flex-none"
+            >
+              <option value="all">All statuses</option>
+              {["new", "contacted", "qualified", "converted", "dead"].map(
+                (s) => (
+                  <option key={s} value={s} className="capitalize">
+                    {s}
+                  </option>
+                ),
+              )}
+            </select>
+            <select
+              value={sourceFilter}
+              onChange={(e) => setSourceFilter(e.target.value)}
+              className="text-sm border border-border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-espresso/20 flex-1 md:flex-none"
+            >
+              <option value="all">All sources</option>
+              {Object.entries(SOURCE_LABELS).map(([k, v]) => (
+                <option key={k} value={k}>
+                  {v}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <table className="w-full">
+        {/* Mobile card list */}
+        <div className="divide-y divide-row-divider md:hidden">
+          {filtered.map((lead) => (
+            <div
+              key={lead.id}
+              onClick={() => router.push(`/admin/leads/${lead.id}`)}
+              className="p-4 hover:bg-surface-hover transition-colors cursor-pointer"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-medium text-sm text-charcoal">
+                    {lead.name}
+                  </p>
+                  <p className="text-xs text-stone mt-0.5 truncate">
+                    {lead.email}
+                  </p>
+                </div>
+                <span
+                  className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold capitalize flex-shrink-0"
+                  style={{
+                    color: LEAD_STATUS_COLORS[lead.status],
+                    backgroundColor: LEAD_STATUS_BG[lead.status],
+                  }}
+                >
+                  {lead.status}
+                </span>
+              </div>
+              <div className="flex items-center gap-3 mt-2 text-xs text-stone">
+                <span>{SOURCE_LABELS[lead.source]}</span>
+                <span className="text-separator">·</span>
+                <span className="capitalize">{lead.petInfo.type}</span>
+                <span className="text-separator">·</span>
+                <span>{formatDate(lead.createdAt)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop table */}
+        <table className="w-full hidden md:table">
           <thead>
             <tr className="border-b border-parchment-dark">
               {COLUMNS.map((col) => (
@@ -161,9 +204,7 @@ export default function LeadsPage() {
                     <p className="font-medium text-sm text-charcoal">
                       {lead.name}
                     </p>
-                    <p className="text-xs text-stone mt-0.5">
-                      {lead.email}
-                    </p>
+                    <p className="text-xs text-stone mt-0.5">{lead.email}</p>
                   </div>
                 </td>
                 <td className="px-4 py-3">
@@ -256,22 +297,25 @@ function AddLeadModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl border border-border p-6 w-full max-w-lg shadow-xl"
+        className="bg-white rounded-xl border border-border p-5 md:p-6 w-full max-w-lg shadow-xl max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-charcoal">Add Lead</h3>
-          <button onClick={onClose} className="text-sand-dim hover:text-charcoal">
+          <button
+            onClick={onClose}
+            className="text-sand-dim hover:text-charcoal"
+          >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold text-stone uppercase tracking-wider mb-1">
                 Name *
@@ -296,7 +340,7 @@ function AddLeadModal({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold text-stone uppercase tracking-wider mb-1">
                 Phone
@@ -344,7 +388,10 @@ function AddLeadModal({
             </label>
             <div className="flex gap-3">
               {(["cat", "dog", "both"] as const).map((t) => (
-                <label key={t} className="flex items-center gap-1.5 cursor-pointer">
+                <label
+                  key={t}
+                  className="flex items-center gap-1.5 cursor-pointer"
+                >
                   <input
                     type="radio"
                     checked={form.petType === t}

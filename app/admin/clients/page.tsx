@@ -84,7 +84,7 @@ export default function ClientsPage() {
     });
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-4 md:p-8 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-charcoal">Clients</h1>
@@ -101,7 +101,7 @@ export default function ClientsPage() {
 
       <div className="bg-white rounded-xl border border-border overflow-hidden">
         <div className="p-4 border-b border-parchment-dark">
-          <div className="relative max-w-sm">
+          <div className="relative md:max-w-sm">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-sand-dim" />
             <input
               type="search"
@@ -113,7 +113,60 @@ export default function ClientsPage() {
           </div>
         </div>
 
-        <table className="w-full">
+        {/* Mobile card list */}
+        <div className="divide-y divide-row-divider md:hidden">
+          {filtered.map((client) => {
+            const jobCount = getJobCount(client.id);
+            const activeCount = getActiveJobCount(client.id);
+            return (
+              <div
+                key={client.id}
+                onClick={() => router.push(`/admin/clients/${client.id}`)}
+                className="p-4 hover:bg-surface-hover transition-colors cursor-pointer"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-medium text-sm text-charcoal">
+                      {client.name}
+                    </p>
+                    <p className="text-xs text-stone mt-0.5 truncate">
+                      {client.email}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="text-xs font-semibold text-charcoal">
+                      {jobCount} job{jobCount !== 1 ? "s" : ""}
+                    </span>
+                    {activeCount > 0 && (
+                      <span
+                        className="text-xs px-2 py-0.5 rounded-full font-medium"
+                        style={{
+                          backgroundColor: "var(--color-status-green-light-bg)",
+                          color: "var(--color-paid)",
+                        }}
+                      >
+                        {activeCount} active
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 mt-2 text-xs text-stone">
+                  <span className="flex items-center gap-1">
+                    <PawPrint className="w-3 h-3 text-sand-dim" />
+                    {client.pets
+                      .map((p) => p.name || p.breed || p.type)
+                      .join(", ") || "—"}
+                  </span>
+                  <span className="text-separator">·</span>
+                  <span>{formatDate(client.createdAt)}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop table */}
+        <table className="w-full hidden md:table">
           <thead>
             <tr className="border-b border-parchment-dark">
               {COLUMNS.map((col) => (
@@ -177,7 +230,8 @@ export default function ClientsPage() {
                         <span
                           className="text-xs px-2 py-0.5 rounded-full font-medium"
                           style={{
-                            backgroundColor: "var(--color-status-green-light-bg)",
+                            backgroundColor:
+                              "var(--color-status-green-light-bg)",
                             color: "var(--color-paid)",
                           }}
                         >
@@ -260,22 +314,25 @@ function AddClientModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl border border-border p-6 w-full max-w-lg shadow-xl"
+        className="bg-white rounded-xl border border-border p-5 md:p-6 w-full max-w-lg shadow-xl max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-charcoal">Add Client</h3>
-          <button onClick={onClose} className="text-sand-dim hover:text-charcoal">
+          <button
+            onClick={onClose}
+            className="text-sand-dim hover:text-charcoal"
+          >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold text-stone uppercase tracking-wider mb-1">
                 Name *
@@ -300,7 +357,7 @@ function AddClientModal({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold text-stone uppercase tracking-wider mb-1">
                 Phone
@@ -329,7 +386,7 @@ function AddClientModal({
             <p className="text-xs font-semibold text-stone uppercase tracking-wider mb-3">
               Pet (optional)
             </p>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs text-stone mb-1">Name</label>
                 <input
@@ -343,14 +400,19 @@ function AddClientModal({
                 <label className="block text-xs text-stone mb-1">Type</label>
                 <div className="flex gap-3 pt-1">
                   {(["cat", "dog"] as const).map((t) => (
-                    <label key={t} className="flex items-center gap-1.5 cursor-pointer">
+                    <label
+                      key={t}
+                      className="flex items-center gap-1.5 cursor-pointer"
+                    >
                       <input
                         type="radio"
                         checked={form.petType === t}
                         onChange={() => set("petType", t)}
                         className="accent-espresso"
                       />
-                      <span className="text-sm capitalize text-charcoal">{t}</span>
+                      <span className="text-sm capitalize text-charcoal">
+                        {t}
+                      </span>
                     </label>
                   ))}
                 </div>
