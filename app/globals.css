@@ -1,21 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  /* === Legacy admin tokens (kept for admin pages) === */
+  /* === Legacy admin tokens === */
   --color-espresso: #2E1A0E;
   --color-espresso-light: #4A2C1A;
   --color-espresso-dim: #1E1008;
   --color-sand: #C8B8A0;
   --color-sand-muted: #A89878;
+  --color-sand-dim: #A09070;
   --color-parchment: #F5F0E8;
   --color-parchment-dark: #EDE4D0;
+  --color-parchment-mid: #E8D8C4;
   --color-gold: #C8A548;
   --color-gold-light: #E8C860;
   --color-stone: #6B5B4A;
   --color-charcoal: #1C1208;
   --color-border: #DDD0B8;
+  --color-border-warm: #E5D8C4;
   --color-paid: #5A7840;
   --color-danger: #A83028;
+
+  /* === UI surface & interaction === */
+  --color-separator: #D0C0A8;
+  --color-surface-cream: #FDFAF5;
+  --color-surface-hover: #F8F3EA;
+  --color-row-divider: #F5EEE0;
+  --color-warm-sand: #F0E4D4;
+
+  /* === Status system === */
+  --color-status-neutral-bg: #F0EAE0;
+  --color-status-neutral: #7C6E58;
+  --color-status-blue-bg: #e8f2fa;
+  --color-status-blue: #3a7db8;
+  --color-status-amber-bg: #fdf3e0;
+  --color-status-amber: #9A7018;
+  --color-status-purple-bg: #f0eaff;
+  --color-status-purple: #6b52c8;
+  --color-status-green-bg: #E8F0D8;
+  --color-status-green-light-bg: #EDF0D8;
+  --color-status-red-bg: #fce8e8;
+
+  /* === Lead status === */
+  --color-lead-new-bg: #fff8e8;
+  --color-lead-contacted: #6b9dc2;
+  --color-lead-converted-bg: #EEE4D0;
+
+  /* === Job kanban border colors === */
+  --color-job-border-blue: #b8d4ed;
+  --color-job-border-amber: #f0d090;
+  --color-job-border-purple: #c8baee;
+  --color-job-border-green: #90BC88;
+  --color-job-border-green-light: #90BC78;
+  --color-job-border-red: #e8a0a0;
 
   /* === Architectural Naturalist design tokens === */
   --color-primary: #173124;
@@ -99,15 +135,15 @@ html {
 }
 
 body {
-  background-color: #f9faf7;
-  color: #191c1b;
-  font-family: "Inter", system-ui, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
   margin: 0;
   padding: 0;
 }
 
 h1, h2, h3, h4 {
-  font-family: "Newsreader", serif;
+  font-family: var(--font-headline);
 }
 
 .label-style {
@@ -132,6 +168,6 @@ h1, h2, h3, h4 {
 }
 
 ::selection {
-  background-color: #ccead6;
-  color: #062014;
+  background-color: var(--color-primary-fixed);
+  color: var(--color-on-primary-fixed);
 }

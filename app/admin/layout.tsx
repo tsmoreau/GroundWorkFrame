@@ -55,29 +55,17 @@ function Sidebar() {
   };
 
   return (
-    <aside
-      className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40 border-r"
-      style={{ backgroundColor: "var(--color-surface)", borderColor: "var(--color-border)" }}
-    >
-      <div className="px-5 py-6 border-b" style={{ borderColor: "var(--color-border)" }}>
+    <aside className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40 border-r bg-surface border-border">
+      <div className="px-5 py-6 border-b border-border">
         <Link href="/" className="flex items-center gap-2.5">
-          <div
-            className="w-7 h-7 rounded-md flex items-center justify-center"
-            style={{ backgroundColor: "var(--color-gold)" }}
-          >
+          <div className="w-7 h-7 rounded-md flex items-center justify-center bg-gold">
             <PawPrint className="w-4 h-4 text-white" />
           </div>
-          <span
-            className="font-semibold tracking-tight"
-            style={{ color: "var(--color-charcoal)" }}
-          >
+          <span className="font-semibold tracking-tight text-charcoal">
             Denhaus
           </span>
         </Link>
-        <p
-          className="text-xs mt-1 font-medium tracking-wide uppercase"
-          style={{ color: "var(--color-stone)" }}
-        >
+        <p className="text-xs mt-1 font-medium tracking-wide uppercase text-stone">
           Admin
         </p>
       </div>
@@ -93,24 +81,16 @@ function Sidebar() {
               className={cn(
                 "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive
-                  ? "text-[var(--color-charcoal)]"
-                  : "text-[var(--color-stone)] hover:text-[var(--color-charcoal)] hover:bg-[var(--color-parchment-dark)]",
+                  ? "bg-parchment-dark text-charcoal"
+                  : "text-stone hover:text-charcoal hover:bg-parchment-dark",
               )}
-              style={
-                isActive
-                  ? { backgroundColor: "var(--color-parchment-dark)", color: "var(--color-charcoal)" }
-                  : undefined
-              }
             >
               <span className="flex items-center gap-3">
                 <Icon className="w-4 h-4 flex-shrink-0" />
                 {label}
               </span>
               {badge !== null && (
-                <span
-                  className="text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center"
-                  style={{ backgroundColor: "var(--color-gold)", color: "#fff" }}
-                >
+                <span className="text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center bg-gold text-white">
                   {badge}
                 </span>
               )}
@@ -119,13 +99,10 @@ function Sidebar() {
         })}
       </nav>
 
-      <div className="px-5 py-4 border-t" style={{ borderColor: "#E5D8C4" }}>
+      <div className="px-5 py-4 border-t border-border-warm">
         <Link
           href="/"
-          className="flex items-center gap-2 text-xs font-medium transition-colors"
-          style={{ color: "var(--color-stone)" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-charcoal)")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-stone)")}
+          className="flex items-center gap-2 text-xs font-medium transition-colors text-stone hover:text-charcoal"
         >
           <span>View Public Site</span>
           <ChevronRight className="w-3 h-3" />
@@ -139,10 +116,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main
-        className="flex-1 ml-56 min-h-screen min-w-0"
-        style={{ backgroundColor: "var(--color-parchment)" }}
-      >
+      <main className="flex-1 ml-56 min-h-screen min-w-0 bg-parchment">
         {children}
       </main>
     </div>

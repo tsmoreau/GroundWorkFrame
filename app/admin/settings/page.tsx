@@ -15,8 +15,8 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-[#1C1208] mb-1">{label}</label>
-      {hint && <p className="text-xs text-[#A09070] mb-1.5">{hint}</p>}
+      <label className="block text-sm font-medium text-charcoal mb-1">{label}</label>
+      {hint && <p className="text-xs text-sand-dim mb-1.5">{hint}</p>}
       {children}
     </div>
   );
@@ -37,7 +37,7 @@ function TextInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20 bg-white"
+      className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-espresso/20 bg-white"
     />
   );
 }
@@ -54,14 +54,14 @@ function Toggle({
   return (
     <label className="flex items-center gap-2 cursor-pointer">
       <div
-        className={`relative w-9 h-5 rounded-full transition-colors ${checked ? "bg-[#C8A548]" : "bg-[#D0C0A8]"}`}
+        className={`relative w-9 h-5 rounded-full transition-colors ${checked ? "bg-gold" : "bg-separator"}`}
         onClick={() => onChange(!checked)}
       >
         <div
           className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
         />
       </div>
-      <span className="text-sm text-[#1C1208]">{label}</span>
+      <span className="text-sm text-charcoal">{label}</span>
     </label>
   );
 }
@@ -88,14 +88,14 @@ export default function SettingsPage() {
   return (
     <div className="p-8 max-w-3xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#1C1208]">Settings</h1>
-        <p className="text-sm text-[#6B5B4A] mt-1">Business configuration and payment methods</p>
+        <h1 className="text-2xl font-bold text-charcoal">Settings</h1>
+        <p className="text-sm text-stone mt-1">Business configuration and payment methods</p>
       </div>
 
       <div className="space-y-6">
         {/* Business Info */}
-        <div className="bg-white rounded-xl border border-[#DDD0B8] p-6">
-          <h2 className="font-semibold text-[#1C1208] mb-5">Business Information</h2>
+        <div className="bg-white rounded-xl border border-border p-6">
+          <h2 className="font-semibold text-charcoal mb-5">Business Information</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
               <Field label="Business Name">
@@ -117,8 +117,8 @@ export default function SettingsPage() {
         </div>
 
         {/* Invoice Settings */}
-        <div className="bg-white rounded-xl border border-[#DDD0B8] p-6">
-          <h2 className="font-semibold text-[#1C1208] mb-5">Invoice Settings</h2>
+        <div className="bg-white rounded-xl border border-border p-6">
+          <h2 className="font-semibold text-charcoal mb-5">Invoice Settings</h2>
           <div className="grid grid-cols-3 gap-4">
             <Field label="Invoice Prefix" hint="e.g. DNH for DNH-2025-001">
               <TextInput value={form.invoicePrefix} onChange={(v) => set("invoicePrefix", v)} />
@@ -130,7 +130,7 @@ export default function SettingsPage() {
                 max="100"
                 value={form.depositPercent}
                 onChange={(e) => set("depositPercent", Number(e.target.value))}
-                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20 bg-white"
+                className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-espresso/20 bg-white"
               />
             </Field>
             <Field label="Tax Rate %" hint="0 for no tax">
@@ -141,21 +141,21 @@ export default function SettingsPage() {
                 step="0.1"
                 value={form.taxRate}
                 onChange={(e) => set("taxRate", Number(e.target.value))}
-                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20 bg-white"
+                className="w-full text-sm border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-espresso/20 bg-white"
               />
             </Field>
           </div>
         </div>
 
         {/* Payment Methods */}
-        <div className="bg-white rounded-xl border border-[#DDD0B8] p-6">
-          <h2 className="font-semibold text-[#1C1208] mb-5">Payment Methods</h2>
+        <div className="bg-white rounded-xl border border-border p-6">
+          <h2 className="font-semibold text-charcoal mb-5">Payment Methods</h2>
           <div className="space-y-6">
             {/* Stripe */}
             <div>
               <Toggle checked={form.stripeEnabled} onChange={(v) => set("stripeEnabled", v)} label="Stripe (ACH + Card)" />
               {form.stripeEnabled && (
-                <p className="text-xs text-[#6B5B4A] mt-2 pl-11">
+                <p className="text-xs text-stone mt-2 pl-11">
                   ACH capped at $5 · Card 2.9% + 30¢ · Stripe handles checkout and PCI compliance
                 </p>
               )}
@@ -211,13 +211,12 @@ export default function SettingsPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleSave}
-            className="px-6 py-2.5 rounded-lg text-sm font-medium text-[#1C1208]"
-            style={{ backgroundColor: "#C8A548" }}
+            className="px-6 py-2.5 rounded-lg text-sm font-medium text-charcoal bg-gold"
           >
             Save Settings
           </button>
           {saved && (
-            <span className="text-sm text-[#5A7840] font-medium">Saved</span>
+            <span className="text-sm text-paid font-medium">Saved</span>
           )}
         </div>
       </div>

@@ -32,8 +32,8 @@ function InvoiceContent({ token }: { token: string }) {
   if (!invoice) {
     return (
       <div className="text-center py-20">
-        <h1 className="text-2xl font-bold text-[#1C1208] mb-3">Invoice not found</h1>
-        <p className="text-[#6B5B4A]">This link may be expired or incorrect.</p>
+        <h1 className="text-2xl font-bold text-charcoal mb-3">Invoice not found</h1>
+        <p className="text-stone">This link may be expired or incorrect.</p>
       </div>
     );
   }
@@ -67,21 +67,25 @@ function InvoiceContent({ token }: { token: string }) {
   ].filter(Boolean) as { key: string; label: string; sub: string; icon: typeof CreditCard }[];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F5F0E8" }}>
+    <div className="min-h-screen bg-parchment">
       {/* Header */}
-      <div className="py-5 px-8 border-b" style={{ backgroundColor: "#FDFAF5", borderColor: "#E5D8C4" }}>
+      <div className="py-5 px-8 border-b bg-surface-cream border-border-warm">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ backgroundColor: "#C8A548" }}>
+            <div className="w-7 h-7 rounded-md flex items-center justify-center bg-gold">
               <PawPrint className="w-4 h-4 text-white" />
             </div>
-            <span className="font-semibold" style={{ color: "#1C1208" }}>Denhaus</span>
+            <span className="font-semibold text-charcoal">Denhaus</span>
           </Link>
           <span
             className="text-xs font-semibold px-3 py-1.5 rounded-full capitalize"
             style={{
-              backgroundColor: invoice.status === "paid" ? "#EDF0D8" : "#fdf3e0",
-              color: invoice.status === "paid" ? "#5A7840" : "#9A7018",
+              backgroundColor: invoice.status === "paid"
+                ? "var(--color-status-green-light-bg)"
+                : "var(--color-status-amber-bg)",
+              color: invoice.status === "paid"
+                ? "var(--color-paid)"
+                : "var(--color-status-amber)",
             }}
           >
             {invoice.status}
@@ -91,29 +95,29 @@ function InvoiceContent({ token }: { token: string }) {
 
       <div className="max-w-2xl mx-auto px-8 py-10">
         {/* Invoice */}
-        <div className="bg-white rounded-2xl border border-[#DDD0B8] overflow-hidden mb-6">
-          <div className="p-8 border-b border-[#EDE4D0]">
+        <div className="bg-white rounded-2xl border border-border overflow-hidden mb-6">
+          <div className="p-8 border-b border-parchment-dark">
             <div className="flex justify-between items-start">
               <div>
-                <p className="font-mono text-xs text-[#A09070] font-semibold">{invoice.invoiceNumber}</p>
-                <h1 className="text-2xl font-bold text-[#1C1208] mt-1">{invoice.clientName}</h1>
-                <p className="text-sm text-[#6B5B4A] mt-1 capitalize">{invoice.type} invoice</p>
+                <p className="font-mono text-xs text-sand-dim font-semibold">{invoice.invoiceNumber}</p>
+                <h1 className="text-2xl font-bold text-charcoal mt-1">{invoice.clientName}</h1>
+                <p className="text-sm text-stone mt-1 capitalize">{invoice.type} invoice</p>
               </div>
               <div className="text-right">
                 {settings.businessName && (
-                  <p className="font-semibold text-[#1C1208]">{settings.businessName}</p>
+                  <p className="font-semibold text-charcoal">{settings.businessName}</p>
                 )}
                 {settings.businessEmail && (
-                  <p className="text-xs text-[#6B5B4A] mt-1">{settings.businessEmail}</p>
+                  <p className="text-xs text-stone mt-1">{settings.businessEmail}</p>
                 )}
                 {settings.businessPhone && (
-                  <p className="text-xs text-[#6B5B4A]">{settings.businessPhone}</p>
+                  <p className="text-xs text-stone">{settings.businessPhone}</p>
                 )}
               </div>
             </div>
 
             {invoice.sentAt && (
-              <p className="text-xs text-[#A09070] mt-4">Issued {formatDate(invoice.sentAt)}</p>
+              <p className="text-xs text-sand-dim mt-4">Issued {formatDate(invoice.sentAt)}</p>
             )}
           </div>
 
@@ -121,18 +125,18 @@ function InvoiceContent({ token }: { token: string }) {
           <div className="p-8">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-[#EDE4D0]">
-                  <th className="text-left text-xs font-semibold text-[#6B5B4A] pb-3 uppercase tracking-wide">Description</th>
-                  <th className="text-right text-xs font-semibold text-[#6B5B4A] pb-3 uppercase tracking-wide">Amount</th>
+                <tr className="border-b border-parchment-dark">
+                  <th className="text-left text-xs font-semibold text-stone pb-3 uppercase tracking-wide">Description</th>
+                  <th className="text-right text-xs font-semibold text-stone pb-3 uppercase tracking-wide">Amount</th>
                 </tr>
               </thead>
               <tbody>
                 {invoice.lineItems.map((li) => (
-                  <tr key={li.id} className="border-b border-[#F5EEE0]">
+                  <tr key={li.id} className="border-b border-row-divider">
                     <td className="py-4 pr-4">
-                      <p className="text-sm text-[#1C1208]">{li.description}</p>
+                      <p className="text-sm text-charcoal">{li.description}</p>
                     </td>
-                    <td className="py-4 text-right text-sm font-semibold text-[#1C1208]">
+                    <td className="py-4 text-right text-sm font-semibold text-charcoal">
                       {formatCurrency(li.amount)}
                     </td>
                   </tr>
@@ -140,9 +144,9 @@ function InvoiceContent({ token }: { token: string }) {
               </tbody>
               <tfoot>
                 <tr>
-                  <td className="pt-4 text-base font-bold text-[#1C1208]">Total Due</td>
+                  <td className="pt-4 text-base font-bold text-charcoal">Total Due</td>
                   <td className="pt-4 text-right">
-                    <span className="text-2xl font-bold text-[#1C1208]">
+                    <span className="text-2xl font-bold text-charcoal">
                       {formatCurrency(total)}
                     </span>
                   </td>
@@ -154,77 +158,76 @@ function InvoiceContent({ token }: { token: string }) {
 
         {/* Payment Section */}
         {invoice.status === "paid" ? (
-          <div className="bg-white rounded-2xl border border-[#DDD0B8] p-8 text-center">
-            <CheckCircle className="w-12 h-12 mx-auto mb-4" style={{ color: "#5A7840" }} />
-            <h2 className="text-xl font-bold text-[#1C1208] mb-2">Payment received</h2>
+          <div className="bg-white rounded-2xl border border-border p-8 text-center">
+            <CheckCircle className="w-12 h-12 mx-auto mb-4 text-paid" />
+            <h2 className="text-xl font-bold text-charcoal mb-2">Payment received</h2>
             {invoice.paidAt && (
-              <p className="text-sm text-[#6B5B4A]">Paid {formatDate(invoice.paidAt)}</p>
+              <p className="text-sm text-stone">Paid {formatDate(invoice.paidAt)}</p>
             )}
             {invoice.paymentMethod && (
-              <p className="text-xs text-[#A09070] mt-1">
+              <p className="text-xs text-sand-dim mt-1">
                 via {PAYMENT_METHOD_LABELS[invoice.paymentMethod]}
               </p>
             )}
           </div>
         ) : payStep === "done" ? (
-          <div className="bg-white rounded-2xl border border-[#DDD0B8] p-8 text-center">
-            <CheckCircle className="w-12 h-12 mx-auto mb-4" style={{ color: "#5A7840" }} />
-            <h2 className="text-xl font-bold text-[#1C1208] mb-2">Payment submitted</h2>
-            <p className="text-sm text-[#6B5B4A]">We'll confirm receipt and be in touch shortly.</p>
+          <div className="bg-white rounded-2xl border border-border p-8 text-center">
+            <CheckCircle className="w-12 h-12 mx-auto mb-4 text-paid" />
+            <h2 className="text-xl font-bold text-charcoal mb-2">Payment submitted</h2>
+            <p className="text-sm text-stone">We'll confirm receipt and be in touch shortly.</p>
           </div>
         ) : payStep === "confirm" ? (
-          <div className="bg-white rounded-2xl border border-[#DDD0B8] p-8">
-            <h2 className="text-lg font-bold text-[#1C1208] mb-2">
+          <div className="bg-white rounded-2xl border border-border p-8">
+            <h2 className="text-lg font-bold text-charcoal mb-2">
               {PAYMENT_METHOD_LABELS[selectedMethod]}
             </h2>
             {selectedMethod === "stripe_ach" && (
-              <div className="space-y-3 text-sm text-[#6B5B4A] mb-6">
+              <div className="space-y-3 text-sm text-stone mb-6">
                 <p>Enter your bank account information to initiate an ACH transfer.</p>
-                <div className="p-4 rounded-xl bg-[#F5F0E8] border border-[#DDD0B8]">
-                  <p className="text-xs text-[#A09070] mb-2">Demo mode — no real payment</p>
-                  <input disabled placeholder="Routing number" className="w-full border border-[#DDD0B8] rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
-                  <input disabled placeholder="Account number" className="w-full border border-[#DDD0B8] rounded-lg px-3 py-2 text-sm bg-white" />
+                <div className="p-4 rounded-xl bg-parchment border border-border">
+                  <p className="text-xs text-sand-dim mb-2">Demo mode — no real payment</p>
+                  <input disabled placeholder="Routing number" className="w-full border border-border rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
+                  <input disabled placeholder="Account number" className="w-full border border-border rounded-lg px-3 py-2 text-sm bg-white" />
                 </div>
               </div>
             )}
             {selectedMethod === "stripe_card" && (
-              <div className="space-y-3 text-sm text-[#6B5B4A] mb-6">
-                <div className="p-4 rounded-xl bg-[#F5F0E8] border border-[#DDD0B8]">
-                  <p className="text-xs text-[#A09070] mb-2">Demo mode — no real payment</p>
-                  <input disabled placeholder="Card number" className="w-full border border-[#DDD0B8] rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
+              <div className="space-y-3 text-sm text-stone mb-6">
+                <div className="p-4 rounded-xl bg-parchment border border-border">
+                  <p className="text-xs text-sand-dim mb-2">Demo mode — no real payment</p>
+                  <input disabled placeholder="Card number" className="w-full border border-border rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
                   <div className="grid grid-cols-2 gap-2">
-                    <input disabled placeholder="MM/YY" className="border border-[#DDD0B8] rounded-lg px-3 py-2 text-sm bg-white" />
-                    <input disabled placeholder="CVC" className="border border-[#DDD0B8] rounded-lg px-3 py-2 text-sm bg-white" />
+                    <input disabled placeholder="MM/YY" className="border border-border rounded-lg px-3 py-2 text-sm bg-white" />
+                    <input disabled placeholder="CVC" className="border border-border rounded-lg px-3 py-2 text-sm bg-white" />
                   </div>
                 </div>
               </div>
             )}
             {selectedMethod === "zelle" && (
-              <div className="p-4 rounded-xl bg-[#F5F0E8] border border-[#DDD0B8] mb-6">
-                <p className="text-sm font-semibold text-[#1C1208] mb-1">Send Zelle to:</p>
-                <p className="text-lg font-bold text-[#2E1A0E]">{settings.zelleRecipient}</p>
-                <p className="text-sm font-semibold mt-2 text-[#1C1208]">Amount: {formatCurrency(total)}</p>
-                <p className="text-xs text-[#A09070] mt-1">Include your name in the memo.</p>
+              <div className="p-4 rounded-xl bg-parchment border border-border mb-6">
+                <p className="text-sm font-semibold text-charcoal mb-1">Send Zelle to:</p>
+                <p className="text-lg font-bold text-espresso">{settings.zelleRecipient}</p>
+                <p className="text-sm font-semibold mt-2 text-charcoal">Amount: {formatCurrency(total)}</p>
+                <p className="text-xs text-sand-dim mt-1">Include your name in the memo.</p>
               </div>
             )}
             {selectedMethod === "check" && (
-              <div className="p-4 rounded-xl bg-[#F5F0E8] border border-[#DDD0B8] mb-6">
-                <p className="text-sm font-semibold text-[#1C1208] mb-1">Make check payable to:</p>
-                <p className="text-lg font-bold text-[#2E1A0E]">{settings.checkPayableTo}</p>
+              <div className="p-4 rounded-xl bg-parchment border border-border mb-6">
+                <p className="text-sm font-semibold text-charcoal mb-1">Make check payable to:</p>
+                <p className="text-lg font-bold text-espresso">{settings.checkPayableTo}</p>
                 {settings.checkMailingAddress && (
                   <>
-                    <p className="text-sm font-semibold mt-2 text-[#1C1208]">Mail to:</p>
-                    <p className="text-sm text-[#6B5B4A]">{settings.checkMailingAddress}</p>
+                    <p className="text-sm font-semibold mt-2 text-charcoal">Mail to:</p>
+                    <p className="text-sm text-stone">{settings.checkMailingAddress}</p>
                   </>
                 )}
-                <p className="text-sm font-semibold mt-2 text-[#1C1208]">Amount: {formatCurrency(total)}</p>
+                <p className="text-sm font-semibold mt-2 text-charcoal">Amount: {formatCurrency(total)}</p>
               </div>
             )}
             <div className="flex gap-3">
               <button
                 onClick={handleSimulatePay}
-                className="flex-1 py-3 rounded-xl font-semibold text-sm text-[#1C1208]"
-                style={{ backgroundColor: "#C8A548" }}
+                className="flex-1 py-3 rounded-xl font-semibold text-sm text-charcoal bg-gold"
               >
                 {selectedMethod === "zelle" || selectedMethod === "check"
                   ? "I've sent payment"
@@ -232,18 +235,18 @@ function InvoiceContent({ token }: { token: string }) {
               </button>
               <button
                 onClick={() => setPayStep("method")}
-                className="px-5 py-3 rounded-xl text-sm border border-[#DDD0B8] text-[#6B5B4A]"
+                className="px-5 py-3 rounded-xl text-sm border border-border text-stone"
               >
                 Back
               </button>
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-[#DDD0B8] p-8">
-            <h2 className="text-lg font-bold text-[#1C1208] mb-1">
+          <div className="bg-white rounded-2xl border border-border p-8">
+            <h2 className="text-lg font-bold text-charcoal mb-1">
               {formatCurrency(total)} due
             </h2>
-            <p className="text-sm text-[#6B5B4A] mb-6">Choose a payment method</p>
+            <p className="text-sm text-stone mb-6">Choose a payment method</p>
             <div className="space-y-3 mb-6">
               {enabledMethods.map(({ key, label, sub, icon: Icon }) => (
                 <button
@@ -251,17 +254,28 @@ function InvoiceContent({ token }: { token: string }) {
                   onClick={() => setSelectedMethod(key)}
                   className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all ${
                     selectedMethod === key
-                      ? "border-[#2E1A0E] bg-[#F0E4D4]"
-                      : "border-[#DDD0B8] hover:border-[#C8A548]"
+                      ? "border-espresso bg-warm-sand"
+                      : "border-border hover:border-gold"
                   }`}
                 >
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: selectedMethod === key ? "#C8A548" : "#F0EAE0" }}>
-                    <Icon className="w-4 h-4" style={{ color: selectedMethod === key ? "white" : "#6B5B4A" }} />
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{
+                      backgroundColor: selectedMethod === key
+                        ? "var(--color-gold)"
+                        : "var(--color-status-neutral-bg)",
+                    }}
+                  >
+                    <Icon
+                      className="w-4 h-4"
+                      style={{
+                        color: selectedMethod === key ? "white" : "var(--color-stone)",
+                      }}
+                    />
                   </div>
                   <div>
-                    <p className="font-medium text-sm text-[#1C1208]">{label}</p>
-                    <p className="text-xs text-[#A09070]">{sub}</p>
+                    <p className="font-medium text-sm text-charcoal">{label}</p>
+                    <p className="text-xs text-sand-dim">{sub}</p>
                   </div>
                 </button>
               ))}
@@ -269,8 +283,7 @@ function InvoiceContent({ token }: { token: string }) {
             <button
               disabled={!selectedMethod}
               onClick={() => setPayStep("confirm")}
-              className="w-full py-3.5 rounded-xl font-semibold text-sm text-[#1C1208] disabled:opacity-40"
-              style={{ backgroundColor: "#C8A548" }}
+              className="w-full py-3.5 rounded-xl font-semibold text-sm text-charcoal bg-gold disabled:opacity-40"
             >
               Continue →
             </button>
@@ -278,7 +291,7 @@ function InvoiceContent({ token }: { token: string }) {
         )}
 
         {/* Footer */}
-        <p className="text-center text-xs text-[#A09070] mt-8">
+        <p className="text-center text-xs text-sand-dim mt-8">
           Questions? Email {settings.businessEmail}
         </p>
       </div>

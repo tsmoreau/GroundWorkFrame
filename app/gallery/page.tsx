@@ -54,27 +54,27 @@ const PROJECTS = [
 
 export default function GalleryPage() {
   return (
-    <div style={{ backgroundColor: "#F5F0E8", minHeight: "100vh" }}>
+    <div className="bg-parchment min-h-screen">
       {/* Nav */}
-      <nav className="px-8 py-5 flex items-center justify-between max-w-6xl mx-auto border-b border-[#E8D8C4]">
+      <nav className="px-8 py-5 flex items-center justify-between max-w-6xl mx-auto border-b border-parchment-mid">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ backgroundColor: "#C8A548" }}>
+          <div className="w-7 h-7 rounded-md flex items-center justify-center bg-gold">
             <PawPrint className="w-4 h-4 text-white" />
           </div>
-          <span className="font-semibold text-[#1C1208] tracking-tight">Denhaus</span>
+          <span className="font-semibold text-charcoal tracking-tight">Denhaus</span>
         </Link>
         <div className="flex items-center gap-6">
-          <Link href="/gallery" className="text-sm font-medium text-[#1C1208]">Gallery</Link>
-          <Link href="/contact" className="text-sm text-[#6B5B4A] hover:text-[#1C1208]">Get a Quote</Link>
-          <Link href="/admin/dashboard" className="text-xs font-medium px-3 py-1.5 rounded-lg border border-[#DDD0B8] text-[#6B5B4A] hover:bg-white">Admin</Link>
+          <Link href="/gallery" className="text-sm font-medium text-charcoal">Gallery</Link>
+          <Link href="/contact" className="text-sm text-stone hover:text-charcoal">Get a Quote</Link>
+          <Link href="/admin/dashboard" className="text-xs font-medium px-3 py-1.5 rounded-lg border border-border text-stone hover:bg-white">Admin</Link>
         </div>
       </nav>
 
       <div className="max-w-6xl mx-auto px-8 py-16">
         <div className="mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#A09070] mb-2">Portfolio</p>
-          <h1 className="text-4xl font-bold text-[#1C1208]">Our work</h1>
-          <p className="mt-4 text-[#6B5B4A] max-w-lg">
+          <p className="text-xs font-semibold tracking-widest uppercase text-sand-dim mb-2">Portfolio</p>
+          <h1 className="text-4xl font-bold text-charcoal">Our work</h1>
+          <p className="mt-4 text-stone max-w-lg">
             Every project is photographed with client permission. These are real builds, real yards, real pets.
           </p>
         </div>
@@ -84,7 +84,7 @@ export default function GalleryPage() {
             <div key={project.id} className={`grid grid-cols-2 gap-10 items-start ${i % 2 === 1 ? "direction-rtl" : ""}`}>
               {/* Image Grid */}
               <div className={`grid gap-3 ${i % 2 === 1 ? "order-2" : ""}`}>
-                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#E8D8C4]">
+                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-parchment-mid">
                   <img
                     src={project.images[0]}
                     alt={project.title}
@@ -94,7 +94,7 @@ export default function GalleryPage() {
                 {project.images.length > 1 && (
                   <div className="grid grid-cols-2 gap-3">
                     {project.images.slice(1, 3).map((img, j) => (
-                      <div key={j} className="aspect-square rounded-xl overflow-hidden bg-[#E8D8C4]">
+                      <div key={j} className="aspect-square rounded-xl overflow-hidden bg-parchment-mid">
                         <img src={img} alt="" className="w-full h-full object-cover" />
                       </div>
                     ))}
@@ -106,16 +106,16 @@ export default function GalleryPage() {
               <div className={`py-4 ${i % 2 === 1 ? "order-1" : ""}`}>
                 <div className="flex items-center gap-2 mb-4">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-full bg-[#E8D8C4] text-[#6B5B4A]">
+                    <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-full bg-parchment-mid text-stone">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h2 className="text-2xl font-bold text-[#1C1208] mb-3">{project.title}</h2>
-                <p className="text-[#6B5B4A] leading-relaxed mb-6">{project.description}</p>
+                <h2 className="text-2xl font-bold text-charcoal mb-3">{project.title}</h2>
+                <p className="text-stone leading-relaxed mb-6">{project.description}</p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-[#2E1A0E] hover:underline"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-espresso hover:underline"
                 >
                   Build something like this
                   <ChevronRight className="w-4 h-4" />
@@ -127,24 +127,23 @@ export default function GalleryPage() {
 
         {/* CTA */}
         <div className="mt-20 text-center">
-          <h2 className="text-2xl font-bold text-[#1C1208] mb-4">Want to see something custom?</h2>
-          <p className="text-[#6B5B4A] mb-8">We're happy to share more photos or sketch out ideas for your space before you commit to anything.</p>
+          <h2 className="text-2xl font-bold text-charcoal mb-4">Want to see something custom?</h2>
+          <p className="text-stone mb-8">We're happy to share more photos or sketch out ideas for your space before you commit to anything.</p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-[#1C1208]"
-            style={{ backgroundColor: "#C8A548" }}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-charcoal bg-gold"
           >
             Start a Conversation
           </Link>
         </div>
       </div>
 
-      <footer className="border-t border-[#E8D8C4] px-8 py-8 mt-10">
+      <footer className="border-t border-parchment-mid px-8 py-8 mt-10">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <p className="text-xs text-[#A09070]">© 2025 Denhaus LLC · Los Angeles, CA</p>
-          <div className="flex gap-5 text-xs text-[#A09070]">
-            <Link href="/" className="hover:text-[#1C1208]">Home</Link>
-            <Link href="/contact" className="hover:text-[#1C1208]">Contact</Link>
+          <p className="text-xs text-sand-dim">© 2025 Denhaus LLC · Los Angeles, CA</p>
+          <div className="flex gap-5 text-xs text-sand-dim">
+            <Link href="/" className="hover:text-charcoal">Home</Link>
+            <Link href="/contact" className="hover:text-charcoal">Contact</Link>
           </div>
         </div>
       </footer>

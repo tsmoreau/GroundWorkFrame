@@ -15,10 +15,10 @@ import { ChevronRight, ExternalLink } from "lucide-react";
 
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
   draft: { bg: "var(--color-parchment-dark)", color: "var(--color-stone)" },
-  sent: { bg: "#e8f2fa", color: "#3a7db8" },
+  sent: { bg: "var(--color-status-blue-bg)", color: "var(--color-status-blue)" },
   viewed: { bg: "var(--color-parchment-dark)", color: "var(--color-gold)" },
-  paid: { bg: "#EDF0D8", color: "var(--color-paid)" },
-  void: { bg: "#fce8e8", color: "var(--color-danger)" },
+  paid: { bg: "var(--color-status-green-light-bg)", color: "var(--color-paid)" },
+  void: { bg: "var(--color-status-red-bg)", color: "var(--color-danger)" },
 };
 
 export default function InvoicesPage() {
@@ -33,17 +33,17 @@ export default function InvoicesPage() {
     <div className="p-8 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-[var(--color-charcoal)]">Invoices</h1>
-          <p className="text-sm text-[var(--color-stone)] mt-1">{invoices.length} total</p>
+          <h1 className="text-2xl font-bold text-charcoal">Invoices</h1>
+          <p className="text-sm text-stone mt-1">{invoices.length} total</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-[var(--color-border)] overflow-hidden">
-        <div className="flex gap-3 p-4 border-b border-[var(--color-parchment-dark)]">
+      <div className="bg-white rounded-xl border border-border overflow-hidden">
+        <div className="flex gap-3 p-4 border-b border-parchment-dark">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-sm border border-[var(--color-border)] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-espresso)]/20"
+            className="text-sm border border-border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-espresso/20"
           >
             <option value="all">All statuses</option>
             {Object.entries(INVOICE_STATUS_LABELS).map(([k, v]) => (
@@ -54,48 +54,48 @@ export default function InvoicesPage() {
 
         <table className="w-full">
           <thead>
-            <tr className="border-b border-[var(--color-parchment-dark)]">
+            <tr className="border-b border-parchment-dark">
               {["Invoice #", "Client", "Type", "Status", "Total", "Sent", ""].map((h) => (
-                <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-[var(--color-stone)] uppercase tracking-wider">
+                <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-stone uppercase tracking-wider">
                   {h}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-[var(--color-parchment-dark)]">
+          <tbody className="divide-y divide-parchment-dark">
             {filtered.map((inv) => {
               const sc = STATUS_STYLES[inv.status];
               return (
-                <tr key={inv.id} className="hover:bg-[var(--color-parchment-dark)] transition-colors">
-                  <td className="px-4 py-3 font-mono text-xs font-semibold text-[var(--color-charcoal)]">
+                <tr key={inv.id} className="hover:bg-parchment-dark transition-colors">
+                  <td className="px-4 py-3 font-mono text-xs font-semibold text-charcoal">
                     {inv.invoiceNumber}
                   </td>
-                  <td className="px-4 py-3 text-sm text-[var(--color-charcoal)]">{inv.clientName}</td>
-                  <td className="px-4 py-3 text-xs text-[var(--color-stone)] capitalize">{inv.type}</td>
+                  <td className="px-4 py-3 text-sm text-charcoal">{inv.clientName}</td>
+                  <td className="px-4 py-3 text-xs text-stone capitalize">{inv.type}</td>
                   <td className="px-4 py-3">
                     <span className="text-xs font-medium px-2 py-0.5 rounded-full"
                       style={{ backgroundColor: sc.bg, color: sc.color }}>
                       {INVOICE_STATUS_LABELS[inv.status]}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm font-semibold text-[var(--color-charcoal)]">
+                  <td className="px-4 py-3 text-sm font-semibold text-charcoal">
                     {formatCurrency(computeTotal(inv.lineItems))}
                   </td>
-                  <td className="px-4 py-3 text-xs text-[var(--color-stone)]">
+                  <td className="px-4 py-3 text-xs text-stone">
                     {inv.sentAt ? timeAgo(inv.sentAt) : "—"}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <Link
                         href={`/invoice/${inv.token}`}
-                        className="text-[var(--color-stone)] hover:text-[var(--color-espresso)]"
+                        className="text-stone hover:text-espresso"
                         title="View client invoice page"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                       </Link>
                       <Link
                         href={`/admin/invoices/${inv.id}`}
-                        className="inline-flex items-center gap-1 text-xs font-medium text-[var(--color-espresso)] hover:underline"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-espresso hover:underline"
                       >
                         View <ChevronRight className="w-3 h-3" />
                       </Link>
@@ -107,7 +107,7 @@ export default function InvoicesPage() {
           </tbody>
         </table>
         {filtered.length === 0 && (
-          <div className="text-center py-12 text-[var(--color-stone)] text-sm">No invoices found.</div>
+          <div className="text-center py-12 text-stone text-sm">No invoices found.</div>
         )}
       </div>
     </div>
