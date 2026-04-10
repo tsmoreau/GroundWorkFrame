@@ -25,12 +25,12 @@ const STATUS_STYLES: Record<
   string,
   { bg: string; color: string; border: string }
 > = {
-  quoted: { bg: "var(--color-parchment-dark)", color: "var(--color-stone)", border: "var(--color-border)" },
+  quoted: { bg: "#F0EAE0", color: "#7C6E58", border: "#DDD0B8" },
   deposit_paid: { bg: "#e8f2fa", color: "#3a7db8", border: "#b8d4ed" },
-  materials_ordered: { bg: "#e8f4ec", color: "#496455", border: "#b0cdbb" },
+  materials_ordered: { bg: "#fdf3e0", color: "#9A7018", border: "#f0d090" },
   scheduled: { bg: "#f0eaff", color: "#6b52c8", border: "#c8baee" },
   in_progress: { bg: "#E8F0D8", color: "#5A7840", border: "#90BC88" },
-  complete: { bg: "var(--color-parchment-dark)", color: "var(--color-paid)", border: "var(--color-border)" },
+  complete: { bg: "#EDF0D8", color: "#5A7840", border: "#90BC78" },
   cancelled: { bg: "#fce8e8", color: "#A83028", border: "#e8a0a0" },
 };
 
@@ -69,24 +69,24 @@ function KanbanCard({ job }: { job: Job }) {
   return (
     <div
       onClick={() => router.push(`/admin/jobs/${job.id}`)}
-      className="bg-white rounded-lg border border-[var(--color-border)] p-3 hover:shadow-sm transition-shadow cursor-pointer"
+      className="bg-white rounded-lg border border-[#DDD0B8] p-3 hover:shadow-sm transition-shadow cursor-pointer"
     >
-      <p className="text-xs font-semibold text-[var(--color-charcoal)] leading-tight">
+      <p className="text-xs font-semibold text-[#1C1208] leading-tight">
         {job.title}
       </p>
-      <p className="text-xs text-[var(--color-stone)] mt-1">{job.clientName}</p>
+      <p className="text-xs text-[#6B5B4A] mt-1">{job.clientName}</p>
       <div className="flex items-center justify-between mt-3">
-        <span className="text-xs font-bold text-[var(--color-charcoal)]">
+        <span className="text-xs font-bold text-[#1C1208]">
           {formatCurrency(total)}
         </span>
         {job.scheduledStart && (
-          <span className="text-xs text-[var(--color-stone)]">
+          <span className="text-xs text-[#A09070]">
             {formatDate(job.scheduledStart)}
           </span>
         )}
       </div>
       <div className="flex items-center gap-1.5 mt-2">
-        <span className="text-xs px-1.5 py-0.5 rounded-full bg-[var(--color-parchment-dark)] text-[var(--color-stone)]">
+        <span className="text-xs px-1.5 py-0.5 rounded-full bg-[#F0E4D4] text-[#7C6E58]">
           {JOB_TYPE_LABELS[job.type]}
         </span>
       </div>
@@ -132,8 +132,8 @@ export default function JobsPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6 flex-shrink-0">
         <div>
-          <h1 className="text-2xl font-bold text-[var(--color-charcoal)]">Jobs</h1>
-          <p className="text-sm text-[var(--color-stone)] mt-1">{jobs.length} total</p>
+          <h1 className="text-2xl font-bold text-[#1C1208]">Jobs</h1>
+          <p className="text-sm text-[#6B5B4A] mt-1">{jobs.length} total</p>
         </div>
         <div className="flex items-center gap-2">
           <input
@@ -141,26 +141,26 @@ export default function JobsPage() {
             placeholder="Search jobs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="text-sm border border-[var(--color-border)] rounded-lg px-3 py-2 w-48 focus:outline-none focus:ring-2 focus:ring-[var(--color-espresso)]/20 bg-white"
+            className="text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 w-48 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20 bg-white"
           />
-          <div className="flex border border-[var(--color-border)] rounded-lg overflow-hidden bg-white">
+          <div className="flex border border-[#DDD0B8] rounded-lg overflow-hidden bg-white">
             <button
               onClick={() => setView("kanban")}
-              className={`p-2 transition-colors ${view === "kanban" ? "bg-[var(--color-gold)] text-[var(--color-charcoal)]" : "text-[var(--color-stone)] hover:bg-[var(--color-parchment)]"}`}
+              className={`p-2 transition-colors ${view === "kanban" ? "bg-[#C8A548] text-[#1C1208]" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
             <button
               onClick={() => setView("list")}
-              className={`p-2 transition-colors ${view === "list" ? "bg-[var(--color-gold)] text-[var(--color-charcoal)]" : "text-[var(--color-stone)] hover:bg-[var(--color-parchment)]"}`}
+              className={`p-2 transition-colors ${view === "list" ? "bg-[#C8A548] text-[#1C1208]" : "text-[#6B5B4A] hover:bg-[#F5F0E8]"}`}
             >
               <List className="w-4 h-4" />
             </button>
           </div>
           <button
             onClick={() => setShowAddModal(true)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[var(--color-charcoal)]"
-            style={{ backgroundColor: "var(--color-gold)" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#1C1208]"
+            style={{ backgroundColor: "#C8A548" }}
           >
             <Plus className="w-4 h-4" />
             New Job
@@ -223,15 +223,15 @@ export default function JobsPage() {
         </div>
       ) : (
         /* List view */
-        <div className="admin-card overflow-hidden">
+        <div className="bg-white rounded-xl border border-[#DDD0B8] overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-[var(--color-parchment-dark)]">
+              <tr className="border-b border-[#EDE4D0]">
                 {LIST_COLUMNS.map((col) => (
                   <th
                     key={col.key}
                     onClick={() => handleSort(col.key)}
-                    className="text-left px-4 py-3 text-xs font-semibold text-[var(--color-stone)] uppercase tracking-wider cursor-pointer hover:text-[var(--color-charcoal)] transition-colors select-none"
+                    className="text-left px-4 py-3 text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider cursor-pointer hover:text-[#1C1208] transition-colors select-none"
                   >
                     <span className="inline-flex items-center gap-1">
                       {col.label}
@@ -246,22 +246,22 @@ export default function JobsPage() {
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-[var(--color-parchment-dark)]">
+            <tbody className="divide-y divide-[#F5EEE0]">
               {filtered.map((job) => {
                 const sc = STATUS_STYLES[job.status];
                 return (
                   <tr
                     key={job.id}
                     onClick={() => router.push(`/admin/jobs/${job.id}`)}
-                    className="hover:bg-[var(--color-parchment-dark)] transition-colors cursor-pointer"
+                    className="hover:bg-[#F8F3EA] transition-colors cursor-pointer"
                   >
-                    <td className="px-4 py-3 font-medium text-sm text-[var(--color-charcoal)]">
+                    <td className="px-4 py-3 font-medium text-sm text-[#1C1208]">
                       {job.title}
                     </td>
-                    <td className="px-4 py-3 text-xs text-[var(--color-stone)]">
+                    <td className="px-4 py-3 text-xs text-[#6B5B4A]">
                       {job.clientName}
                     </td>
-                    <td className="px-4 py-3 text-xs text-[var(--color-stone)]">
+                    <td className="px-4 py-3 text-xs text-[#6B5B4A]">
                       {JOB_TYPE_LABELS[job.type]}
                     </td>
                     <td className="px-4 py-3">
@@ -272,10 +272,10 @@ export default function JobsPage() {
                         {JOB_STATUS_LABELS[job.status]}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm font-semibold text-[var(--color-charcoal)]">
+                    <td className="px-4 py-3 text-sm font-semibold text-[#1C1208]">
                       {formatCurrency(computeTotal(job.lineItems))}
                     </td>
-                    <td className="px-4 py-3 text-xs text-[var(--color-stone)]">
+                    <td className="px-4 py-3 text-xs text-[#6B5B4A]">
                       {job.scheduledStart
                         ? formatDate(job.scheduledStart)
                         : "—"}
@@ -286,7 +286,7 @@ export default function JobsPage() {
             </tbody>
           </table>
           {filtered.length === 0 && (
-            <div className="text-center py-12 text-[var(--color-stone)] text-sm">
+            <div className="text-center py-12 text-[#6B5B4A] text-sm">
               No jobs found.
             </div>
           )}
@@ -354,33 +354,33 @@ function AddJobModal({
       onClick={onClose}
     >
       <div
-        className="admin-card p-6 w-full max-w-md shadow-xl"
+        className="bg-white rounded-xl border border-[#DDD0B8] p-6 w-full max-w-md shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-[var(--color-charcoal)]">New Job</h3>
+          <h3 className="font-semibold text-[#1C1208]">New Job</h3>
           <button
             onClick={onClose}
-            className="text-[var(--color-stone)] hover:text-[var(--color-charcoal)]"
+            className="text-[#A09070] hover:text-[#1C1208]"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {clients.length === 0 ? (
-          <p className="text-sm text-[var(--color-stone)] py-4">
+          <p className="text-sm text-[#6B5B4A] py-4">
             No clients yet. Create a client first.
           </p>
         ) : (
           <div className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-[var(--color-stone)] uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                 Client *
               </label>
               <select
                 value={form.clientId}
                 onChange={(e) => set("clientId", e.target.value)}
-                className="w-full text-sm border border-[var(--color-border)] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-espresso)]/20"
+                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
               >
                 {clients.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -391,27 +391,27 @@ function AddJobModal({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[var(--color-stone)] uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                 Job title *
               </label>
               <input
                 type="text"
                 value={form.title}
                 onChange={(e) => set("title", e.target.value)}
-                className="w-full text-sm border border-[var(--color-border)] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-espresso)]/20"
+                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
                 placeholder="e.g. Smith Catio — 12×8 Standard"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-[var(--color-stone)] uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                   Type
                 </label>
                 <select
                   value={form.type}
                   onChange={(e) => set("type", e.target.value as JobType)}
-                  className="w-full text-sm border border-[var(--color-border)] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-espresso)]/20"
+                  className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
                 >
                   {Object.entries(JOB_TYPE_LABELS).map(([k, v]) => (
                     <option key={k} value={k}>
@@ -421,7 +421,7 @@ function AddJobModal({
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[var(--color-stone)] uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                   Est. days
                 </label>
                 <input
@@ -431,7 +431,7 @@ function AddJobModal({
                   onChange={(e) =>
                     set("estimatedDays", parseInt(e.target.value) || 1)
                   }
-                  className="w-full text-sm border border-[var(--color-border)] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-espresso)]/20"
+                  className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
                 />
               </div>
             </div>
@@ -442,14 +442,14 @@ function AddJobModal({
           <button
             onClick={handleSubmit}
             disabled={!canSubmit}
-            className="flex-1 py-2.5 rounded-lg text-sm font-medium text-[var(--color-charcoal)] disabled:opacity-50"
-            style={{ backgroundColor: "var(--color-gold)" }}
+            className="flex-1 py-2.5 rounded-lg text-sm font-medium text-[#1C1208] disabled:opacity-50"
+            style={{ backgroundColor: "#C8A548" }}
           >
             Create Job
           </button>
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-stone)]"
+            className="flex-1 py-2.5 rounded-lg text-sm font-medium border border-[#DDD0B8] text-[#6B5B4A]"
           >
             Cancel
           </button>

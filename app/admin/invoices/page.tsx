@@ -38,7 +38,7 @@ export default function InvoicesPage() {
         </div>
       </div>
 
-      <div className="admin-card overflow-hidden">
+      <div className="bg-white rounded-xl border border-[var(--color-border)] overflow-hidden">
         <div className="flex gap-3 p-4 border-b border-[var(--color-parchment-dark)]">
           <select
             value={statusFilter}

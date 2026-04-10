@@ -8,19 +8,19 @@ import { Search, Plus, ChevronUp, ChevronDown, X } from "lucide-react";
 import type { Lead, LeadSource } from "@/lib/types";
 
 const STATUS_COLORS: Record<string, string> = {
-  new: "#173124",
+  new: "#C8A548",
   contacted: "#6b9dc2",
   qualified: "#5A7840",
-  converted: "#173124",
-  dead: "#727973",
+  converted: "#2E1A0E",
+  dead: "#A09070",
 };
 
 const STATUS_BG: Record<string, string> = {
-  new: "#e8f4ec",
+  new: "#fff8e8",
   contacted: "#e8f2fa",
   qualified: "#EDF0D8",
-  converted: "#f3f4f1",
-  dead: "#edeeeb",
+  converted: "#EEE4D0",
+  dead: "#F0E4D4",
 };
 
 type SortKey = "name" | "status" | "source" | "pet" | "address" | "received";
@@ -91,36 +91,36 @@ export default function LeadsPage() {
     <div className="p-8 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-[#191c1b]">Leads</h1>
-          <p className="text-sm text-[#424844] mt-1">{leads.length} total</p>
+          <h1 className="text-2xl font-bold text-[#1C1208]">Leads</h1>
+          <p className="text-sm text-[#6B5B4A] mt-1">{leads.length} total</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white"
-          style={{ backgroundColor: "#c8d5cc" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#1C1208]"
+          style={{ backgroundColor: "#C8A548" }}
         >
           <Plus className="w-4 h-4" />
           Add Lead
         </button>
       </div>
 
-      <div className="admin-card overflow-hidden">
+      <div className="bg-white rounded-xl border border-[#DDD0B8] overflow-hidden">
         {/* Filters */}
-        <div className="flex items-center gap-3 p-4 border-b border-[#e7e8e6]">
+        <div className="flex items-center gap-3 p-4 border-b border-[#EDE4D0]">
           <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#727973]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A09070]" />
             <input
               type="search"
               placeholder="Search leads..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm border border-[#c2c8c2] rounded-lg bg-[#f3f4f1] focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+              className="w-full pl-9 pr-3 py-2 text-sm border border-[#DDD0B8] rounded-lg bg-[#F8F3EA] focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
             />
           </div>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+            className="text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
           >
             <option value="all">All statuses</option>
             {["new", "contacted", "qualified", "converted", "dead"].map((s) => (
@@ -132,7 +132,7 @@ export default function LeadsPage() {
           <select
             value={sourceFilter}
             onChange={(e) => setSourceFilter(e.target.value)}
-            className="text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+            className="text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
           >
             <option value="all">All sources</option>
             {Object.entries(SOURCE_LABELS).map(([k, v]) => (
@@ -145,12 +145,12 @@ export default function LeadsPage() {
 
         <table className="w-full">
           <thead>
-            <tr className="border-b border-[#e7e8e6]">
+            <tr className="border-b border-[#EDE4D0]">
               {COLUMNS.map((col) => (
                 <th
                   key={col.key}
                   onClick={() => handleSort(col.key)}
-                  className="text-left px-4 py-3 text-xs font-semibold text-[#424844] uppercase tracking-wider cursor-pointer hover:text-[#191c1b] transition-colors select-none"
+                  className="text-left px-4 py-3 text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider cursor-pointer hover:text-[#1C1208] transition-colors select-none"
                 >
                   <span className="inline-flex items-center gap-1">
                     {col.label}
@@ -165,19 +165,19 @@ export default function LeadsPage() {
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#edeeeb]">
+          <tbody className="divide-y divide-[#F5EEE0]">
             {filtered.map((lead) => (
               <tr
                 key={lead.id}
                 onClick={() => router.push(`/admin/leads/${lead.id}`)}
-                className="hover:bg-[#f3f4f1] transition-colors cursor-pointer"
+                className="hover:bg-[#F8F3EA] transition-colors cursor-pointer"
               >
                 <td className="px-4 py-3">
                   <div>
-                    <p className="font-medium text-sm text-[#191c1b]">
+                    <p className="font-medium text-sm text-[#1C1208]">
                       {lead.name}
                     </p>
-                    <p className="text-xs text-[#424844] mt-0.5">
+                    <p className="text-xs text-[#6B5B4A] mt-0.5">
                       {lead.email}
                     </p>
                   </div>
@@ -193,19 +193,19 @@ export default function LeadsPage() {
                     {lead.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-xs text-[#424844]">
+                <td className="px-4 py-3 text-xs text-[#6B5B4A]">
                   {SOURCE_LABELS[lead.source]}
                 </td>
-                <td className="px-4 py-3 text-xs text-[#424844] capitalize">
+                <td className="px-4 py-3 text-xs text-[#6B5B4A] capitalize">
                   {lead.petInfo.type}
                   {lead.petInfo.count && lead.petInfo.count > 1
                     ? ` (${lead.petInfo.count})`
                     : ""}
                 </td>
-                <td className="px-4 py-3 text-xs text-[#424844] max-w-[160px] truncate">
+                <td className="px-4 py-3 text-xs text-[#6B5B4A] max-w-[160px] truncate">
                   {lead.address || "—"}
                 </td>
-                <td className="px-4 py-3 text-xs text-[#424844]">
+                <td className="px-4 py-3 text-xs text-[#6B5B4A]">
                   {formatDate(lead.createdAt)}
                 </td>
               </tr>
@@ -213,7 +213,7 @@ export default function LeadsPage() {
           </tbody>
         </table>
         {filtered.length === 0 && (
-          <div className="text-center py-12 text-[#424844] text-sm">
+          <div className="text-center py-12 text-[#6B5B4A] text-sm">
             No leads match your filters.
           </div>
         )}
@@ -276,14 +276,14 @@ function AddLeadModal({
       onClick={onClose}
     >
       <div
-        className="admin-card p-6 w-full max-w-lg shadow-xl"
+        className="bg-white rounded-xl border border-[#DDD0B8] p-6 w-full max-w-lg shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-[#191c1b]">Add Lead</h3>
+          <h3 className="font-semibold text-[#1C1208]">Add Lead</h3>
           <button
             onClick={onClose}
-            className="text-[#727973] hover:text-[#191c1b]"
+            className="text-[#A09070] hover:text-[#1C1208]"
           >
             <X className="w-4 h-4" />
           </button>
@@ -292,49 +292,49 @@ function AddLeadModal({
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-[#424844] uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                 Name *
               </label>
               <input
                 type="text"
                 value={form.name}
                 onChange={(e) => set("name", e.target.value)}
-                className="w-full text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-[#424844] uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                 Email *
               </label>
               <input
                 type="email"
                 value={form.email}
                 onChange={(e) => set("email", e.target.value)}
-                className="w-full text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-[#424844] uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                 Phone
               </label>
               <input
                 type="tel"
                 value={form.phone}
                 onChange={(e) => set("phone", e.target.value)}
-                className="w-full text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-[#424844] uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
                 Source
               </label>
               <select
                 value={form.source}
                 onChange={(e) => set("source", e.target.value as LeadSource)}
-                className="w-full text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+                className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
               >
                 {Object.entries(SOURCE_LABELS).map(([k, v]) => (
                   <option key={k} value={k}>
@@ -346,19 +346,19 @@ function AddLeadModal({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#424844] uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
               Address
             </label>
             <input
               type="text"
               value={form.address}
               onChange={(e) => set("address", e.target.value)}
-              className="w-full text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+              className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#424844] uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
               Pet type
             </label>
             <div className="flex gap-3">
@@ -371,23 +371,23 @@ function AddLeadModal({
                     type="radio"
                     checked={form.petType === t}
                     onChange={() => set("petType", t)}
-                    className="accent-[#173124]"
+                    className="accent-[#2E1A0E]"
                   />
-                  <span className="text-sm capitalize text-[#191c1b]">{t}</span>
+                  <span className="text-sm capitalize text-[#1C1208]">{t}</span>
                 </label>
               ))}
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#424844] uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-[#6B5B4A] uppercase tracking-wider mb-1">
               Notes
             </label>
             <textarea
               value={form.message}
               onChange={(e) => set("message", e.target.value)}
               rows={3}
-              className="w-full text-sm border border-[#c2c8c2] rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-[#173124]/20"
+              className="w-full text-sm border border-[#DDD0B8] rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-[#2E1A0E]/20"
               placeholder="Phone call notes, referral details, etc."
             />
           </div>
@@ -397,14 +397,14 @@ function AddLeadModal({
           <button
             onClick={handleSubmit}
             disabled={!canSubmit}
-            className="flex-1 py-2.5 rounded-lg text-sm font-medium text-[#2d3d38] disabled:opacity-50"
-            style={{ backgroundColor: "#c8d5cc" }}
+            className="flex-1 py-2.5 rounded-lg text-sm font-medium text-[#1C1208] disabled:opacity-50"
+            style={{ backgroundColor: "#C8A548" }}
           >
             Add Lead
           </button>
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-lg text-sm font-medium border border-[#c2c8c2] text-[#424844]"
+            className="flex-1 py-2.5 rounded-lg text-sm font-medium border border-[#DDD0B8] text-[#6B5B4A]"
           >
             Cancel
           </button>

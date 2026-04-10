@@ -57,7 +57,7 @@ function Sidebar() {
   return (
     <aside
       className="fixed top-0 left-0 h-screen w-56 flex flex-col z-40 border-r"
-      style={{ backgroundColor: "#ffffff", borderColor: "#dde0db" }}
+      style={{ backgroundColor: "var(--color-surface)", borderColor: "var(--color-border)" }}
     >
       <div className="px-5 py-6 border-b" style={{ borderColor: "var(--color-border)" }}>
         <Link href="/" className="flex items-center gap-2.5">
@@ -119,7 +119,7 @@ function Sidebar() {
         })}
       </nav>
 
-      <div className="px-5 py-4 border-t" style={{ borderColor: "#c2c8c2" }}>
+      <div className="px-5 py-4 border-t" style={{ borderColor: "#E5D8C4" }}>
         <Link
           href="/"
           className="flex items-center gap-2 text-xs font-medium transition-colors"
@@ -137,11 +137,11 @@ function Sidebar() {
 
 function AdminShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen" style={{ backgroundColor: "#edeee9" }}>
+    <div className="flex min-h-screen">
       <Sidebar />
       <main
         className="flex-1 ml-56 min-h-screen min-w-0"
-        style={{ backgroundColor: "#edeee9" }}
+        style={{ backgroundColor: "var(--color-parchment)" }}
       >
         {children}
       </main>
