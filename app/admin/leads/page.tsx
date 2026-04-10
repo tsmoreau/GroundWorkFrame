@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useData } from "../data-context";
-import { SOURCE_LABELS, timeAgo } from "@/lib/utils";
+import { SOURCE_LABELS, formatDate } from "@/lib/utils";
 import {
   Search,
   Plus,
@@ -212,7 +212,7 @@ export default function LeadsPage() {
                   {lead.address || "—"}
                 </td>
                 <td className="px-4 py-3 text-xs text-[#6B5B4A]">
-                  {timeAgo(lead.createdAt)}
+                  {formatDate(lead.createdAt)}
                 </td>
                 <td className="px-4 py-3 text-right">
                   <Link

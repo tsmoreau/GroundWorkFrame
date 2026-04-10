@@ -1,8 +1,6 @@
 import type { Lead, Client, Job, Invoice, BusinessSettings } from "./types";
 
-const now = new Date();
-const d = (offsetDays: number) =>
-  new Date(now.getTime() + offsetDays * 24 * 60 * 60 * 1000).toISOString();
+// Static mock dates — no dynamic generation, no hydration issues
 
 export const initialSettings: BusinessSettings = {
   businessName: "Denhaus",
@@ -35,8 +33,8 @@ export const initialLeads: Lead[] = [
     petInfo: { type: "cat", count: 3, breed: "Mixed" },
     status: "new",
     notes: [],
-    createdAt: d(-2),
-    updatedAt: d(-2),
+    createdAt: "2026-04-08T00:00:00Z",
+    updatedAt: "2026-04-08T00:00:00Z",
   },
   {
     id: "lead-002",
@@ -53,11 +51,11 @@ export const initialLeads: Lead[] = [
     notes: [
       {
         text: "Called Tom, left voicemail. He texted back — wants to schedule for next Tuesday.",
-        createdAt: d(-1),
+        createdAt: "2026-04-09T00:00:00Z",
       },
     ],
-    createdAt: d(-5),
-    updatedAt: d(-1),
+    createdAt: "2026-04-05T00:00:00Z",
+    updatedAt: "2026-04-09T00:00:00Z",
   },
   {
     id: "lead-003",
@@ -74,15 +72,15 @@ export const initialLeads: Lead[] = [
     notes: [
       {
         text: "Sent site visit confirmation for Friday 10am.",
-        createdAt: d(-8),
+        createdAt: "2026-04-02T00:00:00Z",
       },
       {
         text: "Site visit done. Beautiful yard, lots to work with. Measured for 14×8 footprint. She wants the tunnel-to-window option. Sending quote Monday.",
-        createdAt: d(-5),
+        createdAt: "2026-04-05T00:00:00Z",
       },
     ],
-    createdAt: d(-12),
-    updatedAt: d(-5),
+    createdAt: "2026-03-29T00:00:00Z",
+    updatedAt: "2026-04-05T00:00:00Z",
   },
   {
     id: "lead-004",
@@ -97,8 +95,8 @@ export const initialLeads: Lead[] = [
     petInfo: { type: "cat", count: 1, breed: "Domestic Shorthair" },
     status: "new",
     notes: [],
-    createdAt: d(-1),
-    updatedAt: d(-1),
+    createdAt: "2026-04-09T00:00:00Z",
+    updatedAt: "2026-04-09T00:00:00Z",
   },
   {
     id: "lead-005",
@@ -115,11 +113,11 @@ export const initialLeads: Lead[] = [
     notes: [
       {
         text: "Replied to inquiry email. She's comparing quotes from 2 other vendors.",
-        createdAt: d(-3),
+        createdAt: "2026-04-07T00:00:00Z",
       },
     ],
-    createdAt: d(-7),
-    updatedAt: d(-3),
+    createdAt: "2026-04-03T00:00:00Z",
+    updatedAt: "2026-04-07T00:00:00Z",
   },
   {
     id: "lead-006",
@@ -136,12 +134,12 @@ export const initialLeads: Lead[] = [
     notes: [
       {
         text: "Site visit complete. Good yard access. Confirmed catio design — 10×6 standard with window tunnel.",
-        createdAt: d(-45),
+        createdAt: "2026-02-24T00:00:00Z",
       },
     ],
     convertedTo: "client-001",
-    createdAt: d(-50),
-    updatedAt: d(-45),
+    createdAt: "2026-02-19T00:00:00Z",
+    updatedAt: "2026-02-24T00:00:00Z",
   },
   {
     id: "lead-007",
@@ -157,11 +155,11 @@ export const initialLeads: Lead[] = [
     notes: [
       {
         text: "Outside service area. Referred to local contractor.",
-        createdAt: d(-20),
+        createdAt: "2026-03-21T00:00:00Z",
       },
     ],
-    createdAt: d(-22),
-    updatedAt: d(-20),
+    createdAt: "2026-03-19T00:00:00Z",
+    updatedAt: "2026-03-21T00:00:00Z",
   },
   {
     id: "lead-008",
@@ -176,8 +174,8 @@ export const initialLeads: Lead[] = [
     petInfo: { type: "cat", count: 2, breed: "Ragdoll / Bengal" },
     status: "new",
     notes: [],
-    createdAt: d(-0.5),
-    updatedAt: d(-0.5),
+    createdAt: "2026-04-09T12:00:00Z",
+    updatedAt: "2026-04-09T12:00:00Z",
   },
 ];
 
@@ -195,13 +193,13 @@ export const initialClients: Client[] = [
     notes: [
       {
         text: "Super easy to work with. Great communication. Happy to be a reference.",
-        createdAt: d(-30),
+        createdAt: "2026-03-11T00:00:00Z",
       },
     ],
     leadId: "lead-006",
     jobIds: ["job-001"],
-    createdAt: d(-45),
-    updatedAt: d(-30),
+    createdAt: "2026-02-24T00:00:00Z",
+    updatedAt: "2026-03-11T00:00:00Z",
   },
   {
     id: "client-002",
@@ -217,12 +215,12 @@ export const initialClients: Client[] = [
     notes: [
       {
         text: "Three cats, all indoor-only. Loved the Phase 1 result — came back for tech upgrade.",
-        createdAt: d(-15),
+        createdAt: "2026-03-26T00:00:00Z",
       },
     ],
     jobIds: ["job-002", "job-003"],
-    createdAt: d(-90),
-    updatedAt: d(-15),
+    createdAt: "2026-01-10T00:00:00Z",
+    updatedAt: "2026-03-26T00:00:00Z",
   },
   {
     id: "client-003",
@@ -236,8 +234,8 @@ export const initialClients: Client[] = [
     ],
     notes: [],
     jobIds: ["job-004"],
-    createdAt: d(-20),
-    updatedAt: d(-20),
+    createdAt: "2026-03-21T00:00:00Z",
+    updatedAt: "2026-03-21T00:00:00Z",
   },
 ];
 
@@ -277,10 +275,10 @@ export const initialJobs: Job[] = [
     ],
     depositAmount: 285000,
     estimatedDays: 3,
-    scheduledStart: d(-38),
-    scheduledEnd: d(-36),
-    actualStart: d(-38),
-    actualEnd: d(-36),
+    scheduledStart: "2026-03-03T00:00:00Z",
+    scheduledEnd: "2026-03-05T00:00:00Z",
+    actualStart: "2026-03-03T00:00:00Z",
+    actualEnd: "2026-03-05T00:00:00Z",
     materialsCost: 185000,
     photos: [
       "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800&q=80",
@@ -292,15 +290,15 @@ export const initialJobs: Job[] = [
     notes: [
       {
         text: "Client requested cedar framing over pressure-treated — extra cost approved.",
-        createdAt: d(-42),
+        createdAt: "2026-02-27T00:00:00Z",
       },
       {
         text: "Install complete. Client thrilled with the tunnel attachment. Portfolio photos taken with permission.",
-        createdAt: d(-36),
+        createdAt: "2026-03-05T00:00:00Z",
       },
     ],
-    createdAt: d(-44),
-    updatedAt: d(-36),
+    createdAt: "2026-02-25T00:00:00Z",
+    updatedAt: "2026-03-05T00:00:00Z",
   },
   {
     id: "job-002",
@@ -337,8 +335,8 @@ export const initialJobs: Job[] = [
     ],
     depositAmount: 359000,
     estimatedDays: 4,
-    scheduledStart: d(1),
-    scheduledEnd: d(5),
+    scheduledStart: "2026-04-11T00:00:00Z",
+    scheduledEnd: "2026-04-15T00:00:00Z",
     materialsCost: 270000,
     photos: [],
     portfolioApproved: false,
@@ -346,11 +344,11 @@ export const initialJobs: Job[] = [
     notes: [
       {
         text: "Materials delivered to yard. Starting install Tuesday.",
-        createdAt: d(-1),
+        createdAt: "2026-04-09T00:00:00Z",
       },
     ],
-    createdAt: d(-25),
-    updatedAt: d(-1),
+    createdAt: "2026-03-16T00:00:00Z",
+    updatedAt: "2026-04-09T00:00:00Z",
   },
   {
     id: "job-003",
@@ -380,15 +378,15 @@ export const initialJobs: Job[] = [
       },
     ],
     estimatedDays: 1,
-    scheduledStart: d(8),
-    scheduledEnd: d(9),
+    scheduledStart: "2026-04-18T00:00:00Z",
+    scheduledEnd: "2026-04-19T00:00:00Z",
     materialsCost: 72000,
     photos: [],
     portfolioApproved: false,
     invoiceIds: ["inv-004"],
     notes: [],
-    createdAt: d(-10),
-    updatedAt: d(-10),
+    createdAt: "2026-03-31T00:00:00Z",
+    updatedAt: "2026-03-31T00:00:00Z",
   },
   {
     id: "job-004",
@@ -431,11 +429,11 @@ export const initialJobs: Job[] = [
     notes: [
       {
         text: "Quote sent via email. Follow up if no response by Friday.",
-        createdAt: d(-5),
+        createdAt: "2026-04-05T00:00:00Z",
       },
     ],
-    createdAt: d(-18),
-    updatedAt: d(-5),
+    createdAt: "2026-03-23T00:00:00Z",
+    updatedAt: "2026-04-05T00:00:00Z",
   },
 ];
 
@@ -456,12 +454,12 @@ export const initialInvoices: Invoice[] = [
     ],
     paymentMethod: "stripe_ach",
     token: "tok-chen-dep-001",
-    sentAt: d(-43),
-    viewedAt: d(-43),
+    sentAt: "2026-02-26T00:00:00Z",
+    viewedAt: "2026-02-26T00:00:00Z",
     status: "paid",
-    paidAt: d(-42),
-    createdAt: d(-43),
-    updatedAt: d(-42),
+    paidAt: "2026-02-27T00:00:00Z",
+    createdAt: "2026-02-26T00:00:00Z",
+    updatedAt: "2026-02-27T00:00:00Z",
   },
   {
     id: "inv-002",
@@ -480,12 +478,12 @@ export const initialInvoices: Invoice[] = [
     paymentMethod: "zelle",
     paymentReference: "Zelle conf #Z994821",
     token: "tok-chen-fin-002",
-    sentAt: d(-36),
-    viewedAt: d(-35),
+    sentAt: "2026-03-05T00:00:00Z",
+    viewedAt: "2026-03-06T00:00:00Z",
     status: "paid",
-    paidAt: d(-35),
-    createdAt: d(-36),
-    updatedAt: d(-35),
+    paidAt: "2026-03-06T00:00:00Z",
+    createdAt: "2026-03-05T00:00:00Z",
+    updatedAt: "2026-03-06T00:00:00Z",
   },
   {
     id: "inv-003",
@@ -502,11 +500,11 @@ export const initialInvoices: Invoice[] = [
       },
     ],
     token: "tok-foster-dep-003",
-    sentAt: d(-22),
-    viewedAt: d(-21),
+    sentAt: "2026-03-19T00:00:00Z",
+    viewedAt: "2026-03-20T00:00:00Z",
     status: "viewed",
-    createdAt: d(-22),
-    updatedAt: d(-21),
+    createdAt: "2026-03-19T00:00:00Z",
+    updatedAt: "2026-03-20T00:00:00Z",
   },
   {
     id: "inv-004",
@@ -534,7 +532,7 @@ export const initialInvoices: Invoice[] = [
     ],
     token: "tok-foster-tech-004",
     status: "draft",
-    createdAt: d(-8),
-    updatedAt: d(-8),
+    createdAt: "2026-04-02T00:00:00Z",
+    updatedAt: "2026-04-02T00:00:00Z",
   },
 ];
