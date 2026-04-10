@@ -2,18 +2,18 @@
 
 @theme {
   /* === Legacy admin tokens (kept for admin pages) === */
-  --color-espresso: #2E1A0E;
-  --color-espresso-light: #4A2C1A;
-  --color-espresso-dim: #1E1008;
-  --color-sand: #C8B8A0;
-  --color-sand-muted: #A89878;
-  --color-parchment: #F5F0E8;
-  --color-parchment-dark: #EDE4D0;
-  --color-gold: #C8A548;
-  --color-gold-light: #E8C860;
-  --color-stone: #6B5B4A;
-  --color-charcoal: #1C1208;
-  --color-border: #DDD0B8;
+  --color-espresso: #173124;
+  --color-espresso-light: #2d4739;
+  --color-espresso-dim: #062014;
+  --color-sand: #ccead6;
+  --color-sand-muted: #b0cdbb;
+  --color-parchment: #f9faf7;
+  --color-parchment-dark: #f3f4f1;
+  --color-gold: #765934;
+  --color-gold-light: #fed6a7;
+  --color-stone: #424844;
+  --color-charcoal: #191c1b;
+  --color-border: #c2c8c2;
   --color-paid: #5A7840;
   --color-danger: #A83028;
 
